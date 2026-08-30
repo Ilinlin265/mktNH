@@ -558,19 +558,8 @@ if page == "👤 Nhập khách hàng":
         unsafe_allow_html=True
     )
 
-    st.markdown(
-        '<div class="page-title">'
-        '👤 THÔNG TIN KHÁCH HÀNG'
-        '</div>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        '<div class="page-description">'
-        'Vui lòng nhập thông tin khách hàng'
-        '</div>',
-        unsafe_allow_html=True
-    )
+st.subheader("👤 Thông tin khách hàng")
+st.caption("Nhập thông tin vào các trường bên dưới")
 
 
     # -----------------------------------------------------
