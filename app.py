@@ -27,7 +27,9 @@ section[data-testid="stSidebar"] {
     border-right: 1px solid #333;
 }
 section[data-testid="stSidebar"] > div { padding: 28px 18px; }
+
 .side-logo { text-align: center; margin-bottom: 36px; }
+
 .side-symbol {
     width: 44px; height: 44px;
     border: 2px solid #ED1C24;
@@ -40,38 +42,42 @@ section[data-testid="stSidebar"] > div { padding: 28px 18px; }
     transform: rotate(-45deg);
     font-size: 16px;
 }
+
 .side-brand {
     margin-top: 16px;
-    color: #ffffff;
+    color: #ffffff !important;
     font-weight: 700;
     letter-spacing: 3px;
-    font-size: 24px;          /* to hơn */
+    font-size: 36px;              /* tăng thêm 50% (24 → 36) */
 }
+
 .side-sub {
     margin-top: 6px;
     color: #ED1C24;
-    font-size: 13px;          /* to hơn */
+    font-size: 19.5px;            /* tăng thêm 50% (13 → 19.5) */
     letter-spacing: 2.5px;
     font-weight: 600;
 }
 
-/* Menu + ĐIỀU HƯỚNG tăng ~10% */
+/* Menu + ĐIỀU HƯỚNG - tăng 50% + chữ trắng */
 section[data-testid="stSidebar"] .stRadio label {
     color: #ffffff !important;
-    padding: 13px 12px;
+    padding: 14px 12px;
     border-radius: 9px;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     transition: .2s;
-    font-size: 15.5px !important;   /* tăng ~10% */
+    font-size: 23.25px !important;   /* tăng thêm 50% (15.5 → 23.25) */
 }
+
 section[data-testid="stSidebar"] .stRadio label:hover {
     background: #2a2a2a;
     color: #ED1C24 !important;
 }
+
 section[data-testid="stSidebar"] .stCaption,
 section[data-testid="stSidebar"] [data-testid="stCaption"] {
-    color: #ffffff !important;
-    font-size: 14.5px !important;   /* tăng ~10% */
+    color: #ffffff !important;       /* chữ trắng rõ */
+    font-size: 21.75px !important;   /* tăng thêm 50% (14.5 → 21.75) */
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
     opacity: 1 !important;
@@ -105,6 +111,7 @@ div[data-baseweb="textarea"]:focus-within {
     border-color: #ED1C24 !important;
     box-shadow: 0 0 0 3px rgba(237,28,36,.15) !important;
 }
+
 label { color: #333 !important; font-size: 13px !important; font-weight: 600 !important; }
 
 /* BUTTON - ĐỎ TCB */
@@ -204,6 +211,7 @@ if page == "👤 Nhập khách hàng":
     note = st.text_area("📝 Ghi chú", placeholder="Nhập ghi chú", height=100)
 
     st.markdown("<br>", unsafe_allow_html=True)
+
     if st.button("💾  LƯU THÔNG TIN", type="primary", use_container_width=True):
         if not phone.strip():
             st.error("❌ Vui lòng nhập số điện thoại.")
@@ -266,6 +274,7 @@ else:
             st.info("📭 Chưa có khách hàng.")
         else:
             df = pd.DataFrame(st.session_state.customers)
+
             c1, c2, c3 = st.columns(3)
             c1.metric("👥 Tổng số khách hàng", len(df))
             c2.metric("📱 Hồ sơ liên hệ", len(df))
@@ -274,6 +283,7 @@ else:
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown('<div class="section-title">Dữ liệu khách hàng</div>', unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
+
             st.dataframe(df, use_container_width=True, hide_index=True, height=400)
 
             st.markdown("<br>", unsafe_allow_html=True)
