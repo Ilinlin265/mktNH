@@ -547,12 +547,6 @@ page = st.sidebar.radio(
 
 if page == "👤 Nhập khách hàng":
 
-# ==========================================
-# TRANG NHẬP KHÁCH HÀNG
-# ==========================================
-
-if page == "👤 Nhập khách hàng":
-
     st.title("👤 THÔNG TIN KHÁCH HÀNG")
 
     st.write(
