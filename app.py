@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # =========================================================
-# CSS - GIAO DIỆN XANH LÁ VIETCOMBANK
+# CSS - GIAO DIỆN XANH DƯƠNG ACB
 # =========================================================
 st.markdown("""
 <style>
@@ -30,10 +30,10 @@ html, body, [class*="css"] {
 footer { visibility: hidden; }
 header[data-testid="stHeader"] { background: transparent; }
 
-/* SIDEBAR - XANH ĐẬM VIETCOMBANK */
+/* SIDEBAR - XANH ĐẬM ACB */
 section[data-testid="stSidebar"] {
     background: #00205B;
-    border-right: 1px solid #004d28;
+    border-right: 1px solid #003a7a;
 }
 section[data-testid="stSidebar"] > div {
     padding: 30px 20px;
@@ -60,19 +60,20 @@ section[data-testid="stSidebar"] > div {
 }
 .side-sub {
     margin-top: 6px;
-    color: #8fbf9a;
+    color: #7eb8e0;
     font-size: 8px;
     letter-spacing: 2px;
 }
 section[data-testid="stSidebar"] .stRadio label {
-    color: #c8e0cf !important;
+    color: #ffffff !important;
     padding: 12px 10px;
     border-radius: 9px;
     margin-bottom: 5px;
     transition: .2s;
 }
 section[data-testid="stSidebar"] .stRadio label:hover {
-    background: #004d28;
+    background: #003a7a;
+    color: #ffffff !important;
 }
 
 /* MAIN */
@@ -101,7 +102,7 @@ section[data-testid="stSidebar"] .stRadio label:hover {
 }
 .page-description {
     text-align: center;
-    color: #6b8f75;
+    color: #5a7a9a;
     font-size: 12px;
     margin-bottom: 28px;
 }
@@ -109,46 +110,46 @@ section[data-testid="stSidebar"] .stRadio label:hover {
 /* ẢNH */
 .image-card {
     background: #ffffff;
-    border: 1px solid #d6e8db;
+    border: 1px solid #c5d9eb;
     border-radius: 25px;
     padding: 14px;
     margin-bottom: 28px;
-    box-shadow: 0 18px 55px rgba(0, 51, 26, .07);
+    box-shadow: 0 18px 55px rgba(0, 32, 91, .07);
 }
 .image-card img { border-radius: 17px; }
 
 /* FORM CARD */
 .form-card {
     background: #ffffff;
-    border: 1px solid #d6e8db;
+    border: 1px solid #c5d9eb;
     border-radius: 23px;
     padding: 32px 40px;
-    box-shadow: 0 15px 45px rgba(0, 51, 26, .06);
+    box-shadow: 0 15px 45px rgba(0, 32, 91, .06);
 }
 
 /* INPUT */
 div[data-baseweb="input"] > div {
-    background: #f7fbf8 !important;
-    border: 1px solid #cce0d2 !important;
+    background: #f5f9fc !important;
+    border: 1px solid #c5d9eb !important;
     border-radius: 10px !important;
 }
 div[data-baseweb="textarea"] {
-    background: #f7fbf8 !important;
-    border: 1px solid #cce0d2 !important;
+    background: #f5f9fc !important;
+    border: 1px solid #c5d9eb !important;
     border-radius: 10px !important;
 }
 div[data-baseweb="input"] > div:focus-within,
 div[data-baseweb="textarea"]:focus-within {
     border-color: #00A0E3 !important;
-    box-shadow: 0 0 0 3px rgba(78, 165, 67, .15) !important;
+    box-shadow: 0 0 0 3px rgba(0, 160, 227, .15) !important;
 }
 label {
-    color: #2d4a35 !important;
+    color: #1a3a5c !important;
     font-size: 12px !important;
     font-weight: 600 !important;
 }
 
-/* BUTTON - XANH VIETCOMBANK */
+/* BUTTON - XANH ACB */
 .stButton > button {
     min-height: 48px;
     border-radius: 10px !important;
@@ -160,9 +161,9 @@ label {
     transition: .25s;
 }
 .stButton > button:hover {
-    background: #006b35 !important;
+    background: #004a90 !important;
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 69, 34, .25);
+    box-shadow: 0 10px 25px rgba(0, 87, 168, .25);
 }
 .stDownloadButton > button {
     min-height: 48px;
@@ -176,12 +177,12 @@ label {
 /* METRIC */
 div[data-testid="stMetric"] {
     background: #ffffff;
-    border: 1px solid #d6e8db;
+    border: 1px solid #c5d9eb;
     border-radius: 17px;
     padding: 18px 20px;
-    box-shadow: 0 8px 25px rgba(0, 51, 26, .04);
+    box-shadow: 0 8px 25px rgba(0, 32, 91, .04);
 }
-div[data-testid="stMetricLabel"] { color: #6b8f75 !important; }
+div[data-testid="stMetricLabel"] { color: #5a7a9a !important; }
 div[data-testid="stMetricValue"] {
     color: #0057A8 !important;
     font-weight: 700 !important;
@@ -190,13 +191,13 @@ div[data-testid="stMetricValue"] {
 /* ADMIN LOGIN */
 .login-box {
     background: #ffffff;
-    border: 1px solid #d6e8db;
+    border: 1px solid #c5d9eb;
     border-radius: 24px;
     padding: 42px;
     max-width: 500px;
     margin: 45px auto 25px auto;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 51, 26, .09);
+    box-shadow: 0 20px 60px rgba(0, 32, 91, .09);
 }
 .login-symbol {
     width: 58px; height: 58px;
@@ -214,7 +215,7 @@ div[data-testid="stMetricValue"] {
     margin-top: 17px;
 }
 .login-description {
-    color: #6b8f75;
+    color: #5a7a9a;
     font-size: 12px;
     margin-top: 5px;
 }
@@ -227,7 +228,7 @@ div[data-testid="stMetricValue"] {
     font-weight: 700;
 }
 .section-description {
-    color: #6b8f75;
+    color: #5a7a9a;
     font-size: 12px;
     margin-top: 3px;
 }
@@ -236,14 +237,14 @@ div[data-testid="stMetricValue"] {
 div[data-testid="stDataFrame"] {
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid #d6e8db;
-    box-shadow: 0 8px 25px rgba(0, 51, 26, .04);
+    border: 1px solid #c5d9eb;
+    box-shadow: 0 8px 25px rgba(0, 32, 91, .04);
 }
 
 /* FOOTER */
 .footer {
     text-align: center;
-    color: #8fbf9a;
+    color: #7eb8e0;
     font-size: 9px;
     letter-spacing: 2px;
     padding-top: 35px;
@@ -275,15 +276,15 @@ def export_excel():
 st.sidebar.markdown("""
     <div class="side-logo">
         <div class="side-symbol"><span>◆</span></div>
-        <div class="side-brand">CUSTOMER</div>
-        <div class="side-sub">MANAGEMENT SYSTEM</div>
+        <div class="side-brand">QUẢN LÝ</div>
+        <div class="side-sub">KHÁCH HÀNG</div>
     </div>
 """, unsafe_allow_html=True)
 
 st.sidebar.caption("ĐIỀU HƯỚNG")
 page = st.sidebar.radio(
     "Chọn trang",
-    ["👤 Nhập khách hàng", "🔐 Admin"],
+    ["👤 Nhập khách hàng", "🔐 Quản trị"],
     label_visibility="collapsed"
 )
 
@@ -348,25 +349,25 @@ if page == "👤 Nhập khách hàng":
             st.metric("🟢 Trạng thái", "Hoạt động")
 
 # =========================================================
-# TRANG ADMIN
+# TRANG QUẢN TRỊ
 # =========================================================
-elif page == "🔐 Admin":
-    st.markdown('<div class="page-kicker">SYSTEM ADMINISTRATION</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-title">🔐 ADMIN</div>', unsafe_allow_html=True)
+elif page == "🔐 Quản trị":
+    st.markdown('<div class="page-kicker">QUẢN TRỊ HỆ THỐNG</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-title">🔐 QUẢN TRỊ</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-description">Khu vực quản lý dữ liệu khách hàng</div>', unsafe_allow_html=True)
 
     if not st.session_state.admin_logged_in:
         st.markdown("""
             <div class="login-box">
                 <div class="login-symbol">🔐</div>
-                <div class="login-title">ADMIN PORTAL</div>
+                <div class="login-title">CỔNG QUẢN TRỊ</div>
                 <div class="login-description">
                     Đăng nhập để truy cập hệ thống quản lý khách hàng
                 </div>
             </div>
         """, unsafe_allow_html=True)
 
-        password = st.text_input("🔑 Mật khẩu", type="password", placeholder="Nhập mật khẩu Admin")
+        password = st.text_input("🔑 Mật khẩu", type="password", placeholder="Nhập mật khẩu quản trị")
         if st.button("🔓  ĐĂNG NHẬP", type="primary", use_container_width=True):
             if password == "123456":
                 st.session_state.admin_logged_in = True
@@ -421,7 +422,7 @@ elif page == "🔐 Admin":
 # =========================================================
 st.markdown("""
     <div class="footer">
-        CUSTOMER MANAGEMENT SYSTEM &nbsp; • &nbsp;
-        PROFESSIONAL CUSTOMER EXPERIENCE &nbsp; • &nbsp; 2026
+        HỆ THỐNG QUẢN LÝ KHÁCH HÀNG &nbsp; • &nbsp;
+        TRẢI NGHIỆM CHUYÊN NGHIỆP &nbsp; • &nbsp; 2026
     </div>
 """, unsafe_allow_html=True)
