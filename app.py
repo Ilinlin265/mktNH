@@ -547,30 +547,19 @@ page = st.sidebar.radio(
 
 if page == "👤 Nhập khách hàng":
 
-    # -----------------------------------------------------
-    # TIÊU ĐỀ TRANG
-    # -----------------------------------------------------
+# ==========================================
+# TRANG NHẬP KHÁCH HÀNG
+# ==========================================
 
-    st.markdown(
-        '<div class="page-kicker">'
-        'CUSTOMER MANAGEMENT'
-        '</div>',
-        unsafe_allow_html=True
+if page == "👤 Nhập khách hàng":
+
+    st.title("👤 THÔNG TIN KHÁCH HÀNG")
+
+    st.write(
+        "Vui lòng nhập thông tin khách hàng."
     )
 
-    st.markdown(
-        '<div class="page-title">'
-        '👤 THÔNG TIN KHÁCH HÀNG'
-        '</div>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        '<div class="page-description">'
-        'Vui lòng nhập thông tin khách hàng'
-        '</div>',
-        unsafe_allow_html=True
-    )
+    st.divider()
 
 
     # -----------------------------------------------------
