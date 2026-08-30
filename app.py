@@ -558,10 +558,20 @@ if page == "👤 Nhập khách hàng":
         unsafe_allow_html=True
     )
 
-st.markdown("""
-### 👤 Thông tin khách hàng
-*Nhập thông tin vào các trường bên dưới*
-""")
+    st.markdown(
+        '<div class="page-title">'
+        '👤 THÔNG TIN KHÁCH HÀNG'
+        '</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        '<div class="page-description">'
+        'Vui lòng nhập thông tin khách hàng'
+        '</div>',
+        unsafe_allow_html=True
+    )
+
 
     # -----------------------------------------------------
     # ẢNH
@@ -607,26 +617,20 @@ st.markdown("""
     )
 
 
-    # -----------------------------------------------------
-    # TIÊU ĐỀ FORM
-    # -----------------------------------------------------
+    # ==========================================
+    # TRANG NHẬP KHÁCH HÀNG
+    # ==========================================
 
-    st.markdown(
-        """
-        <div class="form-title-box">
+    if page == "👤 Nhập khách hàng":
 
-            <div class="form-title">
-                👤 Thông tin khách hàng
-            </div>
+    st.title("👤 THÔNG TIN KHÁCH HÀNG")
 
-            <div class="form-description">
-                Nhập thông tin vào các trường bên dưới
-            </div>
-
-        </div>
-        """,
-        unsafe_allow_html=True
+    st.write(
+        "Vui lòng nhập thông tin khách hàng."
     )
+
+    st.divider()
+
 
 
     # =====================================================
