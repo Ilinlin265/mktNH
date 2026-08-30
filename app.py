@@ -558,9 +558,10 @@ if page == "👤 Nhập khách hàng":
         unsafe_allow_html=True
     )
 
-st.subheader("👤 Thông tin khách hàng")
-st.caption("Nhập thông tin vào các trường bên dưới")
-
+st.markdown("""
+### 👤 Thông tin khách hàng
+*Nhập thông tin vào các trường bên dưới*
+""")
 
     # -----------------------------------------------------
     # ẢNH
