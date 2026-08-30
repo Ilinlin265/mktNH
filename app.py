@@ -15,7 +15,7 @@ st.set_page_config(
 
 
 # =========================================================
-# CSS - GIAO DIỆN
+# CSS - GIAO DIỆN PREMIUM
 # =========================================================
 
 st.markdown("""
@@ -23,15 +23,24 @@ st.markdown("""
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
+
+/* =====================================================
+   NỀN
+   ===================================================== */
+
 html, body, [class*="css"] {
     font-family: 'DM Sans', sans-serif;
 }
 
 .stApp {
-    background: #f6f7f9;
+    background: #f5f6f8;
 }
 
-/* ẨN MENU STREAMLIT */
+
+/* =====================================================
+   ẨN STREAMLIT
+   ===================================================== */
+
 #MainMenu {
     visibility: hidden;
 }
@@ -44,24 +53,22 @@ header[data-testid="stHeader"] {
     background: transparent;
 }
 
+
 /* =====================================================
    SIDEBAR
    ===================================================== */
 
 section[data-testid="stSidebar"] {
-    background: #0b1728;
-    border-right: 1px solid #17283d;
+    background: #091a2e;
+    border-right: 1px solid #1a3048;
 }
 
 section[data-testid="stSidebar"] > div {
     padding: 30px 20px;
 }
 
-section[data-testid="stSidebar"] label {
-    color: #b9c5d4 !important;
-}
 
-/* LOGO SIDEBAR */
+/* LOGO */
 
 .side-logo {
     text-align: center;
@@ -69,49 +76,53 @@ section[data-testid="stSidebar"] label {
 }
 
 .side-symbol {
-    width: 44px;
-    height: 44px;
-    border: 1px solid rgba(255,255,255,.5);
+    width: 42px;
+    height: 42px;
+    border: 1px solid #c9a96e;
     transform: rotate(45deg);
     margin: auto;
+
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .side-symbol span {
+    color: #c9a96e;
     transform: rotate(-45deg);
-    color: white;
-    font-size: 17px;
+    font-size: 15px;
 }
 
 .side-brand {
-    color: white;
+    margin-top: 18px;
+    color: #ffffff;
     font-weight: 700;
     letter-spacing: 3px;
-    font-size: 15px;
-    margin-top: 19px;
+    font-size: 14px;
 }
 
 .side-sub {
-    color: #73859c;
-    font-size: 9px;
-    letter-spacing: 2px;
     margin-top: 6px;
+    color: #788ca3;
+    font-size: 8px;
+    letter-spacing: 2px;
 }
+
 
 /* MENU */
 
 section[data-testid="stSidebar"] .stRadio label {
+    color: #bdc9d7 !important;
     padding: 12px 10px;
-    border-radius: 10px;
+    border-radius: 9px;
     margin-bottom: 5px;
     transition: .2s;
 }
 
 section[data-testid="stSidebar"] .stRadio label:hover {
-    background: #14283f;
+    background: #132b45;
 }
+
 
 /* =====================================================
    MAIN
@@ -123,22 +134,23 @@ section[data-testid="stSidebar"] .stRadio label:hover {
     padding-bottom: 40px;
 }
 
+
 /* =====================================================
    HEADER
    ===================================================== */
 
 .page-kicker {
     text-align: center;
-    color: #8b96a5;
-    font-size: 10px;
-    font-weight: 600;
+    color: #b18b50;
+    font-size: 9px;
+    font-weight: 700;
     letter-spacing: 4px;
     margin-bottom: 8px;
 }
 
 .page-title {
     text-align: center;
-    color: #0b1c30;
+    color: #0b1d32;
     font-family: 'Playfair Display', serif;
     font-size: 36px;
     font-weight: 700;
@@ -147,96 +159,97 @@ section[data-testid="stSidebar"] .stRadio label:hover {
 
 .page-description {
     text-align: center;
-    color: #8994a2;
-    font-size: 13px;
+    color: #8793a2;
+    font-size: 12px;
     margin-bottom: 28px;
 }
 
+
 /* =====================================================
-   IMAGE
+   ẢNH
    ===================================================== */
 
 .image-card {
-    background: white;
-    border: 1px solid #e7ebf0;
+    background: #ffffff;
+    border: 1px solid #e5e9ee;
     border-radius: 25px;
     padding: 14px;
     margin-bottom: 28px;
-    box-shadow: 0 18px 55px rgba(16, 31, 48, .07);
+
+    box-shadow:
+        0 18px 55px rgba(16, 31, 48, .07);
 }
 
 .image-card img {
     border-radius: 17px;
 }
 
+
 /* =====================================================
    FORM CARD
    ===================================================== */
 
 .form-card {
-    background: white;
-    border: 1px solid #e7ebf0;
+    background: #ffffff;
+    border: 1px solid #e5e9ee;
     border-radius: 23px;
+
     padding: 32px 40px;
-    box-shadow: 0 15px 45px rgba(16, 31, 48, .06);
+
+    box-shadow:
+        0 15px 45px rgba(16, 31, 48, .06);
 }
 
-.form-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding-bottom: 20px;
-    margin-bottom: 24px;
-    border-bottom: 1px solid #edf0f3;
-}
 
-.form-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    background: #0c2947;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 18px;
-    flex-shrink: 0;
+/* =====================================================
+   TIÊU ĐỀ FORM
+   ===================================================== */
+
+.form-title-box {
+    border-left: 5px solid #b8945f;
+    padding-left: 15px;
+    margin-bottom: 25px;
 }
 
 .form-title {
-    color: #0b1c30;
-    font-family: 'Playfair Display', serif;
+    color: #102a43;
     font-size: 23px;
     font-weight: 700;
+    margin: 0;
 }
 
 .form-description {
-    color: #929ca8;
+    color: #7b8794;
     font-size: 11px;
-    margin-top: 3px;
+    margin-top: 5px;
 }
+
 
 /* =====================================================
    INPUT
    ===================================================== */
 
 div[data-baseweb="input"] > div {
-    background: #f9fafb !important;
-    border: 1px solid #e2e7ed !important;
+    background: #fafbfc !important;
+    border: 1px solid #dfe5eb !important;
     border-radius: 10px !important;
 }
 
 div[data-baseweb="textarea"] {
-    background: #f9fafb !important;
-    border: 1px solid #e2e7ed !important;
+    background: #fafbfc !important;
+    border: 1px solid #dfe5eb !important;
     border-radius: 10px !important;
 }
 
 div[data-baseweb="input"] > div:focus-within,
 div[data-baseweb="textarea"]:focus-within {
-    border-color: #183d63 !important;
-    box-shadow: 0 0 0 3px rgba(24,61,99,.08) !important;
+
+    border-color: #b8945f !important;
+
+    box-shadow:
+        0 0 0 3px rgba(184,148,95,.10) !important;
 }
+
 
 label {
     color: #344154 !important;
@@ -244,45 +257,75 @@ label {
     font-weight: 600 !important;
 }
 
+
 /* =====================================================
    BUTTON
    ===================================================== */
 
 .stButton > button {
-    min-height: 47px;
+
+    min-height: 48px;
+
     border-radius: 10px !important;
+
     border: none !important;
+
     background: #0c2947 !important;
-    color: white !important;
+
+    color: #ffffff !important;
+
     font-weight: 700 !important;
-    transition: .2s;
+
+    letter-spacing: .4px;
+
+    transition: .25s;
 }
 
 .stButton > button:hover {
-    background: #173f67 !important;
+
+    background: #173e64 !important;
+
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(12,41,71,.18);
+
+    box-shadow:
+        0 10px 25px rgba(12,41,71,.18);
 }
 
+
+/* DOWNLOAD */
+
 .stDownloadButton > button {
-    min-height: 47px;
+
+    min-height: 48px;
+
     border-radius: 10px !important;
-    border: none !important;
+
     background: #0c2947 !important;
-    color: white !important;
+
+    color: #ffffff !important;
+
+    border: none !important;
+
     font-weight: 700 !important;
 }
+
 
 /* =====================================================
    METRIC
    ===================================================== */
 
 div[data-testid="stMetric"] {
-    background: white;
-    border: 1px solid #e7ebf0;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e9ee;
+
     border-radius: 17px;
+
     padding: 18px 20px;
-    box-shadow: 0 8px 25px rgba(16,31,48,.04);
+
+    box-shadow:
+        0 8px 25px rgba(16,31,48,.04);
 }
 
 div[data-testid="stMetricLabel"] {
@@ -294,73 +337,129 @@ div[data-testid="stMetricValue"] {
     font-weight: 700 !important;
 }
 
+
 /* =====================================================
    ADMIN LOGIN
    ===================================================== */
 
 .login-box {
-    background: white;
-    border: 1px solid #e6ebf0;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e9ee;
+
     border-radius: 24px;
-    padding: 40px;
+
+    padding: 42px;
+
     max-width: 500px;
+
     margin: 45px auto 25px auto;
+
     text-align: center;
-    box-shadow: 0 20px 60px rgba(16,31,48,.09);
+
+    box-shadow:
+        0 20px 60px rgba(16,31,48,.09);
 }
 
 .login-symbol {
+
     width: 58px;
     height: 58px;
+
     background: #0c2947;
+
     border-radius: 50%;
+
     margin: auto;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 23px;
+
+    color: #c9a96e;
+
+    font-size: 22px;
 }
 
 .login-title {
+
     color: #0b1c30;
+
     font-family: 'Playfair Display', serif;
+
     font-size: 28px;
+
     margin-top: 17px;
 }
 
 .login-description {
+
     color: #8994a2;
+
     font-size: 12px;
+
     margin-top: 5px;
 }
 
+
 /* =====================================================
-   SECTION
+   SECTION ADMIN
    ===================================================== */
 
 .section-title {
+
     color: #0b1c30;
+
     font-family: 'Playfair Display', serif;
+
     font-size: 23px;
+
     font-weight: 700;
 }
 
 .section-description {
+
     color: #8994a2;
+
     font-size: 12px;
+
     margin-top: 3px;
 }
+
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+div[data-testid="stDataFrame"] {
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    border: 1px solid #e5e9ee;
+
+    box-shadow:
+        0 8px 25px rgba(16,31,48,.04);
+}
+
 
 /* =====================================================
    FOOTER
    ===================================================== */
 
 .footer {
+
     text-align: center;
+
     color: #a1aab5;
-    font-size: 10px;
-    letter-spacing: 1.5px;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
     padding-top: 35px;
 }
 
@@ -369,7 +468,7 @@ div[data-testid="stMetricValue"] {
 
 
 # =========================================================
-# KHỞI TẠO DANH SÁCH KHÁCH HÀNG
+# KHỞI TẠO
 # =========================================================
 
 if "customers" not in st.session_state:
@@ -406,26 +505,29 @@ def export_excel():
 
 
 # =========================================================
-# MENU SIDEBAR
+# SIDEBAR
 # =========================================================
 
-st.sidebar.markdown("""
-<div class="side-logo">
+st.sidebar.markdown(
+    """
+    <div class="side-logo">
 
-    <div class="side-symbol">
-        <span>◆</span>
+        <div class="side-symbol">
+            <span>◆</span>
+        </div>
+
+        <div class="side-brand">
+            CUSTOMER
+        </div>
+
+        <div class="side-sub">
+            MANAGEMENT SYSTEM
+        </div>
+
     </div>
-
-    <div class="side-brand">
-        CUSTOMER
-    </div>
-
-    <div class="side-sub">
-        MANAGEMENT SYSTEM
-    </div>
-
-</div>
-""", unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
 
 st.sidebar.caption("ĐIỀU HƯỚNG")
 
@@ -446,7 +548,7 @@ page = st.sidebar.radio(
 if page == "👤 Nhập khách hàng":
 
     # -----------------------------------------------------
-    # HEADER
+    # TIÊU ĐỀ TRANG
     # -----------------------------------------------------
 
     st.markdown(
@@ -480,10 +582,11 @@ if page == "👤 Nhập khách hàng":
         unsafe_allow_html=True
     )
 
-    # Tạo khoảng trống hai bên để ảnh nằm giữa
-    col1, col2, col3 = st.columns([1, 3, 1])
+    col_left, col_center, col_right = st.columns(
+        [1, 3, 1]
+    )
 
-    with col2:
+    with col_center:
 
         try:
 
@@ -492,11 +595,10 @@ if page == "👤 Nhập khách hàng":
                 use_container_width=True
             )
 
-        except Exception:
+        except:
 
             st.info(
-                "📷 Chưa tìm thấy LOGO.jpg. "
-                "Hãy đặt ảnh LOGO.jpg cùng thư mục với app.py."
+                "📷 Chưa tìm thấy LOGO.jpg"
             )
 
     st.markdown(
@@ -514,17 +616,17 @@ if page == "👤 Nhập khách hàng":
         unsafe_allow_html=True
     )
 
-    st.markdown("""
-    <div class="form-header">
 
-        <div class="form-icon">
-            👤
-        </div>
+    # -----------------------------------------------------
+    # TIÊU ĐỀ FORM
+    # -----------------------------------------------------
 
-        <div>
+    st.markdown(
+        """
+        <div class="form-title-box">
 
             <div class="form-title">
-                Thông tin khách hàng
+                👤 Thông tin khách hàng
             </div>
 
             <div class="form-description">
@@ -532,9 +634,9 @@ if page == "👤 Nhập khách hàng":
             </div>
 
         </div>
-
-    </div>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True
+    )
 
 
     # =====================================================
@@ -574,7 +676,7 @@ if page == "👤 Nhập khách hàng":
     note = st.text_area(
         "📝 Ghi chú",
         placeholder="Nhập ghi chú",
-        height=100
+        height=110
     )
 
 
@@ -606,10 +708,18 @@ if page == "👤 Nhập khách hàng":
         else:
 
             customer = {
-                "Số điện thoại": phone.strip(),
-                "Tên khách hàng": name.strip(),
-                "Địa chỉ": address.strip(),
-                "Ghi chú": note.strip()
+
+                "Số điện thoại":
+                    phone.strip(),
+
+                "Tên khách hàng":
+                    name.strip(),
+
+                "Địa chỉ":
+                    address.strip(),
+
+                "Ghi chú":
+                    note.strip()
             }
 
             st.session_state.customers.append(
@@ -697,24 +807,27 @@ elif page == "🔐 Admin":
 
     if not st.session_state.admin_logged_in:
 
-        st.markdown("""
-        <div class="login-box">
+        st.markdown(
+            """
+            <div class="login-box">
 
-            <div class="login-symbol">
-                🔐
+                <div class="login-symbol">
+                    🔐
+                </div>
+
+                <div class="login-title">
+                    ADMIN PORTAL
+                </div>
+
+                <div class="login-description">
+                    Đăng nhập để truy cập hệ thống
+                    quản lý khách hàng
+                </div>
+
             </div>
-
-            <div class="login-title">
-                ADMIN PORTAL
-            </div>
-
-            <div class="login-description">
-                Đăng nhập để truy cập hệ thống
-                quản lý khách hàng
-            </div>
-
-        </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
 
 
         password = st.text_input(
@@ -749,7 +862,10 @@ elif page == "🔐 Admin":
 
     else:
 
-        col1, col2 = st.columns([6, 1])
+        col1, col2 = st.columns(
+            [6, 1]
+        )
+
 
         with col1:
 
@@ -766,6 +882,7 @@ elif page == "🔐 Admin":
                 '</div>',
                 unsafe_allow_html=True
             )
+
 
         with col2:
 
@@ -792,6 +909,7 @@ elif page == "🔐 Admin":
                 "📭 Chưa có khách hàng."
             )
 
+
         else:
 
             df = pd.DataFrame(
@@ -805,6 +923,7 @@ elif page == "🔐 Admin":
 
             c1, c2, c3 = st.columns(3)
 
+
             with c1:
 
                 st.metric(
@@ -812,12 +931,14 @@ elif page == "🔐 Admin":
                     len(df)
                 )
 
+
             with c2:
 
                 st.metric(
                     "📱 Hồ sơ liên hệ",
                     len(df)
                 )
+
 
             with c3:
 
@@ -831,7 +952,7 @@ elif page == "🔐 Admin":
 
 
             # =================================================
-            # BẢNG
+            # DANH SÁCH
             # =================================================
 
             st.markdown(
@@ -842,6 +963,7 @@ elif page == "🔐 Admin":
             )
 
             st.markdown("<br>", unsafe_allow_html=True)
+
 
             st.dataframe(
                 df,
@@ -860,6 +982,7 @@ elif page == "🔐 Admin":
 
             excel_file = export_excel()
 
+
             st.download_button(
                 label="📥  XUẤT FILE EXCEL",
                 data=excel_file,
@@ -876,12 +999,15 @@ elif page == "🔐 Admin":
 # FOOTER
 # =========================================================
 
-st.markdown("""
-<div class="footer">
-    CUSTOMER MANAGEMENT SYSTEM
-    &nbsp; • &nbsp;
-    PROFESSIONAL CUSTOMER EXPERIENCE
-    &nbsp; • &nbsp;
-    2026
-</div>
-""", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class="footer">
+        CUSTOMER MANAGEMENT SYSTEM
+        &nbsp; • &nbsp;
+        PROFESSIONAL CUSTOMER EXPERIENCE
+        &nbsp; • &nbsp;
+        2026
+    </div>
+    """,
+    unsafe_allow_html=True
+)
