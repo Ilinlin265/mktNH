@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # ==========================================
-# CSS - GIAO DIỆN ĐỎ TECHCOMBANK + HOA + NỀN NỔI
+# CSS - MÀU TƯƠI SÁNG + HOA + NỀN NỔI
 # ==========================================
 st.markdown("""
 <style>
@@ -22,17 +22,17 @@ st.markdown("""
 html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 
 .stApp {
-    background: linear-gradient(160deg, #FFF5F5 0%, #F8F8F8 40%, #FFF0F0 100%);
+    background: linear-gradient(160deg, #FFF9F9 0%, #FFFFFF 45%, #FFF5F7 100%);
     background-attachment: fixed;
 }
 
 #MainMenu, footer { visibility: hidden; }
 header[data-testid="stHeader"] { background: transparent; }
 
-/* ========== SIDEBAR - ĐEN ĐẬM TCB ========== */
+/* ========== SIDEBAR - SÁNG HƠN MỘT CHÚT ========== */
 section[data-testid="stSidebar"] {
-    background: #1A1A1A !important;
-    border-right: 1px solid #333;
+    background: linear-gradient(180deg, #1F1F1F 0%, #2A2A2A 100%) !important;
+    border-right: 1px solid #3A3A3A;
 }
 section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 
@@ -40,21 +40,21 @@ section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 
 .side-symbol {
     width: 52px; height: 52px;
-    border: 2.5px solid #ED1C24;
+    border: 2.5px solid #FF3B3B;
     transform: rotate(45deg);
     margin: auto;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 18px rgba(237, 28, 36, 0.45);
+    box-shadow: 0 0 20px rgba(255, 59, 59, 0.5);
 }
 .side-symbol span {
-    color: #ED1C24;
+    color: #FF3B3B;
     transform: rotate(-45deg);
     font-size: 18px;
 }
 
 .side-brand {
     margin-top: 18px;
-    color: #ffffff !important;
+    color: #FFFFFF !important;
     font-weight: 700;
     letter-spacing: 3px;
     font-size: 28px;
@@ -62,7 +62,7 @@ section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 
 .side-sub {
     margin-top: 6px;
-    color: #ED1C24;
+    color: #FF5C5C;
     font-size: 14px;
     letter-spacing: 2.5px;
     font-weight: 600;
@@ -73,11 +73,11 @@ section[data-testid="stSidebar"] > div { padding: 28px 18px; }
     font-size: 18px;
     letter-spacing: 6px;
     margin: 14px 0 6px;
-    opacity: 0.85;
+    opacity: 0.9;
 }
 
 section[data-testid="stSidebar"] .stRadio label {
-    color: #ffffff !important;
+    color: #FFFFFF !important;
     padding: 14px 12px;
     border-radius: 10px;
     margin-bottom: 6px;
@@ -85,13 +85,13 @@ section[data-testid="stSidebar"] .stRadio label {
     font-size: 16.5px !important;
 }
 section[data-testid="stSidebar"] .stRadio label:hover {
-    background: #2a2a2a;
-    color: #ED1C24 !important;
+    background: #3A3A3A;
+    color: #FF5C5C !important;
 }
 
 section[data-testid="stSidebar"] .stCaption,
 section[data-testid="stSidebar"] [data-testid="stCaption"] {
-    color: #ffffff !important;
+    color: #FFFFFF !important;
     font-size: 15px !important;
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
@@ -107,7 +107,7 @@ section[data-testid="stSidebar"] [data-testid="stCaption"] {
 
 .page-kicker {
     text-align: center;
-    color: #ED1C24;
+    color: #FF3B3B;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 4px;
@@ -125,7 +125,7 @@ section[data-testid="stSidebar"] [data-testid="stCaption"] {
 
 .page-description {
     text-align: center;
-    color: #666;
+    color: #555;
     font-size: 15px;
     margin-bottom: 18px;
 }
@@ -135,17 +135,17 @@ section[data-testid="stSidebar"] [data-testid="stCaption"] {
     font-size: 20px;
     letter-spacing: 10px;
     margin: 6px 0 22px;
-    opacity: 0.7;
+    opacity: 0.75;
 }
 
-/* Card nổi */
+/* Card nổi sáng */
 .image-card, .form-card, .login-box,
 div[data-testid="stMetric"], div[data-testid="stDataFrame"] {
-    background: #ffffff;
-    border: 1px solid #e5e5e5;
+    background: #FFFFFF;
+    border: 1px solid #FFE0E0;
     border-radius: 20px;
-    box-shadow: 0 12px 36px rgba(0,0,0,.08),
-                0 4px 12px rgba(237,28,36,.06);
+    box-shadow: 0 10px 30px rgba(255, 59, 59, 0.08),
+                0 4px 12px rgba(0,0,0,.04);
 }
 
 .image-card {
@@ -162,7 +162,7 @@ div[data-testid="stMetric"], div[data-testid="stDataFrame"] {
     font-size: 16px;
     letter-spacing: 8px;
     margin-top: 10px;
-    opacity: 0.55;
+    opacity: 0.6;
 }
 
 .form-card {
@@ -177,7 +177,7 @@ div[data-testid="stMetric"], div[data-testid="stDataFrame"] {
     top: 14px;
     right: 20px;
     font-size: 32px;
-    opacity: 0.15;
+    opacity: 0.18;
 }
 
 .login-box {
@@ -194,7 +194,7 @@ div[data-testid="stMetric"], div[data-testid="stDataFrame"] {
     top: 16px;
     left: 22px;
     font-size: 26px;
-    opacity: 0.2;
+    opacity: 0.25;
 }
 .login-box::after {
     content: "🌼";
@@ -202,20 +202,20 @@ div[data-testid="stMetric"], div[data-testid="stDataFrame"] {
     bottom: 16px;
     right: 22px;
     font-size: 26px;
-    opacity: 0.2;
+    opacity: 0.25;
 }
 
 /* Input */
 div[data-baseweb="input"] > div,
 div[data-baseweb="textarea"] {
-    background: #fafafa !important;
-    border: 1.5px solid #e0e0e0 !important;
+    background: #FFF9F9 !important;
+    border: 1.5px solid #FFD6D6 !important;
     border-radius: 12px !important;
 }
 div[data-baseweb="input"] > div:focus-within,
 div[data-baseweb="textarea"]:focus-within {
-    border-color: #ED1C24 !important;
-    box-shadow: 0 0 0 4px rgba(237,28,36,.15) !important;
+    border-color: #FF3B3B !important;
+    box-shadow: 0 0 0 4px rgba(255, 59, 59, 0.15) !important;
 }
 label {
     color: #333 !important;
@@ -223,22 +223,22 @@ label {
     font-weight: 600 !important;
 }
 
-/* BUTTON - ĐỎ TCB */
+/* BUTTON - ĐỎ TƯƠI */
 .stButton > button, .stDownloadButton > button {
     min-height: 52px;
     border-radius: 12px !important;
     border: none !important;
-    background: #ED1C24 !important;
+    background: linear-gradient(135deg, #FF3B3B, #FF5C5C) !important;
     color: #ffffff !important;
     font-weight: 700 !important;
     font-size: 16px !important;
     transition: .25s;
-    box-shadow: 0 6px 18px rgba(237,28,36,.28);
+    box-shadow: 0 6px 20px rgba(255, 59, 59, 0.3);
 }
 .stButton > button:hover {
-    background: #c41720 !important;
+    background: linear-gradient(135deg, #E63535, #FF3B3B) !important;
     transform: translateY(-3px);
-    box-shadow: 0 10px 26px rgba(237,28,36,.38);
+    box-shadow: 0 10px 28px rgba(255, 59, 59, 0.4);
 }
 
 /* Metric */
@@ -247,16 +247,16 @@ div[data-testid="stMetric"] {
     border-radius: 16px;
 }
 div[data-testid="stMetricLabel"] { color: #666 !important; font-size: 14px !important; }
-div[data-testid="stMetricValue"] { color: #ED1C24 !important; font-weight: 700 !important; font-size: 26px !important; }
+div[data-testid="stMetricValue"] { color: #FF3B3B !important; font-weight: 700 !important; font-size: 26px !important; }
 
 .login-symbol {
     width: 64px; height: 64px;
-    background: #ED1C24;
+    background: linear-gradient(135deg, #FF3B3B, #FF5C5C);
     border-radius: 50%;
     margin: auto;
     display: flex; align-items: center; justify-content: center;
     color: #fff; font-size: 26px;
-    box-shadow: 0 8px 22px rgba(237,28,36,.35);
+    box-shadow: 0 8px 24px rgba(255, 59, 59, 0.35);
 }
 .login-title {
     color: #1A1A1A;
@@ -264,7 +264,7 @@ div[data-testid="stMetricValue"] { color: #ED1C24 !important; font-weight: 700 !
     font-size: 28px;
     margin-top: 14px;
 }
-.login-description { color: #666; font-size: 14px; margin-top: 4px; }
+.login-description { color: #555; font-size: 14px; margin-top: 4px; }
 
 .section-title {
     color: #1A1A1A;
@@ -272,7 +272,7 @@ div[data-testid="stMetricValue"] { color: #ED1C24 !important; font-weight: 700 !
     font-size: 26px;
     font-weight: 700;
 }
-.section-description { color: #666; font-size: 14px; margin-top: 2px; }
+.section-description { color: #555; font-size: 14px; margin-top: 2px; }
 
 .footer {
     text-align: center;
