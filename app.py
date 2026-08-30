@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # =========================================================
-# CSS - GIAO DIỆN PREMIUM
+# CSS - GIAO DIỆN XANH LÁ VIETCOMBANK
 # =========================================================
 st.markdown("""
 <style>
@@ -23,17 +23,17 @@ html, body, [class*="css"] {
     font-family: 'DM Sans', sans-serif;
 }
 .stApp {
-    background: #f5f6f8;
+    background: #f4f7f5;
 }
 
 #MainMenu { visibility: hidden; }
 footer { visibility: hidden; }
 header[data-testid="stHeader"] { background: transparent; }
 
-/* SIDEBAR */
+/* SIDEBAR - XANH ĐẬM VIETCOMBANK */
 section[data-testid="stSidebar"] {
-    background: #091a2e;
-    border-right: 1px solid #1a3048;
+    background: #00331a;
+    border-right: 1px solid #004d28;
 }
 section[data-testid="stSidebar"] > div {
     padding: 30px 20px;
@@ -41,13 +41,13 @@ section[data-testid="stSidebar"] > div {
 .side-logo { text-align: center; margin-bottom: 42px; }
 .side-symbol {
     width: 42px; height: 42px;
-    border: 1px solid #c9a96e;
+    border: 1px solid #4EA543;
     transform: rotate(45deg);
     margin: auto;
     display: flex; align-items: center; justify-content: center;
 }
 .side-symbol span {
-    color: #c9a96e;
+    color: #4EA543;
     transform: rotate(-45deg);
     font-size: 15px;
 }
@@ -60,19 +60,19 @@ section[data-testid="stSidebar"] > div {
 }
 .side-sub {
     margin-top: 6px;
-    color: #788ca3;
+    color: #8fbf9a;
     font-size: 8px;
     letter-spacing: 2px;
 }
 section[data-testid="stSidebar"] .stRadio label {
-    color: #bdc9d7 !important;
+    color: #c8e0cf !important;
     padding: 12px 10px;
     border-radius: 9px;
     margin-bottom: 5px;
     transition: .2s;
 }
 section[data-testid="stSidebar"] .stRadio label:hover {
-    background: #132b45;
+    background: #004d28;
 }
 
 /* MAIN */
@@ -85,7 +85,7 @@ section[data-testid="stSidebar"] .stRadio label:hover {
 /* HEADER */
 .page-kicker {
     text-align: center;
-    color: #b18b50;
+    color: #4EA543;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 4px;
@@ -93,7 +93,7 @@ section[data-testid="stSidebar"] .stRadio label:hover {
 }
 .page-title {
     text-align: center;
-    color: #0b1d32;
+    color: #00331a;
     font-family: 'Playfair Display', serif;
     font-size: 36px;
     font-weight: 700;
@@ -101,7 +101,7 @@ section[data-testid="stSidebar"] .stRadio label:hover {
 }
 .page-description {
     text-align: center;
-    color: #8793a2;
+    color: #6b8f75;
     font-size: 12px;
     margin-bottom: 28px;
 }
@@ -109,65 +109,65 @@ section[data-testid="stSidebar"] .stRadio label:hover {
 /* ẢNH */
 .image-card {
     background: #ffffff;
-    border: 1px solid #e5e9ee;
+    border: 1px solid #d6e8db;
     border-radius: 25px;
     padding: 14px;
     margin-bottom: 28px;
-    box-shadow: 0 18px 55px rgba(16, 31, 48, .07);
+    box-shadow: 0 18px 55px rgba(0, 51, 26, .07);
 }
 .image-card img { border-radius: 17px; }
 
 /* FORM CARD */
 .form-card {
     background: #ffffff;
-    border: 1px solid #e5e9ee;
+    border: 1px solid #d6e8db;
     border-radius: 23px;
     padding: 32px 40px;
-    box-shadow: 0 15px 45px rgba(16, 31, 48, .06);
+    box-shadow: 0 15px 45px rgba(0, 51, 26, .06);
 }
 
 /* INPUT */
 div[data-baseweb="input"] > div {
-    background: #fafbfc !important;
-    border: 1px solid #dfe5eb !important;
+    background: #f7fbf8 !important;
+    border: 1px solid #cce0d2 !important;
     border-radius: 10px !important;
 }
 div[data-baseweb="textarea"] {
-    background: #fafbfc !important;
-    border: 1px solid #dfe5eb !important;
+    background: #f7fbf8 !important;
+    border: 1px solid #cce0d2 !important;
     border-radius: 10px !important;
 }
 div[data-baseweb="input"] > div:focus-within,
 div[data-baseweb="textarea"]:focus-within {
-    border-color: #b8945f !important;
-    box-shadow: 0 0 0 3px rgba(184,148,95,.10) !important;
+    border-color: #4EA543 !important;
+    box-shadow: 0 0 0 3px rgba(78, 165, 67, .15) !important;
 }
 label {
-    color: #344154 !important;
+    color: #2d4a35 !important;
     font-size: 12px !important;
     font-weight: 600 !important;
 }
 
-/* BUTTON */
+/* BUTTON - XANH VIETCOMBANK */
 .stButton > button {
     min-height: 48px;
     border-radius: 10px !important;
     border: none !important;
-    background: #0c2947 !important;
+    background: #004522 !important;
     color: #ffffff !important;
     font-weight: 700 !important;
     letter-spacing: .4px;
     transition: .25s;
 }
 .stButton > button:hover {
-    background: #173e64 !important;
+    background: #006b35 !important;
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(12,41,71,.18);
+    box-shadow: 0 10px 25px rgba(0, 69, 34, .25);
 }
 .stDownloadButton > button {
     min-height: 48px;
     border-radius: 10px !important;
-    background: #0c2947 !important;
+    background: #004522 !important;
     color: #ffffff !important;
     border: none !important;
     font-weight: 700 !important;
@@ -176,58 +176,58 @@ label {
 /* METRIC */
 div[data-testid="stMetric"] {
     background: #ffffff;
-    border: 1px solid #e5e9ee;
+    border: 1px solid #d6e8db;
     border-radius: 17px;
     padding: 18px 20px;
-    box-shadow: 0 8px 25px rgba(16,31,48,.04);
+    box-shadow: 0 8px 25px rgba(0, 51, 26, .04);
 }
-div[data-testid="stMetricLabel"] { color: #7d8997 !important; }
+div[data-testid="stMetricLabel"] { color: #6b8f75 !important; }
 div[data-testid="stMetricValue"] {
-    color: #0c2947 !important;
+    color: #004522 !important;
     font-weight: 700 !important;
 }
 
 /* ADMIN LOGIN */
 .login-box {
     background: #ffffff;
-    border: 1px solid #e5e9ee;
+    border: 1px solid #d6e8db;
     border-radius: 24px;
     padding: 42px;
     max-width: 500px;
     margin: 45px auto 25px auto;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(16,31,48,.09);
+    box-shadow: 0 20px 60px rgba(0, 51, 26, .09);
 }
 .login-symbol {
     width: 58px; height: 58px;
-    background: #0c2947;
+    background: #004522;
     border-radius: 50%;
     margin: auto;
     display: flex; align-items: center; justify-content: center;
-    color: #c9a96e;
+    color: #4EA543;
     font-size: 22px;
 }
 .login-title {
-    color: #0b1c30;
+    color: #00331a;
     font-family: 'Playfair Display', serif;
     font-size: 28px;
     margin-top: 17px;
 }
 .login-description {
-    color: #8994a2;
+    color: #6b8f75;
     font-size: 12px;
     margin-top: 5px;
 }
 
 /* SECTION ADMIN */
 .section-title {
-    color: #0b1c30;
+    color: #00331a;
     font-family: 'Playfair Display', serif;
     font-size: 23px;
     font-weight: 700;
 }
 .section-description {
-    color: #8994a2;
+    color: #6b8f75;
     font-size: 12px;
     margin-top: 3px;
 }
@@ -236,14 +236,14 @@ div[data-testid="stMetricValue"] {
 div[data-testid="stDataFrame"] {
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid #e5e9ee;
-    box-shadow: 0 8px 25px rgba(16,31,48,.04);
+    border: 1px solid #d6e8db;
+    box-shadow: 0 8px 25px rgba(0, 51, 26, .04);
 }
 
 /* FOOTER */
 .footer {
     text-align: center;
-    color: #a1aab5;
+    color: #8fbf9a;
     font-size: 9px;
     letter-spacing: 2px;
     padding-top: 35px;
@@ -308,11 +308,9 @@ if page == "👤 Nhập khách hàng":
     # FORM
     st.markdown('<div class="form-card">', unsafe_allow_html=True)
 
-    # ===== TIÊU ĐỀ FORM (ĐÃ SỬA - DÙNG STREAMLIT THUẦN) =====
     st.subheader("👤 Thông tin khách hàng")
     st.caption("Nhập thông tin vào các trường bên dưới")
     st.markdown("<br>", unsafe_allow_html=True)
-    # ========================================================
 
     phone = st.text_input("📱 Số điện thoại", placeholder="Nhập số điện thoại")
     name = st.text_input("👤 Tên khách hàng", placeholder="Nhập tên khách hàng")
