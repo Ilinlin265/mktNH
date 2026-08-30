@@ -23,7 +23,7 @@ html, body, [class*="css"] {
     font-family: 'DM Sans', sans-serif;
 }
 .stApp {
-    background: #f4f7f5;
+    background: #F0F7FC;
 }
 
 #MainMenu { visibility: hidden; }
@@ -32,7 +32,7 @@ header[data-testid="stHeader"] { background: transparent; }
 
 /* SIDEBAR - XANH ĐẬM VIETCOMBANK */
 section[data-testid="stSidebar"] {
-    background: #00331a;
+    background: #00205B;
     border-right: 1px solid #004d28;
 }
 section[data-testid="stSidebar"] > div {
@@ -41,13 +41,13 @@ section[data-testid="stSidebar"] > div {
 .side-logo { text-align: center; margin-bottom: 42px; }
 .side-symbol {
     width: 42px; height: 42px;
-    border: 1px solid #4EA543;
+    border: 1px solid #00A0E3;
     transform: rotate(45deg);
     margin: auto;
     display: flex; align-items: center; justify-content: center;
 }
 .side-symbol span {
-    color: #4EA543;
+    color: #00A0E3;
     transform: rotate(-45deg);
     font-size: 15px;
 }
@@ -85,7 +85,7 @@ section[data-testid="stSidebar"] .stRadio label:hover {
 /* HEADER */
 .page-kicker {
     text-align: center;
-    color: #4EA543;
+    color: #00A0E3;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 4px;
@@ -93,7 +93,7 @@ section[data-testid="stSidebar"] .stRadio label:hover {
 }
 .page-title {
     text-align: center;
-    color: #00331a;
+    color: #00205B;
     font-family: 'Playfair Display', serif;
     font-size: 36px;
     font-weight: 700;
@@ -139,7 +139,7 @@ div[data-baseweb="textarea"] {
 }
 div[data-baseweb="input"] > div:focus-within,
 div[data-baseweb="textarea"]:focus-within {
-    border-color: #4EA543 !important;
+    border-color: #00A0E3 !important;
     box-shadow: 0 0 0 3px rgba(78, 165, 67, .15) !important;
 }
 label {
@@ -153,7 +153,7 @@ label {
     min-height: 48px;
     border-radius: 10px !important;
     border: none !important;
-    background: #004522 !important;
+    background: #0057A8 !important;
     color: #ffffff !important;
     font-weight: 700 !important;
     letter-spacing: .4px;
@@ -167,7 +167,7 @@ label {
 .stDownloadButton > button {
     min-height: 48px;
     border-radius: 10px !important;
-    background: #004522 !important;
+    background: #0057A8 !important;
     color: #ffffff !important;
     border: none !important;
     font-weight: 700 !important;
@@ -183,7 +183,7 @@ div[data-testid="stMetric"] {
 }
 div[data-testid="stMetricLabel"] { color: #6b8f75 !important; }
 div[data-testid="stMetricValue"] {
-    color: #004522 !important;
+    color: #0057A8 !important;
     font-weight: 700 !important;
 }
 
@@ -200,15 +200,15 @@ div[data-testid="stMetricValue"] {
 }
 .login-symbol {
     width: 58px; height: 58px;
-    background: #004522;
+    background: #0057A8;
     border-radius: 50%;
     margin: auto;
     display: flex; align-items: center; justify-content: center;
-    color: #4EA543;
+    color: #00A0E3;
     font-size: 22px;
 }
 .login-title {
-    color: #00331a;
+    color: #00205B;
     font-family: 'Playfair Display', serif;
     font-size: 28px;
     margin-top: 17px;
@@ -221,7 +221,7 @@ div[data-testid="stMetricValue"] {
 
 /* SECTION ADMIN */
 .section-title {
-    color: #00331a;
+    color: #00205B;
     font-family: 'Playfair Display', serif;
     font-size: 23px;
     font-weight: 700;
