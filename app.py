@@ -617,20 +617,26 @@ if page == "👤 Nhập khách hàng":
     )
 
 
-    # ==========================================
-    # TRANG NHẬP KHÁCH HÀNG
-    # ==========================================
+    # -----------------------------------------------------
+    # TIÊU ĐỀ FORM
+    # -----------------------------------------------------
 
-    if page == "👤 Nhập khách hàng":
+    st.markdown(
+        """
+        <div class="form-title-box">
 
-    st.title("👤 THÔNG TIN KHÁCH HÀNG")
+            <div class="form-title">
+                👤 Thông tin khách hàng
+            </div>
 
-    st.write(
-        "Vui lòng nhập thông tin khách hàng."
+            <div class="form-description">
+                Nhập thông tin vào các trường bên dưới
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
     )
-
-    st.divider()
-
 
 
     # =====================================================
