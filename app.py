@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 from io import BytesIO
 
+# ==========================================
+# CẤU HÌNH
+# ==========================================
 st.set_page_config(
     page_title="Quản lý khách hàng",
     page_icon="🌸",
@@ -9,9 +12,9 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# =========================================================
-# CSS - GIAO DIỆN ĐỎ TECHCOMBANK + NHIỀU TRANG TRÍ + NỀN NỔI
-# =========================================================
+# ==========================================
+# CSS - GIAO DIỆN ĐỎ TECHCOMBANK + HOA + NỀN NỔI
+# ==========================================
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
@@ -95,7 +98,7 @@ section[data-testid="stSidebar"] [data-testid="stCaption"] {
     opacity: 1 !important;
 }
 
-/* ========== MAIN - NỀN NỔI ========== */
+/* ========== MAIN ========== */
 .block-container {
     max-width: 1050px;
     padding-top: 36px;
@@ -135,7 +138,7 @@ section[data-testid="stSidebar"] [data-testid="stCaption"] {
     opacity: 0.7;
 }
 
-/* Card nổi mạnh */
+/* Card nổi */
 .image-card, .form-card, .login-box,
 div[data-testid="stMetric"], div[data-testid="stDataFrame"] {
     background: #ffffff;
@@ -238,7 +241,7 @@ label {
     box-shadow: 0 10px 26px rgba(237,28,36,.38);
 }
 
-/* Metric nổi */
+/* Metric */
 div[data-testid="stMetric"] {
     padding: 18px 16px;
     border-radius: 16px;
@@ -281,24 +284,28 @@ div[data-testid="stMetricValue"] { color: #ED1C24 !important; font-weight: 700 !
 </style>
 """, unsafe_allow_html=True)
 
-# =========================================================
-# STATE
-# =========================================================
+# ==========================================
+# KHỞI TẠO DANH SÁCH KHÁCH HÀNG
+# ==========================================
 if "customers" not in st.session_state:
     st.session_state.customers = []
+
 if "admin_logged_in" not in st.session_state:
     st.session_state.admin_logged_in = False
 
+# ==========================================
+# HÀM XUẤT EXCEL
+# ==========================================
 def export_excel():
     df = pd.DataFrame(st.session_state.customers)
-    buf = BytesIO()
-    with pd.ExcelWriter(buf, engine="openpyxl") as writer:
+    output = BytesIO()
+    with pd.ExcelWriter(output, engine="openpyxl") as writer:
         df.to_excel(writer, index=False, sheet_name="Khách hàng")
-    return buf.getvalue()
+    return output.getvalue()
 
-# =========================================================
-# SIDEBAR - THANH ĐIỀU HƯỚNG GỐC + HOA
-# =========================================================
+# ==========================================
+# SIDEBAR - THANH ĐIỀU HƯỚNG
+# ==========================================
 st.sidebar.markdown("""
 <div class="side-logo">
     <div class="side-symbol"><span>◆</span></div>
@@ -311,21 +318,22 @@ st.sidebar.markdown("""
 st.sidebar.caption("ĐIỀU HƯỚNG")
 page = st.sidebar.radio(
     "Chọn trang",
-    ["👤 Nhập khách hàng", "🔐 Quản trị"],
+    ["👤 Nhập khách hàng", "🔐 Admin"],
     label_visibility="collapsed"
 )
 
 st.sidebar.markdown('<div class="flower-side">🌷 🌻 🌹</div>', unsafe_allow_html=True)
 
-# =========================================================
-# TRANG NHẬP
-# =========================================================
+# ==========================================
+# TRANG NHẬP KHÁCH HÀNG
+# ==========================================
 if page == "👤 Nhập khách hàng":
     st.markdown('<div class="page-kicker">🌸 HỆ THỐNG QUẢN LÝ 🌸</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-title">👤 THÔNG TIN KHÁCH HÀNG</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-description">Vui lòng nhập thông tin khách hàng một cách đầy đủ</div>', unsafe_allow_html=True)
     st.markdown('<div class="flower-row">🌺 🌼 🌸 🌺 🌼 🌸</div>', unsafe_allow_html=True)
 
+    # Logo (nếu có)
     st.markdown('<div class="image-card">', unsafe_allow_html=True)
     _, col, _ = st.columns([1, 3, 1])
     with col:
@@ -335,6 +343,7 @@ if page == "👤 Nhập khách hàng":
             st.info("📷 Chưa tìm thấy LOGO.jpg")
     st.markdown('</div>', unsafe_allow_html=True)
 
+    # Form nhập
     st.markdown('<div class="form-card">', unsafe_allow_html=True)
     st.subheader("👤 Thông tin khách hàng")
     st.caption("Nhập thông tin vào các trường bên dưới")
@@ -346,22 +355,25 @@ if page == "👤 Nhập khách hàng":
     note = st.text_area("📝 Ghi chú", placeholder="Nhập ghi chú", height=100)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("💾  LƯU THÔNG TIN", type="primary", use_container_width=True):
-        if not phone.strip():
+
+    if st.button("💾 LƯU THÔNG TIN", type="primary", use_container_width=True):
+        if phone.strip() == "":
             st.error("❌ Vui lòng nhập số điện thoại.")
-        elif not name.strip():
+        elif name.strip() == "":
             st.error("❌ Vui lòng nhập tên khách hàng.")
         else:
-            st.session_state.customers.append({
+            customer = {
                 "Số điện thoại": phone.strip(),
                 "Tên khách hàng": name.strip(),
                 "Địa chỉ": address.strip(),
                 "Ghi chú": note.strip()
-            })
+            }
+            st.session_state.customers.append(customer)
             st.success("✅ Đã lưu thông tin khách hàng!")
             st.balloons()
     st.markdown('</div>', unsafe_allow_html=True)
 
+    # Metrics
     if st.session_state.customers:
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown('<div class="flower-row">🌸 🌺 🌼</div>', unsafe_allow_html=True)
@@ -370,15 +382,16 @@ if page == "👤 Nhập khách hàng":
         c2.metric("📋 Hồ sơ đã lưu", len(st.session_state.customers))
         c3.metric("🟢 Trạng thái", "Hoạt động")
 
-# =========================================================
-# TRANG QUẢN TRỊ
-# =========================================================
-else:
+# ==========================================
+# TRANG ADMIN
+# ==========================================
+elif page == "🔐 Admin":
     st.markdown('<div class="page-kicker">QUẢN TRỊ HỆ THỐNG</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-title">🔐 QUẢN TRỊ</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-title">🔐 ADMIN</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-description">Khu vực quản lý dữ liệu khách hàng</div>', unsafe_allow_html=True)
     st.markdown('<div class="flower-row">🌹 🌷 🌻 🌹 🌷</div>', unsafe_allow_html=True)
 
+    # Đăng nhập
     if not st.session_state.admin_logged_in:
         st.markdown("""
         <div class="login-box">
@@ -388,14 +401,15 @@ else:
         </div>
         """, unsafe_allow_html=True)
 
-        pwd = st.text_input("🔑 Mật khẩu", type="password", placeholder="Nhập mật khẩu quản trị")
-        if st.button("🔓  ĐĂNG NHẬP", type="primary", use_container_width=True):
-            if pwd == "123456":
+        password = st.text_input("🔑 Mật khẩu", type="password", placeholder="Nhập mật khẩu quản trị")
+        if st.button("🔓 ĐĂNG NHẬP", type="primary", use_container_width=True):
+            if password == "123456":
                 st.session_state.admin_logged_in = True
                 st.rerun()
             else:
                 st.error("❌ Sai mật khẩu.")
     else:
+        # Đã đăng nhập
         col1, col2 = st.columns([6, 1])
         with col1:
             st.markdown('<div class="section-title">📊 DANH SÁCH KHÁCH HÀNG</div>', unsafe_allow_html=True)
@@ -407,10 +421,11 @@ else:
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        if not st.session_state.customers:
+        if len(st.session_state.customers) == 0:
             st.info("📭 Chưa có khách hàng.")
         else:
             df = pd.DataFrame(st.session_state.customers)
+
             c1, c2, c3 = st.columns(3)
             c1.metric("👥 Tổng số khách hàng", len(df))
             c2.metric("📱 Hồ sơ liên hệ", len(df))
@@ -419,20 +434,22 @@ else:
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown('<div class="section-title">📋 Dữ liệu khách hàng</div>', unsafe_allow_html=True)
             st.markdown('<div class="flower-row">🌸 🌺 🌼</div>', unsafe_allow_html=True)
+
             st.dataframe(df, use_container_width=True, hide_index=True, height=400)
 
             st.markdown("<br>", unsafe_allow_html=True)
+            excel_file = export_excel()
             st.download_button(
-                "📥  XUẤT FILE EXCEL",
-                data=export_excel(),
+                label="📥 XUẤT FILE EXCEL",
+                data=excel_file,
                 file_name="danh_sach_khach_hang.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 use_container_width=True
             )
 
-# =========================================================
+# ==========================================
 # FOOTER
-# =========================================================
+# ==========================================
 st.markdown("""
 <div class="footer">
     🌸 HỆ THỐNG QUẢN LÝ KHÁCH HÀNG  •  TRẢI NGHIỆM CHUYÊN NGHIỆP  •  2026 🌸
