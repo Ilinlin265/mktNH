@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # ==========================================
-# CSS - MÀU TƯƠI SÁNG + HOA + NỀN NỔI
+# CSS - SIDEBAR SÁNG + MÀU TƯƠI
 # ==========================================
 st.markdown("""
 <style>
@@ -29,10 +29,10 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 #MainMenu, footer { visibility: hidden; }
 header[data-testid="stHeader"] { background: transparent; }
 
-/* ========== SIDEBAR - SÁNG HƠN MỘT CHÚT ========== */
+/* ========== SIDEBAR - NỀN SÁNG ========== */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #1F1F1F 0%, #2A2A2A 100%) !important;
-    border-right: 1px solid #3A3A3A;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFF5F5 100%) !important;
+    border-right: 1px solid #FFD6D6;
 }
 section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 
@@ -44,7 +44,8 @@ section[data-testid="stSidebar"] > div { padding: 28px 18px; }
     transform: rotate(45deg);
     margin: auto;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 20px rgba(255, 59, 59, 0.5);
+    box-shadow: 0 0 18px rgba(255, 59, 59, 0.35);
+    background: #FFFFFF;
 }
 .side-symbol span {
     color: #FF3B3B;
@@ -54,7 +55,7 @@ section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 
 .side-brand {
     margin-top: 18px;
-    color: #FFFFFF !important;
+    color: #1A1A1A !important;
     font-weight: 700;
     letter-spacing: 3px;
     font-size: 28px;
@@ -62,7 +63,7 @@ section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 
 .side-sub {
     margin-top: 6px;
-    color: #FF5C5C;
+    color: #FF3B3B;
     font-size: 14px;
     letter-spacing: 2.5px;
     font-weight: 600;
@@ -77,7 +78,7 @@ section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 }
 
 section[data-testid="stSidebar"] .stRadio label {
-    color: #FFFFFF !important;
+    color: #1A1A1A !important;
     padding: 14px 12px;
     border-radius: 10px;
     margin-bottom: 6px;
@@ -85,13 +86,13 @@ section[data-testid="stSidebar"] .stRadio label {
     font-size: 16.5px !important;
 }
 section[data-testid="stSidebar"] .stRadio label:hover {
-    background: #3A3A3A;
-    color: #FF5C5C !important;
+    background: #FFF0F0;
+    color: #FF3B3B !important;
 }
 
 section[data-testid="stSidebar"] .stCaption,
 section[data-testid="stSidebar"] [data-testid="stCaption"] {
-    color: #FFFFFF !important;
+    color: #666666 !important;
     font-size: 15px !important;
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
@@ -304,7 +305,7 @@ def export_excel():
     return output.getvalue()
 
 # ==========================================
-# SIDEBAR - THANH ĐIỀU HƯỚNG
+# SIDEBAR - THANH ĐIỀU HƯỚNG (NỀN SÁNG)
 # ==========================================
 st.sidebar.markdown("""
 <div class="side-logo">
