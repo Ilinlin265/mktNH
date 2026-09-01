@@ -450,6 +450,6 @@ elif page == "🔐 Admin":
 # ==========================================
 st.markdown("""
 <div class="footer">
-    🌸 HỆ THỐNG QUẢN LÝ KHÁCH HÀNG  •  TRẢI NGHIỆM CHUYÊN NGHIỆP  •  2026 🌸
+    🌸 HỆ THỐNG QUẢN LÝ KHÁCH HÀNG  •  NHÓM CHIẾN LƯỢC 🌸
 </div>
 """, unsafe_allow_html=True)
