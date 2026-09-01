@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # ==========================================
-# CSS - SIDEBAR SÁNG + MÀU TƯƠI
+# CSS - SIDEBAR SÁNG + BẢNG MÀU PINK
 # ==========================================
 st.markdown("""
 <style>
@@ -22,7 +22,7 @@ st.markdown("""
 html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 
 .stApp {
-    background: linear-gradient(160deg, #FFF9F9 0%, #FFFFFF 45%, #FFF5F7 100%);
+    background: linear-gradient(160deg, #FFF5F7 0%, #FFFFFF 45%, #FFE4EC 100%);
     background-attachment: fixed;
 }
 
@@ -31,8 +31,8 @@ header[data-testid="stHeader"] { background: transparent; }
 
 /* ========== SIDEBAR - NỀN SÁNG ========== */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #FFFFFF 0%, #FFF5F5 100%) !important;
-    border-right: 1px solid #FFD6D6;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFF0F5 100%) !important;
+    border-right: 1px solid #FFB6C1;
 }
 section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 
@@ -40,15 +40,15 @@ section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 
 .side-symbol {
     width: 52px; height: 52px;
-    border: 2.5px solid #FF3B3B;
+    border: 2.5px solid #FF1493;
     transform: rotate(45deg);
     margin: auto;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 18px rgba(255, 59, 59, 0.35);
+    box-shadow: 0 0 18px rgba(255, 20, 147, 0.35);
     background: #FFFFFF;
 }
 .side-symbol span {
-    color: #FF3B3B;
+    color: #FF1493;
     transform: rotate(-45deg);
     font-size: 18px;
 }
@@ -60,10 +60,9 @@ section[data-testid="stSidebar"] > div { padding: 28px 18px; }
     letter-spacing: 3px;
     font-size: 28px;
 }
-
 .side-sub {
     margin-top: 6px;
-    color: #FF3B3B;
+    color: #FF1493;
     font-size: 14px;
     letter-spacing: 2.5px;
     font-weight: 600;
@@ -86,8 +85,8 @@ section[data-testid="stSidebar"] .stRadio label {
     font-size: 16.5px !important;
 }
 section[data-testid="stSidebar"] .stRadio label:hover {
-    background: #FFF0F0;
-    color: #FF3B3B !important;
+    background: #FFE4EC;
+    color: #FF1493 !important;
 }
 
 section[data-testid="stSidebar"] .stCaption,
@@ -108,7 +107,7 @@ section[data-testid="stSidebar"] [data-testid="stCaption"] {
 
 .page-kicker {
     text-align: center;
-    color: #FF3B3B;
+    color: #FF1493;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 4px;
@@ -143,9 +142,9 @@ section[data-testid="stSidebar"] [data-testid="stCaption"] {
 .image-card, .form-card, .login-box,
 div[data-testid="stMetric"], div[data-testid="stDataFrame"] {
     background: #FFFFFF;
-    border: 1px solid #FFE0E0;
+    border: 1px solid #FFB6C1;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(255, 59, 59, 0.08),
+    box-shadow: 0 10px 30px rgba(255, 20, 147, 0.08),
                 0 4px 12px rgba(0,0,0,.04);
 }
 
@@ -209,37 +208,38 @@ div[data-testid="stMetric"], div[data-testid="stDataFrame"] {
 /* Input */
 div[data-baseweb="input"] > div,
 div[data-baseweb="textarea"] {
-    background: #FFF9F9 !important;
-    border: 1.5px solid #FFD6D6 !important;
+    background: #FFF5F7 !important;
+    border: 1.5px solid #FFB6C1 !important;
     border-radius: 12px !important;
 }
 div[data-baseweb="input"] > div:focus-within,
 div[data-baseweb="textarea"]:focus-within {
-    border-color: #FF3B3B !important;
-    box-shadow: 0 0 0 4px rgba(255, 59, 59, 0.15) !important;
+    border-color: #FF1493 !important;
+    box-shadow: 0 0 0 4px rgba(255, 20, 147, 0.15) !important;
 }
+
 label {
     color: #333 !important;
     font-size: 14px !important;
     font-weight: 600 !important;
 }
 
-/* BUTTON - ĐỎ TƯƠI */
+/* BUTTON - DEEP PINK */
 .stButton > button, .stDownloadButton > button {
     min-height: 52px;
     border-radius: 12px !important;
     border: none !important;
-    background: linear-gradient(135deg, #FF3B3B, #FF5C5C) !important;
+    background: linear-gradient(135deg, #FF1493, #FF69B4) !important;
     color: #ffffff !important;
     font-weight: 700 !important;
     font-size: 16px !important;
     transition: .25s;
-    box-shadow: 0 6px 20px rgba(255, 59, 59, 0.3);
+    box-shadow: 0 6px 20px rgba(255, 20, 147, 0.3);
 }
 .stButton > button:hover {
-    background: linear-gradient(135deg, #E63535, #FF3B3B) !important;
+    background: linear-gradient(135deg, #C71585, #FF1493) !important;
     transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(255, 59, 59, 0.4);
+    box-shadow: 0 10px 28px rgba(255, 20, 147, 0.4);
 }
 
 /* Metric */
@@ -248,17 +248,18 @@ div[data-testid="stMetric"] {
     border-radius: 16px;
 }
 div[data-testid="stMetricLabel"] { color: #666 !important; font-size: 14px !important; }
-div[data-testid="stMetricValue"] { color: #FF3B3B !important; font-weight: 700 !important; font-size: 26px !important; }
+div[data-testid="stMetricValue"] { color: #FF1493 !important; font-weight: 700 !important; font-size: 26px !important; }
 
 .login-symbol {
     width: 64px; height: 64px;
-    background: linear-gradient(135deg, #FF3B3B, #FF5C5C);
+    background: linear-gradient(135deg, #FF1493, #FF69B4);
     border-radius: 50%;
     margin: auto;
     display: flex; align-items: center; justify-content: center;
     color: #fff; font-size: 26px;
-    box-shadow: 0 8px 24px rgba(255, 59, 59, 0.35);
+    box-shadow: 0 8px 24px rgba(255, 20, 147, 0.35);
 }
+
 .login-title {
     color: #1A1A1A;
     font-family: 'Playfair Display', serif;
@@ -290,7 +291,6 @@ div[data-testid="stMetricValue"] { color: #FF3B3B !important; font-weight: 700 !
 # ==========================================
 if "customers" not in st.session_state:
     st.session_state.customers = []
-
 if "admin_logged_in" not in st.session_state:
     st.session_state.admin_logged_in = False
 
@@ -322,7 +322,6 @@ page = st.sidebar.radio(
     ["👤 Nhập khách hàng", "🔐 Admin"],
     label_visibility="collapsed"
 )
-
 st.sidebar.markdown('<div class="flower-side">🌷 🌻 🌹</div>', unsafe_allow_html=True)
 
 # ==========================================
@@ -426,7 +425,6 @@ elif page == "🔐 Admin":
             st.info("📭 Chưa có khách hàng.")
         else:
             df = pd.DataFrame(st.session_state.customers)
-
             c1, c2, c3 = st.columns(3)
             c1.metric("👥 Tổng số khách hàng", len(df))
             c2.metric("📱 Hồ sơ liên hệ", len(df))
@@ -435,7 +433,6 @@ elif page == "🔐 Admin":
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown('<div class="section-title">📋 Dữ liệu khách hàng</div>', unsafe_allow_html=True)
             st.markdown('<div class="flower-row">🌸 🌺 🌼</div>', unsafe_allow_html=True)
-
             st.dataframe(df, use_container_width=True, hide_index=True, height=400)
 
             st.markdown("<br>", unsafe_allow_html=True)
