@@ -37,31 +37,17 @@ section[data-testid="stSidebar"] {
 section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 
 .side-logo { text-align: center; margin-bottom: 28px; }
-.side-symbol {
-    width: 52px; height: 52px;
-    border: 2.5px solid #01502F;
-    transform: rotate(45deg);
-    margin: auto;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 18px rgba(1, 80, 47, 0.35);
-    background: #FFFFFF;
-}
-.side-symbol span {
-    color: #01502F;
-    transform: rotate(-45deg);
-    font-size: 18px;
-}
 .side-brand {
-    margin-top: 18px;
+    margin-top: 14px;
     color: #1A1A1A !important;
     font-weight: 700;
     letter-spacing: 3px;
-    font-size: 28px;
+    font-size: 26px;
 }
 .side-sub {
-    margin-top: 6px;
+    margin-top: 4px;
     color: #01502F;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 2.5px;
     font-weight: 600;
 }
@@ -247,7 +233,29 @@ def export_excel():
 # ==========================================
 st.sidebar.markdown("""
 <div class="side-logo">
-    <div class="side-symbol"><span>◆</span></div>
+    <div style="
+        width: 68px;
+        height: 68px;
+        margin: 0 auto 14px;
+        background: #01502F;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 24px rgba(1, 80, 47, 0.3);
+    ">
+        <svg width="42" height="42" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- V chính -->
+            <path d="M18 28 L60 92 L102 28" stroke="white" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Trái tim -->
+            <path d="M60 52 
+                     C52 44, 42 46, 42 56 
+                     C42 66, 60 80, 60 80 
+                     C60 80, 78 66, 78 56 
+                     C78 46, 68 44, 60 52 Z" 
+                  fill="#8BC440"/>
+        </svg>
+    </div>
     <div class="side-brand">QUẢN LÝ</div>
     <div class="side-sub">KHÁCH HÀNG</div>
 </div>
