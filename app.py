@@ -7,13 +7,13 @@ from io import BytesIO
 # ==========================================
 st.set_page_config(
     page_title="Quản lý khách hàng",
-    page_icon="🌸",
+    page_icon="🏦",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # ==========================================
-# CSS - SIDEBAR SÁNG + BẢNG MÀU PINK
+# CSS - THEME XANH VCB
 # ==========================================
 st.markdown("""
 <style>
@@ -22,37 +22,35 @@ st.markdown("""
 html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 
 .stApp {
-    background: linear-gradient(160deg, #FFF5F7 0%, #FFFFFF 45%, #FFE4EC 100%);
+    background: linear-gradient(160deg, #F0F7F2 0%, #FFFFFF 45%, #E8F5E9 100%);
     background-attachment: fixed;
 }
 
 #MainMenu, footer { visibility: hidden; }
 header[data-testid="stHeader"] { background: transparent; }
 
-/* ========== SIDEBAR - NỀN SÁNG ========== */
+/* ========== SIDEBAR ========== */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #FFFFFF 0%, #FFF0F5 100%) !important;
-    border-right: 1px solid #FFB6C1;
+    background: linear-gradient(180deg, #FFFFFF 0%, #E8F5E9 100%) !important;
+    border-right: 1px solid #A5D6A7;
 }
 section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 
 .side-logo { text-align: center; margin-bottom: 28px; }
-
 .side-symbol {
     width: 52px; height: 52px;
-    border: 2.5px solid #FF1493;
+    border: 2.5px solid #01502F;
     transform: rotate(45deg);
     margin: auto;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 18px rgba(255, 20, 147, 0.35);
+    box-shadow: 0 0 18px rgba(1, 80, 47, 0.35);
     background: #FFFFFF;
 }
 .side-symbol span {
-    color: #FF1493;
+    color: #01502F;
     transform: rotate(-45deg);
     font-size: 18px;
 }
-
 .side-brand {
     margin-top: 18px;
     color: #1A1A1A !important;
@@ -62,18 +60,10 @@ section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 }
 .side-sub {
     margin-top: 6px;
-    color: #FF1493;
+    color: #01502F;
     font-size: 14px;
     letter-spacing: 2.5px;
     font-weight: 600;
-}
-
-.flower-side {
-    text-align: center;
-    font-size: 18px;
-    letter-spacing: 6px;
-    margin: 14px 0 6px;
-    opacity: 0.9;
 }
 
 section[data-testid="stSidebar"] .stRadio label {
@@ -85,10 +75,9 @@ section[data-testid="stSidebar"] .stRadio label {
     font-size: 16.5px !important;
 }
 section[data-testid="stSidebar"] .stRadio label:hover {
-    background: #FFE4EC;
-    color: #FF1493 !important;
+    background: #C8E6C9;
+    color: #01502F !important;
 }
-
 section[data-testid="stSidebar"] .stCaption,
 section[data-testid="stSidebar"] [data-testid="stCaption"] {
     color: #666666 !important;
@@ -104,16 +93,14 @@ section[data-testid="stSidebar"] [data-testid="stCaption"] {
     padding-top: 36px;
     padding-bottom: 40px;
 }
-
 .page-kicker {
     text-align: center;
-    color: #FF1493;
+    color: #01502F;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 4px;
     margin-bottom: 6px;
 }
-
 .page-title {
     text-align: center;
     color: #1A1A1A;
@@ -122,7 +109,6 @@ section[data-testid="stSidebar"] [data-testid="stCaption"] {
     font-weight: 700;
     margin-bottom: 4px;
 }
-
 .page-description {
     text-align: center;
     color: #555;
@@ -130,116 +116,69 @@ section[data-testid="stSidebar"] [data-testid="stCaption"] {
     margin-bottom: 18px;
 }
 
-.flower-row {
-    text-align: center;
-    font-size: 20px;
-    letter-spacing: 10px;
-    margin: 6px 0 22px;
-    opacity: 0.75;
-}
-
-/* Card nổi sáng */
+/* Card */
 .image-card, .form-card, .login-box,
 div[data-testid="stMetric"], div[data-testid="stDataFrame"] {
     background: #FFFFFF;
-    border: 1px solid #FFB6C1;
+    border: 1px solid #A5D6A7;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(255, 20, 147, 0.08),
+    box-shadow: 0 10px 30px rgba(1, 80, 47, 0.08),
                 0 4px 12px rgba(0,0,0,.04);
 }
-
 .image-card {
     padding: 16px;
     margin-bottom: 26px;
     border-radius: 22px;
-    position: relative;
+    background: linear-gradient(135deg, #01502F 0%, #027A45 100%);
 }
 .image-card img { border-radius: 14px; }
-.image-card::after {
-    content: "🌸 🌺 🌼 🌸";
-    display: block;
-    text-align: center;
-    font-size: 16px;
-    letter-spacing: 8px;
-    margin-top: 10px;
-    opacity: 0.6;
-}
 
 .form-card {
     padding: 32px 38px;
     border-radius: 20px;
-    position: relative;
-    overflow: hidden;
 }
-.form-card::before {
-    content: "🌺";
-    position: absolute;
-    top: 14px;
-    right: 20px;
-    font-size: 32px;
-    opacity: 0.18;
-}
-
 .login-box {
     padding: 42px 36px;
     max-width: 480px;
     margin: 36px auto 20px;
     text-align: center;
     border-radius: 22px;
-    position: relative;
-}
-.login-box::before {
-    content: "🌸";
-    position: absolute;
-    top: 16px;
-    left: 22px;
-    font-size: 26px;
-    opacity: 0.25;
-}
-.login-box::after {
-    content: "🌼";
-    position: absolute;
-    bottom: 16px;
-    right: 22px;
-    font-size: 26px;
-    opacity: 0.25;
 }
 
 /* Input */
 div[data-baseweb="input"] > div,
 div[data-baseweb="textarea"] {
-    background: #FFF5F7 !important;
-    border: 1.5px solid #FFB6C1 !important;
+    background: #F1F8F4 !important;
+    border: 1.5px solid #A5D6A7 !important;
     border-radius: 12px !important;
 }
 div[data-baseweb="input"] > div:focus-within,
 div[data-baseweb="textarea"]:focus-within {
-    border-color: #FF1493 !important;
-    box-shadow: 0 0 0 4px rgba(255, 20, 147, 0.15) !important;
+    border-color: #01502F !important;
+    box-shadow: 0 0 0 4px rgba(1, 80, 47, 0.15) !important;
 }
-
 label {
     color: #333 !important;
     font-size: 14px !important;
     font-weight: 600 !important;
 }
 
-/* BUTTON - DEEP PINK */
+/* BUTTON - XANH VCB */
 .stButton > button, .stDownloadButton > button {
     min-height: 52px;
     border-radius: 12px !important;
     border: none !important;
-    background: linear-gradient(135deg, #FF1493, #FF69B4) !important;
+    background: linear-gradient(135deg, #01502F, #027A45) !important;
     color: #ffffff !important;
     font-weight: 700 !important;
     font-size: 16px !important;
     transition: .25s;
-    box-shadow: 0 6px 20px rgba(255, 20, 147, 0.3);
+    box-shadow: 0 6px 20px rgba(1, 80, 47, 0.3);
 }
 .stButton > button:hover {
-    background: linear-gradient(135deg, #C71585, #FF1493) !important;
+    background: linear-gradient(135deg, #013D24, #01502F) !important;
     transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(255, 20, 147, 0.4);
+    box-shadow: 0 10px 28px rgba(1, 80, 47, 0.4);
 }
 
 /* Metric */
@@ -248,18 +187,17 @@ div[data-testid="stMetric"] {
     border-radius: 16px;
 }
 div[data-testid="stMetricLabel"] { color: #666 !important; font-size: 14px !important; }
-div[data-testid="stMetricValue"] { color: #FF1493 !important; font-weight: 700 !important; font-size: 26px !important; }
+div[data-testid="stMetricValue"] { color: #01502F !important; font-weight: 700 !important; font-size: 26px !important; }
 
 .login-symbol {
     width: 64px; height: 64px;
-    background: linear-gradient(135deg, #FF1493, #FF69B4);
+    background: linear-gradient(135deg, #01502F, #027A45);
     border-radius: 50%;
     margin: auto;
     display: flex; align-items: center; justify-content: center;
     color: #fff; font-size: 26px;
-    box-shadow: 0 8px 24px rgba(255, 20, 147, 0.35);
+    box-shadow: 0 8px 24px rgba(1, 80, 47, 0.35);
 }
-
 .login-title {
     color: #1A1A1A;
     font-family: 'Playfair Display', serif;
@@ -287,7 +225,7 @@ div[data-testid="stMetricValue"] { color: #FF1493 !important; font-weight: 700 !
 """, unsafe_allow_html=True)
 
 # ==========================================
-# KHỞI TẠO DANH SÁCH KHÁCH HÀNG
+# KHỞI TẠO
 # ==========================================
 if "customers" not in st.session_state:
     st.session_state.customers = []
@@ -305,14 +243,13 @@ def export_excel():
     return output.getvalue()
 
 # ==========================================
-# SIDEBAR - THANH ĐIỀU HƯỚNG (NỀN SÁNG)
+# SIDEBAR
 # ==========================================
 st.sidebar.markdown("""
 <div class="side-logo">
     <div class="side-symbol"><span>◆</span></div>
     <div class="side-brand">QUẢN LÝ</div>
     <div class="side-sub">KHÁCH HÀNG</div>
-    <div class="flower-side">🌸 🌺 🌼</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -322,18 +259,16 @@ page = st.sidebar.radio(
     ["👤 Nhập khách hàng", "🔐 Admin"],
     label_visibility="collapsed"
 )
-st.sidebar.markdown('<div class="flower-side">🌷 🌻 🌹</div>', unsafe_allow_html=True)
 
 # ==========================================
 # TRANG NHẬP KHÁCH HÀNG
 # ==========================================
 if page == "👤 Nhập khách hàng":
-    st.markdown('<div class="page-kicker">🌸 HỆ THỐNG QUẢN LÝ 🌸</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-kicker">HỆ THỐNG QUẢN LÝ</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-title">👤 THÔNG TIN KHÁCH HÀNG</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-description">Vui lòng nhập thông tin khách hàng một cách đầy đủ</div>', unsafe_allow_html=True)
-    st.markdown('<div class="flower-row">🌺 🌼 🌸 🌺 🌼 🌸</div>', unsafe_allow_html=True)
 
-    # Logo (nếu có)
+    # Logo với nền VCB
     st.markdown('<div class="image-card">', unsafe_allow_html=True)
     _, col, _ = st.columns([1, 3, 1])
     with col:
@@ -355,7 +290,6 @@ if page == "👤 Nhập khách hàng":
     note = st.text_area("📝 Ghi chú", placeholder="Nhập ghi chú", height=100)
 
     st.markdown("<br>", unsafe_allow_html=True)
-
     if st.button("💾 LƯU THÔNG TIN", type="primary", use_container_width=True):
         if phone.strip() == "":
             st.error("❌ Vui lòng nhập số điện thoại.")
@@ -376,7 +310,6 @@ if page == "👤 Nhập khách hàng":
     # Metrics
     if st.session_state.customers:
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown('<div class="flower-row">🌸 🌺 🌼</div>', unsafe_allow_html=True)
         c1, c2, c3 = st.columns(3)
         c1.metric("👥 Tổng khách hàng", len(st.session_state.customers))
         c2.metric("📋 Hồ sơ đã lưu", len(st.session_state.customers))
@@ -389,9 +322,7 @@ elif page == "🔐 Admin":
     st.markdown('<div class="page-kicker">QUẢN TRỊ HỆ THỐNG</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-title">🔐 ADMIN</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-description">Khu vực quản lý dữ liệu khách hàng</div>', unsafe_allow_html=True)
-    st.markdown('<div class="flower-row">🌹 🌷 🌻 🌹 🌷</div>', unsafe_allow_html=True)
 
-    # Đăng nhập
     if not st.session_state.admin_logged_in:
         st.markdown("""
         <div class="login-box">
@@ -409,7 +340,6 @@ elif page == "🔐 Admin":
             else:
                 st.error("❌ Sai mật khẩu.")
     else:
-        # Đã đăng nhập
         col1, col2 = st.columns([6, 1])
         with col1:
             st.markdown('<div class="section-title">📊 DANH SÁCH KHÁCH HÀNG</div>', unsafe_allow_html=True)
@@ -432,7 +362,6 @@ elif page == "🔐 Admin":
 
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown('<div class="section-title">📋 Dữ liệu khách hàng</div>', unsafe_allow_html=True)
-            st.markdown('<div class="flower-row">🌸 🌺 🌼</div>', unsafe_allow_html=True)
             st.dataframe(df, use_container_width=True, hide_index=True, height=400)
 
             st.markdown("<br>", unsafe_allow_html=True)
@@ -450,6 +379,6 @@ elif page == "🔐 Admin":
 # ==========================================
 st.markdown("""
 <div class="footer">
-    🌸 HỆ THỐNG QUẢN LÝ KHÁCH HÀNG  •  NHÓM CHIẾN LƯỢC 🌸
+    HỆ THỐNG QUẢN LÝ KHÁCH HÀNG  •  NHÓM CHIẾN LƯỢC
 </div>
 """, unsafe_allow_html=True)
