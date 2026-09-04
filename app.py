@@ -268,12 +268,12 @@ if page == "👤 Nhập khách hàng":
     st.markdown('<div class="page-title">👤 THÔNG TIN KHÁCH HÀNG</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-description">Vui lòng nhập thông tin khách hàng một cách đầy đủ</div>', unsafe_allow_html=True)
 
-    # Logo với nền VCB
+    # Logo với nền VCB (đã thu nhỏ)
     st.markdown('<div class="image-card">', unsafe_allow_html=True)
-    _, col, _ = st.columns([1, 3, 1])
+    _, col, _ = st.columns([2, 2, 2])
     with col:
         try:
-            st.image("LOGO.jpg", use_container_width=True)
+            st.image("LOGO.jpg", width=280)
         except:
             st.info("📷 Chưa tìm thấy LOGO.jpg")
     st.markdown('</div>', unsafe_allow_html=True)
