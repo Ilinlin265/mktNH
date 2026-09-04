@@ -37,15 +37,29 @@ section[data-testid="stSidebar"] {
 section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 
 .side-logo { text-align: center; margin-bottom: 28px; }
+.side-symbol {
+    width: 52px; height: 52px;
+    border: 2.5px solid #01502F;
+    transform: rotate(45deg);
+    margin: auto;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 18px rgba(1, 80, 47, 0.35);
+    background: #FFFFFF;
+}
+.side-symbol span {
+    color: #01502F;
+    transform: rotate(-45deg);
+    font-size: 18px;
+}
 .side-brand {
-    margin-top: 14px;
+    margin-top: 18px;
     color: #1A1A1A !important;
     font-weight: 700;
     letter-spacing: 3px;
     font-size: 26px;
 }
 .side-sub {
-    margin-top: 4px;
+    margin-top: 6px;
     color: #01502F;
     font-size: 13px;
     letter-spacing: 2.5px;
@@ -229,42 +243,11 @@ def export_excel():
     return output.getvalue()
 
 # ==========================================
-# SIDEBAR - LOGO VCB STYLE
+# SIDEBAR
 # ==========================================
 st.sidebar.markdown("""
 <div class="side-logo">
-    <div style="
-        width: 72px;
-        height: 72px;
-        margin: 0 auto 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    ">
-        <svg width="68" height="68" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="vcbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#4CAF50"/>
-                    <stop offset="40%" stop-color="#2E7D32"/>
-                    <stop offset="100%" stop-color="#1B5E20"/>
-                </linearGradient>
-            </defs>
-            <!-- Hình logo VCB (tam giác xoắn / trái tim) -->
-            <path d="M100 20 
-                     C140 20, 175 50, 175 95 
-                     C175 130, 150 155, 100 185 
-                     C50 155, 25 130, 25 95 
-                     C25 50, 60 20, 100 20 
-                     Z
-                     M100 55 
-                     C75 55, 55 75, 55 100 
-                     C55 120, 75 140, 100 155 
-                     C125 140, 145 120, 145 100 
-                     C145 75, 125 55, 100 55 
-                     Z" 
-                  fill="url(#vcbGrad)"/>
-        </svg>
-    </div>
+    <div class="side-symbol"><span>◆</span></div>
     <div class="side-brand">QUẢN LÝ</div>
     <div class="side-sub">KHÁCH HÀNG</div>
 </div>
@@ -273,4 +256,129 @@ st.sidebar.markdown("""
 st.sidebar.caption("ĐIỀU HƯỚNG")
 page = st.sidebar.radio(
     "Chọn trang",
-    
+    ["👤 Nhập khách hàng", "🔐 Admin"],
+    label_visibility="collapsed"
+)
+
+# ==========================================
+# TRANG NHẬP KHÁCH HÀNG
+# ==========================================
+if page == "👤 Nhập khách hàng":
+    st.markdown('<div class="page-kicker">HỆ THỐNG QUẢN LÝ</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-title">👤 THÔNG TIN KHÁCH HÀNG</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-description">Vui lòng nhập thông tin khách hàng một cách đầy đủ</div>', unsafe_allow_html=True)
+
+    # Logo với nền VCB
+    st.markdown('<div class="image-card">', unsafe_allow_html=True)
+    _, col, _ = st.columns([1, 3, 1])
+    with col:
+        try:
+            st.image("LOGO.jpg", use_container_width=True)
+        except:
+            st.info("📷 Chưa tìm thấy LOGO.jpg")
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # Form nhập
+    st.markdown('<div class="form-card">', unsafe_allow_html=True)
+    st.subheader("👤 Thông tin khách hàng")
+    st.caption("Nhập thông tin vào các trường bên dưới")
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    phone = st.text_input("📱 Số điện thoại", placeholder="Nhập số điện thoại")
+    name = st.text_input("👤 Tên khách hàng", placeholder="Nhập tên khách hàng")
+    address = st.text_input("📍 Địa chỉ", placeholder="Nhập địa chỉ")
+    note = st.text_area("📝 Ghi chú", placeholder="Nhập ghi chú", height=100)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+    if st.button("💾 LƯU THÔNG TIN", type="primary", use_container_width=True):
+        if phone.strip() == "":
+            st.error("❌ Vui lòng nhập số điện thoại.")
+        elif name.strip() == "":
+            st.error("❌ Vui lòng nhập tên khách hàng.")
+        else:
+            customer = {
+                "Số điện thoại": phone.strip(),
+                "Tên khách hàng": name.strip(),
+                "Địa chỉ": address.strip(),
+                "Ghi chú": note.strip()
+            }
+            st.session_state.customers.append(customer)
+            st.success("✅ Đã lưu thông tin khách hàng!")
+            st.balloons()
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # Metrics
+    if st.session_state.customers:
+        st.markdown("<br>", unsafe_allow_html=True)
+        c1, c2, c3 = st.columns(3)
+        c1.metric("👥 Tổng khách hàng", len(st.session_state.customers))
+        c2.metric("📋 Hồ sơ đã lưu", len(st.session_state.customers))
+        c3.metric("🟢 Trạng thái", "Hoạt động")
+
+# ==========================================
+# TRANG ADMIN
+# ==========================================
+elif page == "🔐 Admin":
+    st.markdown('<div class="page-kicker">QUẢN TRỊ HỆ THỐNG</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-title">🔐 ADMIN</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-description">Khu vực quản lý dữ liệu khách hàng</div>', unsafe_allow_html=True)
+
+    if not st.session_state.admin_logged_in:
+        st.markdown("""
+        <div class="login-box">
+            <div class="login-symbol">🔐</div>
+            <div class="login-title">CỔNG QUẢN TRỊ</div>
+            <div class="login-description">Đăng nhập để truy cập hệ thống quản lý khách hàng</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        password = st.text_input("🔑 Mật khẩu", type="password", placeholder="Nhập mật khẩu quản trị")
+        if st.button("🔓 ĐĂNG NHẬP", type="primary", use_container_width=True):
+            if password == "123456":
+                st.session_state.admin_logged_in = True
+                st.rerun()
+            else:
+                st.error("❌ Sai mật khẩu.")
+    else:
+        col1, col2 = st.columns([6, 1])
+        with col1:
+            st.markdown('<div class="section-title">📊 DANH SÁCH KHÁCH HÀNG</div>', unsafe_allow_html=True)
+            st.markdown('<div class="section-description">Quản lý và theo dõi dữ liệu khách hàng</div>', unsafe_allow_html=True)
+        with col2:
+            if st.button("🚪 Đăng xuất", use_container_width=True):
+                st.session_state.admin_logged_in = False
+                st.rerun()
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        if len(st.session_state.customers) == 0:
+            st.info("📭 Chưa có khách hàng.")
+        else:
+            df = pd.DataFrame(st.session_state.customers)
+            c1, c2, c3 = st.columns(3)
+            c1.metric("👥 Tổng số khách hàng", len(df))
+            c2.metric("📱 Hồ sơ liên hệ", len(df))
+            c3.metric("🟢 Trạng thái hệ thống", "Hoạt động")
+
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown('<div class="section-title">📋 Dữ liệu khách hàng</div>', unsafe_allow_html=True)
+            st.dataframe(df, use_container_width=True, hide_index=True, height=400)
+
+            st.markdown("<br>", unsafe_allow_html=True)
+            excel_file = export_excel()
+            st.download_button(
+                label="📥 XUẤT FILE EXCEL",
+                data=excel_file,
+                file_name="danh_sach_khach_hang.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                use_container_width=True
+            )
+
+# ==========================================
+# FOOTER
+# ==========================================
+st.markdown("""
+<div class="footer">
+    HỆ THỐNG QUẢN LÝ KHÁCH HÀNG  •  NHÓM CHIẾN LƯỢC
+</div>
+""", unsafe_allow_html=True)
