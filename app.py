@@ -37,15 +37,29 @@ section[data-testid="stSidebar"] {
 section[data-testid="stSidebar"] > div { padding: 28px 18px; }
 
 .side-logo { text-align: center; margin-bottom: 28px; }
+.side-symbol {
+    width: 52px; height: 52px;
+    border: 2.5px solid #01502F;
+    transform: rotate(45deg);
+    margin: auto;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 18px rgba(1, 80, 47, 0.35);
+    background: #FFFFFF;
+}
+.side-symbol span {
+    color: #01502F;
+    transform: rotate(-45deg);
+    font-size: 18px;
+}
 .side-brand {
-    margin-top: 14px;
+    margin-top: 18px;
     color: #1A1A1A !important;
     font-weight: 700;
     letter-spacing: 3px;
     font-size: 26px;
 }
 .side-sub {
-    margin-top: 4px;
+    margin-top: 6px;
     color: #01502F;
     font-size: 13px;
     letter-spacing: 2.5px;
@@ -229,42 +243,11 @@ def export_excel():
     return output.getvalue()
 
 # ==========================================
-# SIDEBAR - LOGO VCB STYLE
+# SIDEBAR
 # ==========================================
 st.sidebar.markdown("""
 <div class="side-logo">
-    <div style="
-        width: 72px;
-        height: 72px;
-        margin: 0 auto 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    ">
-        <svg width="68" height="68" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="vcbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#4CAF50"/>
-                    <stop offset="40%" stop-color="#2E7D32"/>
-                    <stop offset="100%" stop-color="#1B5E20"/>
-                </linearGradient>
-            </defs>
-            <!-- Hình logo VCB (tam giác xoắn / trái tim) -->
-            <path d="M100 20 
-                     C140 20, 175 50, 175 95 
-                     C175 130, 150 155, 100 185 
-                     C50 155, 25 130, 25 95 
-                     C25 50, 60 20, 100 20 
-                     Z
-                     M100 55 
-                     C75 55, 55 75, 55 100 
-                     C55 120, 75 140, 100 155 
-                     C125 140, 145 120, 145 100 
-                     C145 75, 125 55, 100 55 
-                     Z" 
-                  fill="url(#vcbGrad)"/>
-        </svg>
-    </div>
+    <div class="side-symbol"><span>◆</span></div>
     <div class="side-brand">QUẢN LÝ</div>
     <div class="side-sub">KHÁCH HÀNG</div>
 </div>
