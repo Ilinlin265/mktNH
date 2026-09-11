@@ -270,7 +270,7 @@ st.markdown("""
         <div class="team-sub">Giải pháp thu thập & phân tích nhu cầu vay vốn tài chính cao cấp</div>
     </div>
     <div class="team-badge">
-        DỰ ÁN TÀI CHÍNH 2024
+        DỰ ÁN TÀI CHÍNH 2026
     </div>
 </div>
 """, unsafe_allow_html=True)
