@@ -6,14 +6,14 @@ from io import BytesIO
 # CẤU HÌNH TRANG
 # ==========================================
 st.set_page_config(
-    page_title="Đăng Ký Vay Vốn Ngân Hàng",
-    page_icon="💳",
+    page_title="Hệ Thống Quản Lý & Đăng Ký Vay - Nhóm Chiến Lược",
+    page_icon="🏦",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # ==========================================
-# CSS - THEME XANH VCB
+# CSS - THEME XANH VCB & CĂN SÁT LỀ TRÁI
 # ==========================================
 st.markdown("""
 <style>
@@ -29,39 +29,48 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 #MainMenu, footer { visibility: hidden; }
 header[data-testid="stHeader"] { background: transparent; }
 
+/* CĂN SÁT LỀ TRÁI TOÀN BỘ KHÔNG GIAN MAIN */
+.block-container {
+    max-width: 100% !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    padding-top: 20px !important;
+    padding-bottom: 40px !important;
+}
+
 /* SIDEBAR */
 section[data-testid="stSidebar"] {
     background: linear-gradient(180deg, #FFFFFF 0%, #E8F5E9 100%) !important;
     border-right: 1px solid #A5D6A7;
 }
-section[data-testid="stSidebar"] > div { padding: 28px 18px; }
+section[data-testid="stSidebar"] > div { padding: 24px 16px; }
 
-.side-logo { text-align: center; margin-bottom: 28px; }
+.side-logo { text-align: center; margin-bottom: 24px; }
 .side-symbol {
-    width: 52px; height: 52px;
+    width: 48px; height: 48px;
     border: 2.5px solid #01502F;
     transform: rotate(45deg);
     margin: auto;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 18px rgba(1, 80, 47, 0.35);
+    box-shadow: 0 0 16px rgba(1, 80, 47, 0.3);
     background: #FFFFFF;
 }
 .side-symbol span {
     color: #01502F;
     transform: rotate(-45deg);
-    font-size: 20px;
+    font-size: 18px;
 }
 .side-brand {
-    margin-top: 18px;
+    margin-top: 16px;
     color: #1A1A1A !important;
     font-weight: 700;
     letter-spacing: 2px;
-    font-size: 22px;
+    font-size: 20px;
 }
 .side-sub {
     margin-top: 4px;
     color: #01502F;
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 2px;
     font-weight: 600;
 }
@@ -79,14 +88,44 @@ section[data-testid="stSidebar"] .stRadio label:hover {
     color: #01502F !important;
 }
 
-/* MAIN CONTAINERS */
-.block-container {
-    max-width: 1080px;
-    padding-top: 30px;
-    padding-bottom: 40px;
+/* BANNER NHÓM CHIẾN LƯỢC SÁT LỀ TRÁI */
+.team-header-card {
+    background: linear-gradient(135deg, #01502F 0%, #027A45 100%);
+    border-radius: 16px;
+    padding: 24px 30px;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 24px rgba(1, 80, 47, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+.team-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+    color: #FFFFFF;
+}
+.team-sub {
+    font-size: 14px;
+    color: #C8E6C9;
+    margin-top: 4px;
+    letter-spacing: 1px;
+}
+.team-badge {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Page Header Text - Left Aligned */
 .page-kicker {
-    text-align: center;
+    text-align: left;
     color: #01502F;
     font-size: 12px;
     font-weight: 700;
@@ -94,103 +133,96 @@ section[data-testid="stSidebar"] .stRadio label:hover {
     margin-bottom: 4px;
 }
 .page-title {
-    text-align: center;
+    text-align: left;
     color: #1A1A1A;
     font-family: 'Playfair Display', serif;
-    font-size: 38px;
+    font-size: 34px;
     font-weight: 700;
     margin-bottom: 4px;
 }
 .page-description {
-    text-align: center;
+    text-align: left;
     color: #555;
-    font-size: 15px;
-    margin-bottom: 24px;
+    font-size: 14px;
+    margin-bottom: 20px;
 }
 
-/* Cards & Containers */
-.image-card, .form-card, .login-box, .calc-card,
+/* CARDS */
+.form-card, .login-box, .calc-card,
 div[data-testid="stMetric"], div[data-testid="stDataFrame"] {
     background: #FFFFFF;
     border: 1px solid #A5D6A7;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(1, 80, 47, 0.08), 0 4px 12px rgba(0,0,0,.04);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(1, 80, 47, 0.06);
 }
-.image-card {
-    padding: 16px;
-    margin-bottom: 24px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #01502F 0%, #027A45 100%);
-}
-.form-card { padding: 32px 36px; border-radius: 20px; }
-.calc-card { padding: 24px; border-radius: 20px; background: #F1F8F4; margin-bottom: 20px; }
+.form-card { padding: 28px 32px; border-radius: 16px; margin-bottom: 20px; }
+.calc-card { padding: 24px; border-radius: 16px; background: #F1F8F4; margin-bottom: 20px; }
 
 .login-box {
-    padding: 42px 36px;
-    max-width: 480px;
-    margin: 36px auto 20px;
+    padding: 36px 30px;
+    max-width: 450px;
+    margin: 20px 0;
     text-align: center;
 }
 
-/* Inputs */
+/* INPUTS */
 div[data-baseweb="input"] > div,
 div[data-baseweb="select"] > div,
 div[data-baseweb="textarea"] {
     background: #F1F8F4 !important;
     border: 1.5px solid #A5D6A7 !important;
-    border-radius: 12px !important;
+    border-radius: 10px !important;
 }
 div[data-baseweb="input"] > div:focus-within,
 div[data-baseweb="textarea"]:focus-within {
     border-color: #01502F !important;
-    box-shadow: 0 0 0 4px rgba(1, 80, 47, 0.15) !important;
+    box-shadow: 0 0 0 3px rgba(1, 80, 47, 0.15) !important;
 }
 label { color: #333 !important; font-size: 14px !important; font-weight: 600 !important; }
 
-/* Buttons */
+/* BUTTONS */
 .stButton > button, .stDownloadButton > button {
-    min-height: 50px;
-    border-radius: 12px !important;
+    min-height: 48px;
+    border-radius: 10px !important;
     border: none !important;
     background: linear-gradient(135deg, #01502F, #027A45) !important;
     color: #ffffff !important;
     font-weight: 700 !important;
-    font-size: 16px !important;
+    font-size: 15px !important;
     transition: .25s;
-    box-shadow: 0 6px 20px rgba(1, 80, 47, 0.25);
+    box-shadow: 0 6px 18px rgba(1, 80, 47, 0.2);
 }
 .stButton > button:hover {
     background: linear-gradient(135deg, #013D24, #01502F) !important;
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(1, 80, 47, 0.35);
+    box-shadow: 0 8px 22px rgba(1, 80, 47, 0.3);
 }
 
-/* Metrics */
-div[data-testid="stMetric"] { padding: 18px 16px; border-radius: 16px; }
+/* METRICS */
+div[data-testid="stMetric"] { padding: 16px; border-radius: 14px; }
 div[data-testid="stMetricLabel"] { color: #666 !important; font-size: 13px !important; }
 div[data-testid="stMetricValue"] { color: #01502F !important; font-weight: 700 !important; font-size: 24px !important; }
 
 .login-symbol {
-    width: 60px; height: 60px;
+    width: 56px; height: 56px;
     background: linear-gradient(135deg, #01502F, #027A45);
     border-radius: 50%;
     margin: auto;
     display: flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 24px;
-    box-shadow: 0 8px 20px rgba(1, 80, 47, 0.3);
+    color: #fff; font-size: 22px;
 }
-.login-title { color: #1A1A1A; font-family: 'Playfair Display', serif; font-size: 26px; margin-top: 14px; }
-.login-description { color: #555; font-size: 14px; margin-top: 4px; }
+.login-title { color: #1A1A1A; font-family: 'Playfair Display', serif; font-size: 24px; margin-top: 12px; }
+.login-description { color: #555; font-size: 13px; margin-top: 4px; }
 
-.section-title { color: #1A1A1A; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; }
-.section-description { color: #555; font-size: 14px; margin-top: 2px; }
+.section-title { color: #1A1A1A; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; text-align: left; }
+.section-description { color: #555; font-size: 13px; margin-top: 2px; text-align: left; }
 
-.footer { text-align: center; color: #888; font-size: 12px; letter-spacing: 2px; padding-top: 40px; }
+.footer { text-align: left; color: #888; font-size: 12px; letter-spacing: 1.5px; padding-top: 30px; }
 </style>
 """, unsafe_allow_html=True)
 
 # ==========================================
-# KHỞI TẠO STATE
+# KHỞI TẠO SESSION STATE
 # ==========================================
 if "loan_requests" not in st.session_state:
     st.session_state.loan_requests = []
@@ -198,7 +230,7 @@ if "admin_logged_in" not in st.session_state:
     st.session_state.admin_logged_in = False
 
 # ==========================================
-# HÀM TÍNH TOÁN & EXCEL
+# HÀM BỔ TRỢ
 # ==========================================
 def export_excel():
     df = pd.DataFrame(st.session_state.loan_requests)
@@ -216,17 +248,32 @@ def format_money(amount):
 st.sidebar.markdown("""
 <div class="side-logo">
     <div class="side-symbol"><span>%</span></div>
-    <div class="side-brand">TÀI CHÍNH</div>
-    <div class="side-sub">ĐĂNG KÝ VAY VỐN</div>
+    <div class="side-brand">QUẢN LÝ KHÁCH HÀNG</div>
+    <div class="side-sub">NHÓM CHIẾN LƯỢC</div>
 </div>
 """, unsafe_allow_html=True)
 
-st.sidebar.caption("MENU CHÍNH")
+st.sidebar.caption("ĐIỀU HƯỚNG BẢNG ĐIỀU KHIỂN")
 page = st.sidebar.radio(
-    "Điều hướng",
+    "Menu",
     ["📝 Đăng ký nhu cầu vay", "🧮 Bảng tính trả góp", "🔐 Quản trị Admin"],
     label_visibility="collapsed"
 )
+
+# ==========================================
+# BANNER ĐẦU TRANG - THÔNG TIN NHÓM CHIẾN LƯỢC
+# ==========================================
+st.markdown("""
+<div class="team-header-card">
+    <div>
+        <div class="team-title">🏛️ NHÓM CHIẾN LƯỢC - HỆ THỐNG PHÁT TRIỂN KHÁCH HÀNG</div>
+        <div class="team-sub">Giải pháp thu thập & phân tích nhu cầu vay vốn tài chính cao cấp</div>
+    </div>
+    <div class="team-badge">
+        DỰ ÁN TÀI CHÍNH 2024
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # ==========================================
 # TRANG 1: ĐĂNG KÝ VAY VỐN
@@ -234,46 +281,36 @@ page = st.sidebar.radio(
 if page == "📝 Đăng ký nhu cầu vay":
     st.markdown('<div class="page-kicker">DỊCH VỤ TÀI CHÍNH CÁ NHÂN</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-title">💳 ĐĂNG KÝ TƯ VẤN VAY VỐN</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-description">Hoàn tất thông tin bên dưới để nhận tư vấn gói vay lãi suất ưu đãi nhất</div>', unsafe_allow_html=True)
-
-    # Header Banner Image
-    st.markdown('<div class="image-card">', unsafe_allow_html=True)
-    _, col_img, _ = st.columns([2, 2, 2])
-    with col_img:
-        try:
-            st.image("LOGO.jpg", width=260)
-        except:
-            st.info("📷 LOGO BANK")
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-description">Khách hàng vui lòng điền đầy đủ thông tin bên dưới để Nhóm Chiến Lược hỗ trợ gói vay tối ưu nhất.</div>', unsafe_allow_html=True)
 
     # Form Nhập
     st.markdown('<div class="form-card">', unsafe_allow_html=True)
-    st.subheader("📋 Thông tin hồ sơ đăng ký")
-    st.caption("Các trường có dấu (*) là bắt buộc")
+    st.subheader("📋 Thông tin hồ sơ vay")
+    st.caption("Điền thông tin chính xác để chuyên viên thẩm định liên hệ nhanh nhất")
     st.markdown("<br>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
     with col1:
-        name = st.text_input("👤 Họ và tên (*)", placeholder="Nguyễn Văn A")
-        phone = st.text_input("📱 Số điện thoại (*)", placeholder="0901234567")
-        address = st.text_input("📍 Tỉnh/Thành phố sinh sống", placeholder="Ví dụ: Hà Nội, TP.HCM")
+        name = st.text_input("👤 Họ và tên khách hàng (*)", placeholder="Nguyễn Văn A")
+        phone = st.text_input("📱 Số điện thoại liên hệ (*)", placeholder="0901234567")
+        address = st.text_input("📍 Tỉnh / Thành phố sinh sống", placeholder="Ví dụ: Hà Nội, TP.HCM")
         income = st.number_input("💵 Thu nhập hàng tháng (VNĐ)", min_value=0, step=1000000, value=15000000)
 
     with col2:
         loan_type = st.selectbox(
-            "🏷️ Nhu cầu gói vay (*)",
-            ["Vay Tín Chấp Theo Lương", "Vay Mua Nhà / BĐS", "Vay Mua Ô Tô", "Vay Kinh Doanh", "Vay Thấu Chi"]
+            "🏷️ Nhu cầu sản phẩm vay (*)",
+            ["Vay Tín Chấp Theo Lương", "Vay Mua Nhà / BĐS", "Vay Mua Ô TÔ", "Vay Sản Xuất Kinh Doanh", "Vay Thấu Chi"]
         )
-        loan_amount = st.number_input("💰 Số tiền muốn vay (VNĐ) (*)", min_value=10000000, step=10000000, value=100000000)
+        loan_amount = st.number_input("💰 Số tiền đề xuất vay (VNĐ) (*)", min_value=10000000, step=10000000, value=100000000)
         tenure = st.selectbox("⏱️ Thời hạn vay mong muốn", ["12 tháng", "24 tháng", "36 tháng", "48 tháng", "60 tháng", "120 tháng"])
         income_type = st.radio("💳 Hình thức nhận lương", ["Chuyển khoản Ngân hàng", "Tiền mặt"], horizontal=True)
 
-    note = st.text_area("📝 Ghi chú / Yêu cầu thêm", placeholder="VD: Muốn tư vấn gói lãi suất cố định 12 tháng...", height=80)
+    note = st.text_area("📝 Ghi chú thêm (Nếu có)", placeholder="Nhu cầu chi tiết hoặc thời gian tiện nghe điện thoại...", height=80)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("🚀 GỬI YÊU CẦU TƯ VẤN", type="primary", use_container_width=True):
+    if st.button("🚀 GỬI THÔNG TIN VỀ NHÓM CHIẾN LƯỢC", type="primary", use_container_width=True):
         if not name.strip():
-            st.error("❌ Vui lòng nhập Họ và tên.")
+            st.error("❌ Vui lòng nhập Họ và tên khách hàng.")
         elif not phone.strip():
             st.error("❌ Vui lòng nhập Số điện thoại.")
         else:
@@ -287,10 +324,10 @@ if page == "📝 Đăng ký nhu cầu vay":
                 "Thời hạn": tenure,
                 "Hình thức lương": income_type,
                 "Ghi chú": note.strip(),
-                "Trạng thái": "Chờ liên hệ"
+                "Trạng thái": "Chờ Nhóm Chiến Lược xử lý"
             }
             st.session_state.loan_requests.append(new_request)
-            st.success("🎉 Đăng ký thành công! Chuyên viên tài chính sẽ liên hệ với bạn trong thời gian sớm nhất.")
+            st.success("✅ Đã gửi thông tin thành công! Nhóm Chiến Lược sẽ ghi nhận và xử lý hồ sơ ngay.")
             st.balloons()
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -298,20 +335,20 @@ if page == "📝 Đăng ký nhu cầu vay":
 # TRANG 2: CÔNG CỤ TÍNH TRẢ GÓP
 # ==========================================
 elif page == "🧮 Bảng tính trả góp":
-    st.markdown('<div class="page-kicker">CÔNG CỤ HỖ TRỢ</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-title">🧮 TÍNH KHOẢN VAY DỰ KIẾN</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-description">Ước tính số tiền cần trả hàng tháng theo phương thức dư nợ giảm dần</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-kicker">CÔNG CỤ HỖ TRỢ TÀI CHÍNH</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-title">🧮 BẢNG TÍNH LÃI VÀ GỐC TRẢ GÓP</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-description">Công cụ tính khoản vay theo dư nợ giảm dần do Nhóm Chiến Lược phát triển.</div>', unsafe_allow_html=True)
 
     st.markdown('<div class="form-card">', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
     with c1:
         calc_amount = st.number_input("Số tiền vay (VNĐ)", min_value=10000000, value=200000000, step=10000000)
     with c2:
-        calc_interest = st.number_input("Lãi suất ưu đãi (%/năm)", min_value=1.0, max_value=25.0, value=8.5, step=0.1)
+        calc_interest = st.number_input("Lãi suất (%/năm)", min_value=1.0, max_value=25.0, value=8.5, step=0.1)
     with c3:
         calc_months = st.slider("Thời gian vay (Tháng)", min_value=6, max_value=120, value=36, step=6)
 
-    # Tính toán cơ bản
+    # Tính toán
     monthly_rate = (calc_interest / 100) / 12
     principal_monthly = calc_amount / calc_months
     first_month_interest = calc_amount * monthly_rate
@@ -319,41 +356,42 @@ elif page == "🧮 Bảng tính trả góp":
 
     st.markdown("<br>", unsafe_allow_html=True)
     res1, res2, res3 = st.columns(3)
-    res1.metric("📌 Gốc trả hàng tháng", format_money(principal_monthly))
+    res1.metric("📌 Gốc cố định hàng tháng", format_money(principal_monthly))
     res2.metric("💸 Lãi tháng đầu tiên", format_money(first_month_interest))
     res3.metric("🔥 Tổng trả tháng đầu", format_money(total_first_month))
 
-    st.caption("⚡ *Lưu ý: Bảng tính mang tính chất tham khảo, lãi suất thực tế phụ thuộc vào hồ sơ phê duyệt của ngân hàng.*")
+    st.caption("⚡ *Bảng tính mang tính tham khảo. Chi tiết sẽ được Nhóm Chiến Lược phê duyệt chính xác theo hồ sơ.*")
     st.markdown('</div>', unsafe_allow_html=True)
 
 # ==========================================
-# TRANG 3: ADMIN QUẢN LÝ HỒ SƠ VAY
+# TRANG 3: ADMIN QUẢN LÝ
 # ==========================================
 elif page == "🔐 Quản trị Admin":
-    st.markdown('<div class="page-kicker">HỆ THỐNG QUẢN TRỊ</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-title">🔐 CỔNG QUẢN LÝ HỒ SƠ VAY</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-description">Kiểm tra & Xuất dữ liệu khách hàng đăng ký tư vấn</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-kicker">QUẢN TRỊ DỮ LIỆU Nội BỘ</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-title">🔐 CỔNG ĐIỀU HÀNH - NHÓM CHIẾN LƯỢC</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-description">Xem danh sách khách hàng và trích xuất dữ liệu đăng ký.</div>', unsafe_allow_html=True)
 
     if not st.session_state.admin_logged_in:
         st.markdown("""
         <div class="login-box">
             <div class="login-symbol">🔐</div>
             <div class="login-title">ĐĂNG NHẬP ADMIN</div>
-            <div class="login-description">Nhập mật khẩu quản trị viên để tiếp tục</div>
+            <div class="login-description">Nhập mật khẩu để truy cập hệ thống quản trị</div>
         </div>
         """, unsafe_allow_html=True)
 
-        pwd = st.text_input("🔑 Mật khẩu", type="password", placeholder="Nhập mật khẩu...")
+        pwd = st.text_input("🔑 Mật khẩu", type="password", placeholder="Nhập mật khẩu admin...")
         if st.button("🔓 XÁC NHẬN ĐĂNG NHẬP", type="primary", use_container_width=True):
             if pwd == "123456":
                 st.session_state.admin_logged_in = True
                 st.rerun()
             else:
-                st.error("❌ Mật khẩu không chính xác.")
+                st.error("❌ Mật khẩu không đúng.")
     else:
-        top_col1, top_col2 = st.columns([5, 1])
+        top_col1, top_col2 = st.columns([6, 1])
         with top_col1:
-            st.markdown('<div class="section-title">📊 DANH SÁCH YÊU CẦU VAY VỐN</div>', unsafe_allow_html=True)
+            st.markdown('<div class="section-title">📊 DANH SÁCH DỮ LIỆU KHÁCH HÀNG</div>', unsafe_allow_html=True)
+            st.markdown('<div class="section-description">Cập nhật realtime từ người dùng đăng ký</div>', unsafe_allow_html=True)
         with top_col2:
             if st.button("🚪 Đăng xuất", use_container_width=True):
                 st.session_state.admin_logged_in = False
@@ -362,15 +400,15 @@ elif page == "🔐 Quản trị Admin":
         st.markdown("<br>", unsafe_allow_html=True)
 
         if not st.session_state.loan_requests:
-            st.info("📭 Hiện chưa có khách hàng nào đăng ký nhu cầu vay.")
+            st.info("📭 Chưa có thông tin đăng ký mới nào.")
         else:
             df = pd.DataFrame(st.session_state.loan_requests)
 
-            # Thống kê nhanh
+            # Thống kê
             m1, m2, m3 = st.columns(3)
-            m1.metric("👥 Tổng hồ sơ", len(df))
-            m2.metric("💰 Tổng nhu cầu vay", format_money(df["Số tiền vay"].sum()))
-            m3.metric("📊 Giá trị vay trung bình", format_money(df["Số tiền vay"].mean()))
+            m1.metric("👥 Tổng hồ sơ tiếp nhận", len(df))
+            m2.metric("💰 Tổng nhu cầu vay vốn", format_money(df["Số tiền vay"].sum()))
+            m3.metric("📊 Nhu cầu trung bình", format_money(df["Số tiền vay"].mean()))
 
             st.markdown("<br>", unsafe_allow_html=True)
             st.dataframe(df, use_container_width=True, hide_index=True, height=380)
@@ -378,9 +416,9 @@ elif page == "🔐 Quản trị Admin":
             st.markdown("<br>", unsafe_allow_html=True)
             excel_data = export_excel()
             st.download_button(
-                label="📥 XUẤT DANH SÁCH RA EXCEL (.XLSX)",
+                label="📥 XUẤT FILE EXCEL CHO NHÓM CHIẾN LƯỢC (.XLSX)",
                 data=excel_data,
-                file_name="danh_sach_dang_ky_vay.xlsx",
+                file_name="danh_sach_khach_hang_nhom_chien_luoc.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 use_container_width=True
             )
@@ -390,6 +428,6 @@ elif page == "🔐 Quản trị Admin":
 # ==========================================
 st.markdown("""
 <div class="footer">
-    HỆ THỐNG ĐĂNG KÝ TƯ VẤN TÀI CHÍNH & VAY VỐN • TỰ ĐỘNG & BẢO MẬT
+    HỆ THỐNG ĐĂNG KÝ VAY VỐN & QUẢN LÝ KHÁCH HÀNG • PHÁT TRIỂN BỞI NHÓM CHIẾN LƯỢC
 </div>
 """, unsafe_allow_html=True)
