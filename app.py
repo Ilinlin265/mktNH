@@ -13,211 +13,251 @@ st.set_page_config(
 )
 
 # ==========================================
-# CSS - THEME XANH VCB & CĂN SÁT LỀ TRÁI
+# CSS PREMIUM UI - STYLE VIETCOMBANK MODERN
 # ==========================================
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
-
-.stApp {
-    background: linear-gradient(160deg, #F0F7F2 0%, #FFFFFF 45%, #E8F5E9 100%);
-    background-attachment: fixed;
+/* Global Font & Smooth Theme */
+html, body, [class*="css"] { 
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+.stApp {
+    background: #F4F7F5;
+}
+
+/* Hide default elements */
 #MainMenu, footer { visibility: hidden; }
 header[data-testid="stHeader"] { background: transparent; }
 
-/* CĂN SÁT LỀ TRÁI TOÀN BỘ KHÔNG GIAN MAIN */
+/* Main Layout Padding */
 .block-container {
     max-width: 100% !important;
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
-    padding-top: 20px !important;
-    padding-bottom: 40px !important;
+    padding: 1.5rem 2.5rem 3rem 2.5rem !important;
 }
 
-/* SIDEBAR */
+/* Custom Glassmorphism Sidebar */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #FFFFFF 0%, #E8F5E9 100%) !important;
-    border-right: 1px solid #A5D6A7;
-}
-section[data-testid="stSidebar"] > div { padding: 24px 16px; }
-
-.side-logo { text-align: center; margin-bottom: 24px; }
-.side-symbol {
-    width: 48px; height: 48px;
-    border: 2.5px solid #01502F;
-    transform: rotate(45deg);
-    margin: auto;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 16px rgba(1, 80, 47, 0.3);
-    background: #FFFFFF;
-}
-.side-symbol span {
-    color: #01502F;
-    transform: rotate(-45deg);
-    font-size: 18px;
-}
-.side-brand {
-    margin-top: 16px;
-    color: #1A1A1A !important;
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-size: 20px;
-}
-.side-sub {
-    margin-top: 4px;
-    color: #01502F;
-    font-size: 11px;
-    letter-spacing: 2px;
-    font-weight: 600;
+    background-color: #FFFFFF !important;
+    border-right: 1px solid #E1E8E3;
 }
 
-section[data-testid="stSidebar"] .stRadio label {
-    color: #1A1A1A !important;
-    padding: 12px 10px;
-    border-radius: 10px;
-    margin-bottom: 6px;
-    transition: .2s;
-    font-size: 15px !important;
-}
-section[data-testid="stSidebar"] .stRadio label:hover {
-    background: #C8E6C9;
-    color: #01502F !important;
+section[data-testid="stSidebar"] > div { 
+    padding: 2rem 1.2rem; 
 }
 
-/* BANNER NHÓM CHIẾN LƯỢC SÁT LỀ TRÁI */
-.team-header-card {
-    background: linear-gradient(135deg, #01502F 0%, #027A45 100%);
+/* Sidebar Brand Styling */
+.brand-card {
+    background: linear-gradient(135deg, #013D24 0%, #01502F 100%);
     border-radius: 16px;
-    padding: 24px 30px;
-    color: #FFFFFF;
-    margin-bottom: 24px;
-    box-shadow: 0 8px 24px rgba(1, 80, 47, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.team-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    font-weight: 700;
-    margin: 0;
-    color: #FFFFFF;
-}
-.team-sub {
-    font-size: 14px;
-    color: #C8E6C9;
-    margin-top: 4px;
-    letter-spacing: 1px;
-}
-.team-badge {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
-
-/* Page Header Text - Left Aligned */
-.page-kicker {
-    text-align: left;
-    color: #01502F;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    margin-bottom: 4px;
-}
-.page-title {
-    text-align: left;
-    color: #1A1A1A;
-    font-family: 'Playfair Display', serif;
-    font-size: 34px;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-.page-description {
-    text-align: left;
-    color: #555;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-/* CARDS */
-.form-card, .login-box, .calc-card,
-div[data-testid="stMetric"], div[data-testid="stDataFrame"] {
-    background: #FFFFFF;
-    border: 1px solid #A5D6A7;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(1, 80, 47, 0.06);
-}
-.form-card { padding: 28px 32px; border-radius: 16px; margin-bottom: 20px; }
-.calc-card { padding: 24px; border-radius: 16px; background: #F1F8F4; margin-bottom: 20px; }
-
-.login-box {
-    padding: 36px 30px;
-    max-width: 450px;
-    margin: 20px 0;
+    padding: 20px 16px;
     text-align: center;
+    color: white;
+    box-shadow: 0 10px 20px rgba(1, 80, 47, 0.15);
+    margin-bottom: 24px;
 }
 
-/* INPUTS */
+.brand-icon {
+    font-size: 28px;
+    background: rgba(255, 255, 255, 0.15);
+    width: 52px;
+    height: 52px;
+    line-height: 52px;
+    border-radius: 12px;
+    margin: 0 auto 12px auto;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.brand-title {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.brand-subtitle {
+    font-size: 11px;
+    color: #A3E6CD;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+/* Custom Navigation Radio Buttons */
+section[data-testid="stSidebar"] .stRadio label {
+    background: #F8FAF9;
+    border: 1px solid #E1E8E3;
+    color: #2D3748 !important;
+    padding: 14px 16px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: all 0.25s ease;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+section[data-testid="stSidebar"] .stRadio label:hover {
+    border-color: #01502F;
+    background: #E8F5E9;
+    color: #01502F !important;
+    transform: translateX(4px);
+}
+
+/* Hero Header Banner */
+.hero-banner {
+    background: linear-gradient(135deg, #01502F 0%, #027A45 60%, #004D25 100%);
+    border-radius: 20px;
+    padding: 32px 40px;
+    color: #FFFFFF;
+    margin-bottom: 28px;
+    box-shadow: 0 12px 30px rgba(1, 80, 47, 0.18);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-banner::after {
+    content: "";
+    position: absolute;
+    right: -50px;
+    bottom: -50px;
+    width: 220px;
+    height: 220px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+.hero-title {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.hero-sub {
+    font-size: 15px;
+    color: #C8E6C9;
+    margin-top: 6px;
+    font-weight: 400;
+}
+
+/* Custom Modern Cards */
+.custom-card {
+    background: #FFFFFF;
+    border-radius: 18px;
+    padding: 32px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    margin-bottom: 24px;
+}
+
+/* Form Controls Styling */
 div[data-baseweb="input"] > div,
 div[data-baseweb="select"] > div,
 div[data-baseweb="textarea"] {
-    background: #F1F8F4 !important;
-    border: 1.5px solid #A5D6A7 !important;
-    border-radius: 10px !important;
+    background: #F8FAF9 !important;
+    border: 1.5px solid #E1E8E3 !important;
+    border-radius: 12px !important;
+    font-size: 14px !important;
 }
+
 div[data-baseweb="input"] > div:focus-within,
 div[data-baseweb="textarea"]:focus-within {
     border-color: #01502F !important;
-    box-shadow: 0 0 0 3px rgba(1, 80, 47, 0.15) !important;
+    box-shadow: 0 0 0 3px rgba(1, 80, 47, 0.12) !important;
+    background: #FFFFFF !important;
 }
-label { color: #333 !important; font-size: 14px !important; font-weight: 600 !important; }
 
-/* BUTTONS */
+label { 
+    color: #2D3748 !important; 
+    font-size: 13px !important; 
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px !important;
+}
+
+/* Primary Button Styling */
 .stButton > button, .stDownloadButton > button {
-    min-height: 48px;
-    border-radius: 10px !important;
+    height: 52px;
+    border-radius: 12px !important;
     border: none !important;
-    background: linear-gradient(135deg, #01502F, #027A45) !important;
+    background: linear-gradient(135deg, #01502F 0%, #027A45 100%) !important;
     color: #ffffff !important;
     font-weight: 700 !important;
     font-size: 15px !important;
-    transition: .25s;
-    box-shadow: 0 6px 18px rgba(1, 80, 47, 0.2);
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 6px 18px rgba(1, 80, 47, 0.22);
 }
+
 .stButton > button:hover {
-    background: linear-gradient(135deg, #013D24, #01502F) !important;
+    background: linear-gradient(135deg, #013D24 0%, #01502F 100%) !important;
     transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(1, 80, 47, 0.3);
+    box-shadow: 0 10px 25px rgba(1, 80, 47, 0.32);
 }
 
-/* METRICS */
-div[data-testid="stMetric"] { padding: 16px; border-radius: 14px; }
-div[data-testid="stMetricLabel"] { color: #666 !important; font-size: 13px !important; }
-div[data-testid="stMetricValue"] { color: #01502F !important; font-weight: 700 !important; font-size: 24px !important; }
-
-.login-symbol {
-    width: 56px; height: 56px;
-    background: linear-gradient(135deg, #01502F, #027A45);
-    border-radius: 50%;
-    margin: auto;
-    display: flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 22px;
+/* Modern Metric Cards */
+div[data-testid="stMetric"] {
+    background: #F8FAF9;
+    border: 1px solid #E1E8E3;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: none;
 }
-.login-title { color: #1A1A1A; font-family: 'Playfair Display', serif; font-size: 24px; margin-top: 12px; }
-.login-description { color: #555; font-size: 13px; margin-top: 4px; }
 
-.section-title { color: #1A1A1A; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; text-align: left; }
-.section-description { color: #555; font-size: 13px; margin-top: 2px; text-align: left; }
+div[data-testid="stMetricLabel"] { 
+    color: #718096 !important; 
+    font-size: 12px !important; 
+    font-weight: 700 !important;
+    text-transform: uppercase;
+}
 
-.footer { text-align: left; color: #888; font-size: 12px; letter-spacing: 1.5px; padding-top: 30px; }
+div[data-testid="stMetricValue"] { 
+    color: #01502F !important; 
+    font-weight: 800 !important; 
+    font-size: 26px !important; 
+}
+
+/* Section Titles */
+.page-header {
+    margin-bottom: 24px;
+}
+.page-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #1A202C;
+    margin: 0;
+}
+.page-desc {
+    font-size: 14px;
+    color: #718096;
+    margin-top: 4px;
+}
+
+/* Admin Login Card */
+.admin-card {
+    max-width: 420px;
+    margin: 40px auto;
+    padding: 40px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.footer {
+    text-align: center;
+    color: #A0AEC0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -245,33 +285,28 @@ def format_money(amount):
 # ==========================================
 # SIDEBAR
 # ==========================================
-st.sidebar.markdown("""
-<div class="side-logo">
-    <div class="side-symbol"><span>%</span></div>
-    <div class="side-brand">QUẢN LÝ KHÁCH HÀNG</div>
-    <div class="side-sub">NHÓM CHIẾN LƯỢC</div>
-</div>
-""", unsafe_allow_html=True)
+with st.sidebar:
+    st.markdown("""
+    <div class="brand-card">
+        <div class="brand-icon">🏛️</div>
+        <div class="brand-title">NHÓM CHIẾN LƯỢC</div>
+        <div class="brand-subtitle">HỆ THỐNG QUẢN LÝ VAY</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-st.sidebar.caption("ĐIỀU HƯỚNG BẢNG ĐIỀU KHIỂN")
-page = st.sidebar.radio(
-    "Menu",
-    ["📝 Đăng ký nhu cầu vay", "🧮 Bảng tính trả góp", "🔐 Quản trị Admin"],
-    label_visibility="collapsed"
-)
+    page = st.radio(
+        "Menu Điều Hướng",
+        ["📝 Đăng ký nhu cầu vay", "🧮 Bảng tính trả góp", "🔐 Quản trị Admin"],
+        label_visibility="collapsed"
+    )
 
 # ==========================================
-# BANNER ĐẦU TRANG - THÔNG TIN NHÓM CHIẾN LƯỢC
+# BANNER ĐẦU TRANG
 # ==========================================
 st.markdown("""
-<div class="team-header-card">
-    <div>
-        <div class="team-title">🏛️ NHÓM CHIẾN LƯỢC - HỆ THỐNG PHÁT TRIỂN KHÁCH HÀNG</div>
-        <div class="team-sub">Giải pháp thu thập & phân tích nhu cầu vay vốn tài chính cao cấp</div>
-    </div>
-    <div class="team-badge">
-        DỰ ÁN TÀI CHÍNH 2026
-    </div>
+<div class="hero-banner">
+    <div class="hero-title">🏛️ HỆ THỐNG PHÁT TRIỂN & QUẢN LÝ KHÁCH HÀNG VAY</div>
+    <div class="hero-sub">Giải pháp số hóa tiếp nhận nhu cầu vay vốn & phân tích tài chính tối ưu | Nhóm Chiến Lược</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -279,21 +314,20 @@ st.markdown("""
 # TRANG 1: ĐĂNG KÝ VAY VỐN
 # ==========================================
 if page == "📝 Đăng ký nhu cầu vay":
-    st.markdown('<div class="page-kicker">DỊCH VỤ TÀI CHÍNH CÁ NHÂN</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-title">💳 ĐĂNG KÝ TƯ VẤN VAY VỐN</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-description">Khách hàng vui lòng điền đầy đủ thông tin bên dưới để Nhóm Chiến Lược hỗ trợ gói vay tối ưu nhất.</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="page-header">
+        <div class="page-title">💳 Đăng Ký Tư Vấn Vay Vốn</div>
+        <div class="page-desc">Vui lòng hoàn thiện thông tin bên dưới, chuyên viên Nhóm Chiến Lược sẽ liên hệ hỗ trợ trong thời gian sớm nhất.</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-    # Form Nhập
-    st.markdown('<div class="form-card">', unsafe_allow_html=True)
-    st.subheader("📋 Thông tin hồ sơ vay")
-    st.caption("Điền thông tin chính xác để chuyên viên thẩm định liên hệ nhanh nhất")
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    col1, col2 = st.columns(2)
+    st.markdown('<div class="custom-card">', unsafe_allow_html=True)
+    
+    col1, col2 = st.columns(2, gap="large")
     with col1:
-        name = st.text_input("👤 Họ và tên khách hàng (*)", placeholder="Nguyễn Văn A")
-        phone = st.text_input("📱 Số điện thoại liên hệ (*)", placeholder="0901234567")
-        address = st.text_input("📍 Tỉnh / Thành phố sinh sống", placeholder="Ví dụ: Hà Nội, TP.HCM")
+        name = st.text_input("👤 Họ và tên khách hàng (*)", placeholder="Nhập đầy đủ họ tên")
+        phone = st.text_input("📱 Số điện thoại liên hệ (*)", placeholder="Ví dụ: 0901234567")
+        address = st.text_input("📍 Tỉnh / Thành phố sinh sống", placeholder="Ví dụ: TP. Hồ Chí Minh, Hà Nội")
         income = st.number_input("💵 Thu nhập hàng tháng (VNĐ)", min_value=0, step=1000000, value=15000000)
 
     with col2:
@@ -305,14 +339,14 @@ if page == "📝 Đăng ký nhu cầu vay":
         tenure = st.selectbox("⏱️ Thời hạn vay mong muốn", ["12 tháng", "24 tháng", "36 tháng", "48 tháng", "60 tháng", "120 tháng"])
         income_type = st.radio("💳 Hình thức nhận lương", ["Chuyển khoản Ngân hàng", "Tiền mặt"], horizontal=True)
 
-    note = st.text_area("📝 Ghi chú thêm (Nếu có)", placeholder="Nhu cầu chi tiết hoặc thời gian tiện nghe điện thoại...", height=80)
+    note = st.text_area("📝 Ghi chú thêm (Nếu có)", placeholder="Nhập nhu cầu chi tiết hoặc mốc thời gian tiện nghe máy...", height=90)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("🚀 GỬI THÔNG TIN VỀ NHÓM CHIẾN LƯỢC", type="primary", use_container_width=True):
+    if st.button("🚀 GỬI HỒ SƠ ĐĂNG KÝ VAY", type="primary", use_container_width=True):
         if not name.strip():
             st.error("❌ Vui lòng nhập Họ và tên khách hàng.")
         elif not phone.strip():
-            st.error("❌ Vui lòng nhập Số điện thoại.")
+            st.error("❌ Vui lòng nhập Số điện thoại liên hệ.")
         else:
             new_request = {
                 "Họ và tên": name.strip(),
@@ -327,26 +361,31 @@ if page == "📝 Đăng ký nhu cầu vay":
                 "Trạng thái": "Chờ Nhóm Chiến Lược xử lý"
             }
             st.session_state.loan_requests.append(new_request)
-            st.success("✅ Đã gửi thông tin thành công! Nhóm Chiến Lược sẽ ghi nhận và xử lý hồ sơ ngay.")
+            st.success("✅ Đã gửi hồ sơ thành công! Chuyên viên Nhóm Chiến Lược sẽ tiếp nhận và liên hệ ngay.")
             st.balloons()
+            
     st.markdown('</div>', unsafe_allow_html=True)
 
 # ==========================================
 # TRANG 2: CÔNG CỤ TÍNH TRẢ GÓP
 # ==========================================
 elif page == "🧮 Bảng tính trả góp":
-    st.markdown('<div class="page-kicker">CÔNG CỤ HỖ TRỢ TÀI CHÍNH</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-title">🧮 BẢNG TÍNH LÃI VÀ GỐC TRẢ GÓP</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-description">Công cụ tính khoản vay theo dư nợ giảm dần do Nhóm Chiến Lược phát triển.</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="page-header">
+        <div class="page-title">🧮 Mô Phỏng Khoản Vay & Lãi Suất</div>
+        <div class="page-desc">Công cụ dự toán lịch trả nợ theo phương thức dư nợ giảm dần do Nhóm Chiến Lược phát triển.</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-    st.markdown('<div class="form-card">', unsafe_allow_html=True)
-    c1, c2, c3 = st.columns(3)
+    st.markdown('<div class="custom-card">', unsafe_allow_html=True)
+    
+    c1, c2, c3 = st.columns(3, gap="medium")
     with c1:
-        calc_amount = st.number_input("Số tiền vay (VNĐ)", min_value=10000000, value=200000000, step=10000000)
+        calc_amount = st.number_input("💰 Số tiền vay (VNĐ)", min_value=10000000, value=200000000, step=10000000)
     with c2:
-        calc_interest = st.number_input("Lãi suất (%/năm)", min_value=1.0, max_value=25.0, value=8.5, step=0.1)
+        calc_interest = st.number_input("📈 Lãi suất năm (%/năm)", min_value=1.0, max_value=25.0, value=8.5, step=0.1)
     with c3:
-        calc_months = st.slider("Thời gian vay (Tháng)", min_value=6, max_value=120, value=36, step=6)
+        calc_months = st.select_slider("⏱️ Thời gian vay (Tháng)", options=[6, 12, 18, 24, 36, 48, 60, 84, 120], value=36)
 
     # Tính toán
     monthly_rate = (calc_interest / 100) / 12
@@ -358,40 +397,45 @@ elif page == "🧮 Bảng tính trả góp":
     res1, res2, res3 = st.columns(3)
     res1.metric("📌 Gốc cố định hàng tháng", format_money(principal_monthly))
     res2.metric("💸 Lãi tháng đầu tiên", format_money(first_month_interest))
-    res3.metric("🔥 Tổng trả tháng đầu", format_money(total_first_month))
+    res3.metric("🔥 Tổng gốc + lãi tháng đầu", format_money(total_first_month))
 
-    st.caption("⚡ *Bảng tính mang tính tham khảo. Chi tiết sẽ được Nhóm Chiến Lược phê duyệt chính xác theo hồ sơ.*")
+    st.caption("⚡ *Lưu ý: Bảng tính mang tính chất tham khảo. Lịch trả nợ chi tiết sẽ được phê duyệt chính xác theo từng hồ sơ thực tế.*")
     st.markdown('</div>', unsafe_allow_html=True)
 
 # ==========================================
 # TRANG 3: ADMIN QUẢN LÝ
 # ==========================================
 elif page == "🔐 Quản trị Admin":
-    st.markdown('<div class="page-kicker">QUẢN TRỊ DỮ LIỆU Nội BỘ</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-title">🔐 CỔNG ĐIỀU HÀNH - NHÓM CHIẾN LƯỢC</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-description">Xem danh sách khách hàng và trích xuất dữ liệu đăng ký.</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="page-header">
+        <div class="page-title">🔐 Cổng Quản Trị Hệ Thống</div>
+        <div class="page-desc">Khu vực dành riêng cho chuyên viên Nhóm Chiến Lược quản lý hồ sơ và trích xuất dữ liệu.</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     if not st.session_state.admin_logged_in:
+        st.markdown('<div class="admin-card">', unsafe_allow_html=True)
         st.markdown("""
-        <div class="login-box">
-            <div class="login-symbol">🔐</div>
-            <div class="login-title">ĐĂNG NHẬP ADMIN</div>
-            <div class="login-description">Nhập mật khẩu để truy cập hệ thống quản trị</div>
-        </div>
+            <div style="font-size: 40px; margin-bottom: 8px;">🔐</div>
+            <h3 style="margin: 0; color: #1A202C;">Đăng Nhập Admin</h3>
+            <p style="color: #718096; font-size: 13px; margin-bottom: 24px;">Vui lòng nhập mật khẩu quản trị viên</p>
         """, unsafe_allow_html=True)
-
-        pwd = st.text_input("🔑 Mật khẩu", type="password", placeholder="Nhập mật khẩu admin...")
+        
+        pwd = st.text_input("Mật khẩu truy cập", type="password", placeholder="••••••••", label_visibility="collapsed")
+        st.markdown("<br>", unsafe_allow_html=True)
+        
         if st.button("🔓 XÁC NHẬN ĐĂNG NHẬP", type="primary", use_container_width=True):
             if pwd == "123456":
                 st.session_state.admin_logged_in = True
                 st.rerun()
             else:
-                st.error("❌ Mật khẩu không đúng.")
+                st.error("❌ Mật khẩu xác thực không đúng.")
+        st.markdown('</div>', unsafe_allow_html=True)
+        
     else:
-        top_col1, top_col2 = st.columns([6, 1])
+        top_col1, top_col2 = st.columns([5, 1])
         with top_col1:
-            st.markdown('<div class="section-title">📊 DANH SÁCH DỮ LIỆU KHÁCH HÀNG</div>', unsafe_allow_html=True)
-            st.markdown('<div class="section-description">Cập nhật realtime từ người dùng đăng ký</div>', unsafe_allow_html=True)
+            st.subheader("📊 Danh Sách Hồ Sơ Khách Hàng Đăng Ký")
         with top_col2:
             if st.button("🚪 Đăng xuất", use_container_width=True):
                 st.session_state.admin_logged_in = False
@@ -400,18 +444,25 @@ elif page == "🔐 Quản trị Admin":
         st.markdown("<br>", unsafe_allow_html=True)
 
         if not st.session_state.loan_requests:
-            st.info("📭 Chưa có thông tin đăng ký mới nào.")
+            st.info("📭 Hiện tại chưa có dữ liệu hồ sơ đăng ký mới.")
         else:
             df = pd.DataFrame(st.session_state.loan_requests)
 
-            # Thống kê
+            # Thống kê KPI
             m1, m2, m3 = st.columns(3)
-            m1.metric("👥 Tổng hồ sơ tiếp nhận", len(df))
-            m2.metric("💰 Tổng nhu cầu vay vốn", format_money(df["Số tiền vay"].sum()))
-            m3.metric("📊 Nhu cầu trung bình", format_money(df["Số tiền vay"].mean()))
+            m1.metric("👥 Tổng hồ sơ tiếp nhận", f"{len(df)} hồ sơ")
+            m2.metric("💰 Tổng nhu cầu vay", format_money(df["Số tiền vay"].sum()))
+            m3.metric("📊 Nhu cầu vay trung bình", format_money(df["Số tiền vay"].mean()))
 
             st.markdown("<br>", unsafe_allow_html=True)
-            st.dataframe(df, use_container_width=True, hide_index=True, height=380)
+            
+            # Data Table
+            st.dataframe(
+                df, 
+                use_container_width=True, 
+                hide_index=True, 
+                height=380
+            )
 
             st.markdown("<br>", unsafe_allow_html=True)
             excel_data = export_excel()
@@ -428,6 +479,6 @@ elif page == "🔐 Quản trị Admin":
 # ==========================================
 st.markdown("""
 <div class="footer">
-    HỆ THỐNG ĐĂNG KÝ VAY VỐN & QUẢN LÝ KHÁCH HÀNG • PHÁT TRIỂN BỞI NHÓM CHIẾN LƯỢC
+    HỆ THỐNG ĐĂNG KÝ VAY VỐN & QUẢN LÝ KHÁCH HÀNG • PHÁT TRIỂN BỞI NHÓM CHIẾN LƯỢC © 2026
 </div>
 """, unsafe_allow_html=True)
