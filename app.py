@@ -230,8 +230,8 @@ def format_money(amount):
 # SIDEBAR (BỔ SUNG LOGO)
 # ==========================================
 with st.sidebar:
-    if os.path.exists("logo.jpg"):
-        st.image("logo.jpg", use_container_width=True)
+    if os.path.exists("LOGO.jpg"):
+        st.image("LOGO.jpg", use_container_width=True)
     
     st.markdown("""
     <div class="side-brand-box">
