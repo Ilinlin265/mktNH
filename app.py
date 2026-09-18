@@ -95,11 +95,11 @@ section[data-testid="stSidebar"] .stRadio label:hover {
     transform: translateX(4px);
 }
 
-/* Header Banner - Xanh Vietcombank */
+/* Header Banner - Full Width Xanh Vietcombank */
 .vcb-banner {
     background: linear-gradient(135deg, #01502F 0%, #027A45 60%, #003820 100%);
     border-radius: 20px;
-    padding: 24px 32px;
+    padding: 28px 36px;
     color: #FFFFFF;
     margin-bottom: 28px;
     box-shadow: 0 10px 25px rgba(1, 80, 47, 0.18);
@@ -115,7 +115,7 @@ section[data-testid="stSidebar"] .stRadio label:hover {
 .vcb-sub {
     font-size: 14px;
     color: #C8E6C9;
-    margin-top: 4px;
+    margin-top: 6px;
 }
 
 /* White Card Content Box */
@@ -227,10 +227,9 @@ def format_money(amount):
     return f"{amount:,.0f} VNĐ".replace(",", ".")
 
 # ==========================================
-# SIDEBAR (BỔ SUNG LOGO)
+# SIDEBAR (GIỮ LOGO Ở SIDEBAR)
 # ==========================================
 with st.sidebar:
-    # Kiểm tra hỗ trợ cả tên LOGO.jpg lẫn logo.jpg
     logo_file = "LOGO.jpg" if os.path.exists("LOGO.jpg") else "logo.jpg"
     if os.path.exists(logo_file):
         st.image(logo_file, use_container_width=True)
@@ -249,24 +248,14 @@ with st.sidebar:
     )
 
 # ==========================================
-# BANNER ĐẦU TRANG (ĐÃ SỬA LỖI THIẾU CỘT)
+# BANNER ĐẦU TRANG (ĐÃ XÓA LOGO)
 # ==========================================
-logo_col, text_col = st.columns([1, 5], gap="medium")
-
-with logo_col:
-    logo_file = "LOGO.jpg" if os.path.exists("LOGO.jpg") else "logo.jpg"
-    if os.path.exists(logo_file):
-        st.image(logo_file, width=130)
-    else:
-        st.warning("⚠️ Thiếu logo.jpg")
-
-with text_col:
-    st.markdown("""
-    <div class="vcb-banner">
-        <div class="vcb-title">🏦 HỆ THỐNG PHÁT TRIỂN & QUẢN LÝ KHÁCH HÀNG VAY</div>
-        <div class="vcb-sub">Giải pháp số hóa tiếp nhận nhu cầu vay vốn & phân tích tài chính | Nhóm Chiến Lược</div>
-    </div>
-    """, unsafe_allow_html=True)
+st.markdown("""
+<div class="vcb-banner">
+    <div class="vcb-title">🏦 HỆ THỐNG PHÁT TRIỂN & QUẢN LÝ KHÁCH HÀNG VAY</div>
+    <div class="vcb-sub">Giải pháp số hóa tiếp nhận nhu cầu vay vốn & phân tích tài chính | Nhóm Chiến Lược</div>
+</div>
+""", unsafe_allow_html=True)
 
 # ==========================================
 # TRANG 1: ĐĂNG KÝ VAY VỐN
