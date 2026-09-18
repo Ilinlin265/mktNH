@@ -140,9 +140,9 @@ def classify_strategic_group(income, loan_amount, dti):
 # ----------------------------------------------------
 with st.sidebar:
     try:
-        st.image("LOGO.JPG", use_container_width=True)
+        st.image("LOGO.jpg", use_container_width=True)
     except Exception:
-        st.error("⚠️ Không tìm thấy file LOGO.JPG")
+        st.error("⚠️ Không tìm thấy file LOGO.jpg")
         st.markdown("### 🏦 VIETCOMBANK")
         
     st.markdown("---")
