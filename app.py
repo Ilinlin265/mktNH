@@ -14,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Tùy chỉnh CSS giao diện theo tông màu Vietcombank (#005A36 - Xanh lá đậm, #73C033 - Xanh lá tươi)
+# Tùy chỉnh CSS giao diện Vietcombank (#005A36 - Xanh lá đậm)
 st.markdown("""
     <style>
     :root {
@@ -23,7 +23,6 @@ st.markdown("""
         --vcb-bg: #F4F7F5;
     }
     
-    /* Style Tiêu đề chính */
     .vcb-header {
         background: linear-gradient(135deg, #005A36 0%, #003B22 100%);
         padding: 24px;
@@ -45,7 +44,6 @@ st.markdown("""
         font-size: 14px;
     }
     
-    /* Metric Cards */
     .metric-card {
         background-color: white;
         padding: 18px;
@@ -67,7 +65,6 @@ st.markdown("""
         margin-top: 5px;
     }
 
-    /* Style Thẻ Nhóm Chiến Lược */
     .strategy-card {
         background: #FFFFFF;
         border: 1px solid #E2E8F0;
@@ -79,12 +76,26 @@ st.markdown("""
     .badge-potential { background-color: #E0E7FF; color: #3730A3; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
     .badge-standard { background-color: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
     .badge-risk { background-color: #FEE2E2; color: #991B1B; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+    
+    /* Box Login Admin */
+    .admin-login-box {
+        max-width: 450px;
+        margin: 40px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border-top: 5px solid #005A36;
+    }
     </style>
 """, unsafe_allow_html=True)
 
 # ----------------------------------------------------
-# 2. KHỞI TẠO DỮ LIỆU MẪU (SESSION STATE)
+# 2. KHỞI TẠO STATE (DỮ LIỆU & BẢO MẬT ADMIN)
 # ----------------------------------------------------
+if 'is_admin' not in st.session_state:
+    st.session_state.is_admin = False
+
 if 'customer_df' not in st.session_state:
     sample_data = [
         {
@@ -140,9 +151,9 @@ def classify_strategic_group(income, loan_amount, dti):
 # ----------------------------------------------------
 with st.sidebar:
     try:
-        st.image("LOGO.jpg", use_container_width=True)
+        st.image("LOGO.JPG", use_container_width=True)
     except Exception:
-        st.error("⚠️ Không tìm thấy file LOGO.jpg")
+        st.error("⚠️ Không tìm thấy file LOGO.JPG")
         st.markdown("### 🏦 VIETCOMBANK")
         
     st.markdown("---")
@@ -153,7 +164,7 @@ with st.sidebar:
             "📊 Dashboard Tổng Quan",
             "🧮 Tính Vay & Đăng Ký Hồ Sơ",
             "🎯 Nhóm Chiến Lược Khách Hàng",
-            "📑 Danh Sách & Xuất File KH"
+            "🔒 Cổng Quản Trị Viên (Admin)"
         ]
     )
     
@@ -250,7 +261,6 @@ elif menu == "🧮 Tính Vay & Đăng Ký Hồ Sơ":
         interest_rate = st.number_input("Lãi suất ưu đãi (%/năm)", min_value=1.0, max_value=20.0, value=7.2, step=0.1)
         income = st.number_input("Thu nhập hàng tháng (Triệu VNĐ)", min_value=5, max_value=500, value=45, step=5)
 
-    # Tính toán khoản vay
     monthly_rate = (interest_rate / 100) / 12
     principal_per_month = amount_mb / tenure_months
     first_month_interest = amount_mb * monthly_rate
@@ -296,12 +306,7 @@ elif menu == "🧮 Tính Vay & Đăng Ký Hồ Sơ":
 elif menu == "🎯 Nhóm Chiến Lược Khách Hàng":
     st.subheader("🎯 Phân Loại & Định Hướng Nhóm Chiến Lược")
     
-    st.markdown("""
-    Mô hình phân loại chiến lược dựa trên quy mô vay, năng lực tài chính và mức độ rủi ro nhằm tối ưu hóa chính sách ưu đãi của **Vietcombank**:
-    """)
-    
     col1, col2 = st.columns(2)
-    
     with col1:
         st.markdown("""
         <div class="strategy-card">
@@ -349,62 +354,106 @@ elif menu == "🎯 Nhóm Chiến Lược Khách Hàng":
         """, unsafe_allow_html=True)
 
 # ----------------------------------------------------
-# MENU 4: DANH SÁCH & XUẤT FILE KHÁCH HÀNG
+# MENU 4: CỔNG QUẢN TRỊ VIÊN (ADMIN - MẬT KHẨU: 123456)
 # ----------------------------------------------------
-elif menu == "📑 Danh Sách & Xuất File KH":
-    st.subheader("📑 Danh Sách Khách Hàng Vay Cá Nhân & Xuất Dữ Liệu")
+elif menu == "🔒 Cổng Quản Trị Viên (Admin)":
     
-    df = st.session_state.customer_df.copy()
-    
-    # Bộ lọc dữ liệu
-    st.markdown("##### 🔍 Bộ lọc tìm kiếm")
-    f_col1, f_col2, f_col3 = st.columns(3)
-    
-    with f_col1:
-        search_kw = st.text_input("Tìm theo Họ tên / Số điện thoại")
-    with f_col2:
-        filter_strat = st.selectbox("Lọc theo Nhóm Chiến Lược", ["Tất cả"] + list(df["Nhóm Chiến Lược"].unique()))
-    with f_col3:
-        filter_status = st.selectbox("Lọc theo Trạng Thái", ["Tất cả"] + list(df["Trạng Thái"].unique()))
+    # 🔒 CHƯA ĐĂNG NHẬP ADMIN -> BẮT NHẬP MẬT KHẨU
+    if not st.session_state.is_admin:
+        st.markdown("<h3 style='text-align: center;'>🔒 ĐĂNG NHẬP CỔNG QUẢN TRỊ VIÊN VIETCOMBANK</h3>", unsafe_allow_html=True)
         
-    # Áp dụng bộ lọc
-    if search_kw:
-        df = df[df["Họ và Tên"].str.contains(search_kw, case=False) | df["Số Điện Thoại"].str.contains(search_kw)]
-    if filter_strat != "Tất cả":
-        df = df[df["Nhóm Chiến Lược"] == filter_strat]
-    if filter_status != "Tất cả":
-        df = df[df["Trạng Thái"] == filter_status]
-        
-    st.dataframe(df, use_container_width=True, hide_index=True)
-    st.caption(f"Hiển thị {len(df)} trên tổng số {len(st.session_state.customer_df)} khách hàng.")
-    
-    st.markdown("---")
-    st.markdown("##### 📥 Xuất danh sách khách hàng ra File")
-    
-    exp_col1, exp_col2 = st.columns(2)
-    
-    # Xuất file Excel (.xlsx)
-    with exp_col1:
-        output_excel = io.BytesIO()
-        with pd.ExcelWriter(output_excel, engine='openpyxl') as writer:
-            df.to_excel(writer, index=False, sheet_name='DS_KhachHang_VCB')
-        excel_data = output_excel.getvalue()
-        
-        st.download_button(
-            label="📊 Tải file Danh sách Khách hàng (Excel .xlsx)",
-            data=excel_data,
-            file_name=f"DS_KhachHang_Vay_VCB_{datetime.now().strftime('%Y%m%d')}.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            use_container_width=True
-        )
+        col_m1, col_m2, col_m3 = st.columns([1, 2, 1])
+        with col_m2:
+            st.info("💡 Vui lòng nhập mật khẩu quản trị để truy cập dữ liệu khách hàng và xuất file.")
+            input_pass = st.text_input("🔑 Mật khẩu Admin:", type="password", placeholder="Nhập mật khẩu...")
+            
+            if st.button("🔓 Đăng Nhập Quản Trị Viên", use_container_width=True):
+                if input_pass == "123456":
+                    st.session_state.is_admin = True
+                    st.success("✅ Đăng nhập Admin thành công!")
+                    st.rerun()
+                else:
+                    st.error("❌ Mật khẩu không chính xác! (Gợi ý: 123456)")
+                    
+    # 🔓 ĐÃ ĐĂNG NHẬP ADMIN -> HIỂN THỊ QUẢN LÝ & XUẤT FILE
+    else:
+        top_col1, top_col2 = st.columns([4, 1])
+        with top_col1:
+            st.subheader("📑 Danh Sách Khách Hàng & Cổng Xuất Dữ Liệu Admin")
+        with top_col2:
+            if st.button("🚪 Đăng Xuất Admin", use_container_width=True):
+                st.session_state.is_admin = False
+                st.rerun()
 
-    # Xuất file CSV (UTF-8)
-    with exp_col2:
-        csv_data = df.to_csv(index=False, encoding='utf-8-sig')
-        st.download_button(
-            label="📄 Tải file Danh sách Khách hàng (CSV .csv)",
-            data=csv_data,
-            file_name=f"DS_KhachHang_Vay_VCB_{datetime.now().strftime('%Y%m%d')}.csv",
-            mime="text/csv",
-            use_container_width=True
-        )
+        st.success("🟢 Bạn đang trong phiên làm việc với quyền: **Quản Trị Viên VIETCOMBANK**")
+        df = st.session_state.customer_df.copy()
+        
+        # Bộ lọc dữ liệu
+        st.markdown("##### 🔍 Bộ lọc tìm kiếm")
+        f_col1, f_col2, f_col3 = st.columns(3)
+        
+        with f_col1:
+            search_kw = st.text_input("Tìm theo Họ tên / Số điện thoại")
+        with f_col2:
+            filter_strat = st.selectbox("Lọc theo Nhóm Chiến Lược", ["Tất cả"] + list(df["Nhóm Chiến Lược"].unique()))
+        with f_col3:
+            filter_status = st.selectbox("Lọc theo Trạng Thái", ["Tất cả"] + list(df["Trạng Thái"].unique()))
+            
+        # Áp dụng bộ lọc
+        if search_kw:
+            df = df[df["Họ và Tên"].str.contains(search_kw, case=False) | df["Số Điện Thoại"].str.contains(search_kw)]
+        if filter_strat != "Tất cả":
+            df = df[df["Nhóm Chiến Lược"] == filter_strat]
+        if filter_status != "Tất cả":
+            df = df[df["Trạng Thái"] == filter_status]
+            
+        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.caption(f"Hiển thị {len(df)} trên tổng số {len(st.session_state.customer_df)} khách hàng.")
+        
+        st.markdown("---")
+        st.markdown("##### 🛠️ Thao tác Quản trị viên & Xuất Dữ Liệu")
+        
+        tab_action1, tab_action2 = st.columns(2)
+        
+        # Cột 1: Xuất file
+        with tab_action1:
+            st.write("📥 **Tải danh sách khách hàng:**")
+            
+            # Xuất Excel
+            output_excel = io.BytesIO()
+            with pd.ExcelWriter(output_excel, engine='openpyxl') as writer:
+                df.to_excel(writer, index=False, sheet_name='DS_KhachHang_VCB')
+            excel_data = output_excel.getvalue()
+            
+            st.download_button(
+                label="📊 Tải file Danh sách Khách hàng (Excel .xlsx)",
+                data=excel_data,
+                file_name=f"DS_KhachHang_Vay_VCB_{datetime.now().strftime('%Y%m%d')}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                use_container_width=True
+            )
+
+            # Xuất CSV
+            csv_data = df.to_csv(index=False, encoding='utf-8-sig')
+            st.download_button(
+                label="📄 Tải file Danh sách Khách hàng (CSV .csv)",
+                data=csv_data,
+                file_name=f"DS_KhachHang_Vay_VCB_{datetime.now().strftime('%Y%m%d')}.csv",
+                mime="text/csv",
+                use_container_width=True
+            )
+
+        # Cột 2: Quyền Xóa hồ sơ Admin
+        with tab_action2:
+            st.write("🗑️ **Xóa hồ sơ khách hàng:**")
+            if not st.session_state.customer_df.empty:
+                customer_list = st.session_state.customer_df["Họ và Tên"].tolist()
+                selected_cust = st.selectbox("Chọn khách hàng muốn xóa khỏi hệ thống:", customer_list)
+                
+                if st.button("❌ Xóa Hồ Sơ Này", use_container_width=True):
+                    st.session_state.customer_df = st.session_state.customer_df[
+                        st.session_state.customer_df["Họ và Tên"] != selected_cust
+                    ].reset_index(drop=True)
+                    st.success(f"✅ Đã xóa thành công hồ sơ của **{selected_cust}**!")
+                    st.rerun()
+                    
