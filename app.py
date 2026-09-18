@@ -230,9 +230,11 @@ def format_money(amount):
 # SIDEBAR (BỔ SUNG LOGO)
 # ==========================================
 with st.sidebar:
-    if os.path.exists("LOGO.jpg"):
-        st.image("LOGO.jpg", use_container_width=True)
-    
+    # Kiểm tra hỗ trợ cả tên LOGO.jpg lẫn logo.jpg
+    logo_file = "LOGO.jpg" if os.path.exists("LOGO.jpg") else "logo.jpg"
+    if os.path.exists(logo_file):
+        st.image(logo_file, use_container_width=True)
+
     st.markdown("""
     <div class="side-brand-box">
         <div class="side-brand-title">NHÓM CHIẾN LƯỢC</div>
@@ -247,6 +249,16 @@ with st.sidebar:
     )
 
 # ==========================================
+# BANNER ĐẦU TRANG (ĐÃ SỬA LỖI THIẾU CỘT)
+# ==========================================
+logo_col, text_col = st.columns([1, 5], gap="medium")
+
+with logo_col:
+    logo_file = "LOGO.jpg" if os.path.exists("LOGO.jpg") else "logo.jpg"
+    if os.path.exists(logo_file):
+        st.image(logo_file, width=130)
+    else:
+        st.warning("⚠️ Thiếu logo.jpg")
 
 with text_col:
     st.markdown("""
@@ -265,7 +277,7 @@ if page == "📝 Đăng ký nhu cầu vay":
     st.markdown("<br>", unsafe_allow_html=True)
 
     st.markdown('<div class="vcb-card">', unsafe_allow_html=True)
-    
+
     col1, col2 = st.columns(2, gap="large")
     with col1:
         name = st.text_input("👤 Họ và tên khách hàng (*)", placeholder="Nguyễn Văn A")
@@ -306,7 +318,7 @@ if page == "📝 Đăng ký nhu cầu vay":
             st.session_state.loan_requests.append(new_request)
             st.success("✅ Đã gửi thông tin thành công! Nhóm Chiến Lược sẽ ghi nhận và xử lý hồ sơ ngay.")
             st.balloons()
-            
+
     st.markdown('</div>', unsafe_allow_html=True)
 
 # ==========================================
@@ -318,7 +330,7 @@ elif page == "🧮 Bảng tính trả góp":
     st.markdown("<br>", unsafe_allow_html=True)
 
     st.markdown('<div class="vcb-card">', unsafe_allow_html=True)
-    
+
     c1, c2, c3 = st.columns(3, gap="medium")
     with c1:
         calc_amount = st.number_input("💰 Số tiền vay (VNĐ)", min_value=10000000, value=200000000, step=10000000)
@@ -358,17 +370,17 @@ elif page == "🔐 Quản trị Admin":
             <p style="color: #718096; font-size: 13px; margin-bottom: 20px;">Nhập mật khẩu để truy cập hệ thống</p>
         </div>
         """, unsafe_allow_html=True)
-        
+
         pwd = st.text_input("🔑 Mật khẩu admin", type="password", placeholder="••••••••", label_visibility="collapsed")
         st.markdown("<br>", unsafe_allow_html=True)
-        
+
         if st.button("🔓 XÁC NHẬN ĐĂNG NHẬP", type="primary", use_container_width=True):
             if pwd == "123456":
                 st.session_state.admin_logged_in = True
                 st.rerun()
             else:
                 st.error("❌ Mật khẩu không đúng.")
-        
+
     else:
         top_col1, top_col2 = st.columns([5, 1])
         with top_col1:
