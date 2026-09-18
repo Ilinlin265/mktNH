@@ -1,414 +1,458 @@
 import streamlit as st
 import pandas as pd
-from io import BytesIO
-import os
+import numpy as np
+import io
+from datetime import datetime, date
 
-# ==========================================
-# CẤU HÌNH TRANG
-# ==========================================
+# ----------------------------------------------------
+# 1. CẤU HÌNH TRANG & GIAO DIỆN CHUẨN VIETCOMBANK
+# ----------------------------------------------------
 st.set_page_config(
-    page_title="Hệ Thống Quản Lý Vay - Vietcombank",
+    page_title="Vietcombank - Quản Lý & Phân Tích Gói Vay Cá Nhân",
     page_icon="🏦",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# ==========================================
-# CSS THEME VIETCOMBANK (GREEN & LIGHT)
-# ==========================================
+# Tùy chỉnh CSS giao diện Vietcombank (#005A36 - Xanh lá đậm)
 st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    <style>
+    :root {
+        --vcb-primary: #005A36;
+        --vcb-accent: #73C033;
+        --vcb-bg: #F4F7F5;
+    }
+    
+    .vcb-header {
+        background: linear-gradient(135deg, #005A36 0%, #003B22 100%);
+        padding: 24px;
+        border-radius: 12px;
+        color: white;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 15px rgba(0, 90, 54, 0.2);
+    }
+    .vcb-header h1 {
+        color: #FFFFFF !important;
+        font-weight: 700;
+        margin: 0;
+        font-size: 26px;
+    }
+    .vcb-header p {
+        color: #E0F2E9;
+        margin-top: 6px;
+        margin-bottom: 0;
+        font-size: 14px;
+    }
+    
+    .metric-card {
+        background-color: white;
+        padding: 18px;
+        border-radius: 10px;
+        border-left: 5px solid #005A36;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        text-align: center;
+    }
+    .metric-title {
+        font-size: 13px;
+        color: #64748B;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+    .metric-value {
+        font-size: 22px;
+        font-weight: bold;
+        color: #005A36;
+        margin-top: 5px;
+    }
 
-html, body, [class*="css"] { 
-    font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-/* Nền xám nhạt hiện đại */
-.stApp {
-    background-color: #F4F7F5;
-}
-
-#MainMenu, footer { visibility: hidden; }
-header[data-testid="stHeader"] { background: transparent; }
-
-/* Dynamic Layout Padding */
-.block-container {
-    max-width: 100% !important;
-    padding: 1.5rem 2.5rem 3rem 2.5rem !important;
-}
-
-/* Sidebar Trắng sạch chuẩn VCB */
-section[data-testid="stSidebar"] {
-    background-color: #FFFFFF !important;
-    border-right: 1px solid #E1E8E3;
-}
-
-section[data-testid="stSidebar"] > div { 
-    padding: 1.5rem 1rem; 
-}
-
-/* Brand Card Sidebar */
-.side-brand-box {
-    background: linear-gradient(135deg, #01502F 0%, #027A45 100%);
-    border-radius: 16px;
-    padding: 20px 16px;
-    text-align: center;
-    color: #FFFFFF;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 20px rgba(1, 80, 47, 0.15);
-}
-
-.side-brand-title {
-    font-size: 15px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    margin-top: 8px;
-    color: #FFFFFF;
-}
-
-.side-brand-sub {
-    font-size: 11px;
-    color: #A3E6CD;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-top: 2px;
-}
-
-/* Sidebar Radio Buttons */
-section[data-testid="stSidebar"] .stRadio label {
-    background: #F8FAF9;
-    border: 1px solid #E1E8E3;
-    color: #2D3748 !important;
-    padding: 12px 16px;
-    border-radius: 10px;
-    margin-bottom: 8px;
-    transition: all 0.2s ease;
-    font-size: 14px !important;
-    font-weight: 600 !important;
-}
-
-section[data-testid="stSidebar"] .stRadio label:hover {
-    border-color: #01502F;
-    background: #E8F5E9;
-    color: #01502F !important;
-    transform: translateX(4px);
-}
-
-/* Header Banner - Full Width Xanh Vietcombank */
-.vcb-banner {
-    background: linear-gradient(135deg, #01502F 0%, #027A45 60%, #003820 100%);
-    border-radius: 20px;
-    padding: 28px 36px;
-    color: #FFFFFF;
-    margin-bottom: 28px;
-    box-shadow: 0 10px 25px rgba(1, 80, 47, 0.18);
-}
-
-.vcb-title {
-    font-size: 26px;
-    font-weight: 800;
-    margin: 0;
-    letter-spacing: -0.5px;
-}
-
-.vcb-sub {
-    font-size: 14px;
-    color: #C8E6C9;
-    margin-top: 6px;
-}
-
-/* White Card Content Box */
-.vcb-card {
-    background: #FFFFFF;
-    border-radius: 18px;
-    padding: 32px;
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-    margin-bottom: 24px;
-}
-
-/* Input Fields */
-div[data-baseweb="input"] > div,
-div[data-baseweb="select"] > div,
-div[data-baseweb="textarea"] {
-    background: #F8FAF9 !important;
-    border: 1.5px solid #E1E8E3 !important;
-    border-radius: 10px !important;
-    font-size: 14px !important;
-}
-
-div[data-baseweb="input"] > div:focus-within,
-div[data-baseweb="textarea"]:focus-within {
-    border-color: #01502F !important;
-    box-shadow: 0 0 0 3px rgba(1, 80, 47, 0.12) !important;
-    background: #FFFFFF !important;
-}
-
-label {
-    color: #2D3748 !important;
-    font-size: 13px !important;
-    font-weight: 700 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 6px !important;
-}
-
-/* VCB Green Button */
-.stButton > button, .stDownloadButton > button {
-    height: 50px;
-    border-radius: 10px !important;
-    border: none !important;
-    background: linear-gradient(135deg, #01502F 0%, #027A45 100%) !important;
-    color: #FFFFFF !important;
-    font-weight: 700 !important;
-    font-size: 15px !important;
-    transition: all 0.25s ease !important;
-    box-shadow: 0 6px 18px rgba(1, 80, 47, 0.2);
-}
-
-.stButton > button:hover {
-    background: linear-gradient(135deg, #003820 0%, #01502F 100%) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(1, 80, 47, 0.3);
-}
-
-/* Metrics */
-div[data-testid="stMetric"] {
-    background: #F8FAF9;
-    border: 1px solid #E1E8E3;
-    border-radius: 14px;
-    padding: 18px;
-}
-
-div[data-testid="stMetricLabel"] {
-    color: #718096 !important;
-    font-size: 12px !important;
-    font-weight: 700 !important;
-    text-transform: uppercase;
-}
-
-div[data-testid="stMetricValue"] {
-    color: #01502F !important;
-    font-weight: 800 !important;
-    font-size: 24px !important;
-}
-
-.footer-vcb {
-    text-align: center;
-    color: #A0AEC0;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    padding-top: 30px;
-}
-</style>
+    .strategy-card {
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 12px;
+    }
+    .badge-vip { background-color: #FEF3C7; color: #92400E; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+    .badge-potential { background-color: #E0E7FF; color: #3730A3; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+    .badge-standard { background-color: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+    .badge-risk { background-color: #FEE2E2; color: #991B1B; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+    
+    /* Box Login Admin */
+    .admin-login-box {
+        max-width: 450px;
+        margin: 40px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border-top: 5px solid #005A36;
+    }
+    </style>
 """, unsafe_allow_html=True)
 
-# ==========================================
-# KHỞI TẠO SESSION STATE
-# ==========================================
-if "loan_requests" not in st.session_state:
-    st.session_state.loan_requests = []
-if "admin_logged_in" not in st.session_state:
-    st.session_state.admin_logged_in = False
+# ----------------------------------------------------
+# 2. KHỞI TẠO STATE (DỮ LIỆU & BẢO MẬT ADMIN)
+# ----------------------------------------------------
+if 'is_admin' not in st.session_state:
+    st.session_state.is_admin = False
 
-# ==========================================
-# HÀM BỔ TRỢ
-# ==========================================
-def export_excel():
-    df = pd.DataFrame(st.session_state.loan_requests)
-    output = BytesIO()
-    with pd.ExcelWriter(output, engine="openpyxl") as writer:
-        df.to_excel(writer, index=False, sheet_name="Nhu_cau_vay")
-    return output.getvalue()
+if 'customer_df' not in st.session_state:
+    sample_data = [
+        {
+            "Họ và Tên": "Nguyễn Văn An", "Số Điện Thoại": "0903123456",
+            "Gói Vay": "Vay mua nhà (An Cư)", "Số Tiền Vay (Triệu VNĐ)": 2500, "Thời Hạn (Tháng)": 240,
+            "Lãi Suất (%/năm)": 6.8, "Thu Nhập Hàng Tháng (Triệu)": 65, "Tỷ Lệ DTI (%)": 38.5,
+            "Nhóm Chiến Lược": "💎 VIP - Khách hàng Ưu tiên", "Trạng Thái": "Đã phê duyệt", "Ngày Đăng Ký": "2026-09-01"
+        },
+        {
+            "Họ và Tên": "Trần Thị Bích", "Số Điện Thoại": "0918234567",
+            "Gói Vay": "Vay mua ô tô", "Số Tiền Vay (Triệu VNĐ)": 600, "Thời Hạn (Tháng)": 60,
+            "Lãi Suất (%/năm)": 7.5, "Thu Nhập Hàng Tháng (Triệu)": 35, "Tỷ Lệ DTI (%)": 42.0,
+            "Nhóm Chiến Lược": "🌟 Tiềm Năng Tăng Trưởng", "Trạng Thái": "Đang thẩm định", "Ngày Đăng Ký": "2026-09-05"
+        },
+        {
+            "Họ và Tên": "Lê Hoàng Cường", "Số Điện Thoại": "0989345678",
+            "Gói Vay": "Vay tiêu dùng tín chấp", "Số Tiền Vay (Triệu VNĐ)": 150, "Thời Hạn (Tháng)": 36,
+            "Lãi Suất (%/năm)": 10.5, "Thu Nhập Hàng Tháng (Triệu)": 22, "Tỷ Lệ DTI (%)": 32.1,
+            "Nhóm Chiến Lược": "🌱 Phổ Thông Khai Thác", "Trạng Thái": "Đã phê duyệt", "Ngày Đăng Ký": "2026-09-10"
+        },
+        {
+            "Họ và Tên": "Phạm Quốc Dũng", "Số Điện Thoại": "0977456789",
+            "Gói Vay": "Vay SXKD cá thể", "Số Tiền Vay (Triệu VNĐ)": 1200, "Thời Hạn (Tháng)": 84,
+            "Lãi Suất (%/năm)": 8.0, "Thu Nhập Hàng Tháng (Triệu)": 40, "Tỷ Lệ DTI (%)": 58.2,
+            "Nhóm Chiến Lược": "⚠️ Cần Tăng Cường Thẩm Định", "Trạng Thái": "Yêu cầu bổ sung HS", "Ngày Đăng Ký": "2026-09-12"
+        },
+        {
+            "Họ và Tên": "Đặng Mai Phương", "Số Điện Thoại": "0934567890",
+            "Gói Vay": "Vay mua nhà (An Cư)", "Số Tiền Vay (Triệu VNĐ)": 4000, "Thời Hạn (Tháng)": 180,
+            "Lãi Suất (%/năm)": 6.5, "Thu Nhập Hàng Tháng (Triệu)": 110, "Tỷ Lệ DTI (%)": 29.5,
+            "Nhóm Chiến Lược": "💎 VIP - Khách hàng Ưu tiên", "Trạng Thái": "Đã phê duyệt", "Ngày Đăng Ký": "2026-09-15"
+        }
+    ]
+    st.session_state.customer_df = pd.DataFrame(sample_data)
 
-def format_money(amount):
-    return f"{amount:,.0f} VNĐ".replace(",", ".")
+# ----------------------------------------------------
+# 3. HÀM TỰ ĐỘNG PHÂN LOẠI NHÓM CHIẾN LƯỢC
+# ----------------------------------------------------
+def classify_strategic_group(income, loan_amount, dti):
+    if income >= 60 and loan_amount >= 2000:
+        return "💎 VIP - Khách hàng Ưu tiên"
+    elif income >= 30 or loan_amount >= 500:
+        if dti > 50:
+            return "⚠️ Cần Tăng Cường Thẩm Định"
+        return "🌟 Tiềm Năng Tăng Trưởng"
+    elif dti > 50:
+        return "⚠️ Cần Tăng Cường Thẩm Định"
+    else:
+        return "🌱 Phổ Thông Khai Thác"
 
-# ==========================================
-# SIDEBAR (SỬ DỤNG LOGO.JPG)
-# ==========================================
+# ----------------------------------------------------
+# 4. SIDEBAR (LOGO & ĐIỀU HƯỚNG)
+# ----------------------------------------------------
 with st.sidebar:
-    if os.path.exists("LOGO.jpg"):
-        st.image("LOGO.jpg", use_container_width=True)
-
-    st.markdown("""
-    <div class="side-brand-box">
-        <div class="side-brand-title">NHÓM CHIẾN LƯỢC</div>
-        <div class="side-brand-sub">QUẢN LÝ TÀI CHÍNH VAY</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    page = st.radio(
-        "Menu Navigation",
-        ["📝 Đăng ký nhu cầu vay", "🧮 Bảng tính trả góp", "🔐 Quản trị Admin"],
-        label_visibility="collapsed"
+    try:
+        st.image("LOGO.JPG", use_container_width=True)
+    except Exception:
+        st.error("⚠️ Không tìm thấy file LOGO.JPG")
+        st.markdown("### 🏦 VIETCOMBANK")
+        
+    st.markdown("---")
+    
+    menu = st.radio(
+        "📌 DANH MỤC QUẢN LÝ",
+        [
+            "📊 Dashboard Tổng Quan",
+            "🧮 Tính Vay & Đăng Ký Hồ Sơ",
+            "🎯 Nhóm Chiến Lược Khách Hàng",
+            "🔒 Cổng Quản Trị Viên (Admin)"
+        ]
     )
+    
+    st.markdown("---")
+    st.caption("🟢 Hệ thống quản trị gói vay cá nhân VCB v2.5")
+    st.caption("© Ngân hàng TMCP Ngoại thương Việt Nam")
 
-# ==========================================
-# BANNER ĐẦU TRANG
-# ==========================================
+# ----------------------------------------------------
+# HEADER BẢN QUYỀN
+# ----------------------------------------------------
 st.markdown("""
-<div class="vcb-banner">
-    <div class="vcb-title">🏦 HỆ THỐNG PHÁT TRIỂN & QUẢN LÝ KHÁCH HÀNG VAY</div>
-    <div class="vcb-sub">Giải pháp số hóa tiếp nhận nhu cầu vay vốn & phân tích tài chính | Nhóm Chiến Lược</div>
-</div>
+    <div class="vcb-header">
+        <h1>NGÂN HÀNG TMCP NGOẠI THƯƠNG VIỆT NAM - VIETCOMBANK</h1>
+        <p>Hệ Thống Phân Tích, Phân Loại Nhóm Chiến Lược & Quản Lý Khách Hàng Vay Cá Nhân</p>
+    </div>
 """, unsafe_allow_html=True)
 
-# ==========================================
-# TRANG 1: ĐĂNG KÝ VAY VỐN
-# ==========================================
-if page == "📝 Đăng ký nhu cầu vay":
-    st.markdown("### 💳 Đăng Ký Tư Vấn Vay Vốn")
-    st.caption("Khách hàng vui lòng điền đầy đủ thông tin bên dưới để Nhóm Chiến Lược tư vấn gói vay phù hợp nhất.")
-    st.markdown("<br>", unsafe_allow_html=True)
+# ----------------------------------------------------
+# MENU 1: DASHBOARD TỔNG QUAN
+# ----------------------------------------------------
+if menu == "📊 Dashboard Tổng Quan":
+    st.subheader("📊 Báo Cáo Tổng Quan Dư Nợ & Khách Hàng")
+    df = st.session_state.customer_df
 
-    st.markdown('<div class="vcb-card">', unsafe_allow_html=True)
-
-    col1, col2 = st.columns(2, gap="large")
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
-        name = st.text_input("👤 Họ và tên khách hàng (*)", placeholder="Nguyễn Văn A")
-        phone = st.text_input("📱 Số điện thoại liên hệ (*)", placeholder="0901234567")
-        address = st.text_input("📍 Tỉnh / Thành phố sinh sống", placeholder="Ví dụ: TP. Hồ Chí Minh, Hà Nội")
-        income = st.number_input("💵 Thu nhập hàng tháng (VNĐ)", min_value=0, step=1000000, value=15000000)
-
+        st.markdown(f"""
+            <div class="metric-card">
+                <div class="metric-title">Tổng Khách Hàng</div>
+                <div class="metric-value">{len(df)} KH</div>
+            </div>
+        """, unsafe_allow_html=True)
     with col2:
-        loan_type = st.selectbox(
-            "🏷️ Nhu cầu sản phẩm vay (*)",
-            ["Vay Tín Chấp Theo Lương", "Vay Mua Nhà / BĐS", "Vay Mua Ô TÔ", "Vay Sản Xuất Kinh Doanh", "Vay Thấu Chi"]
-        )
-        loan_amount = st.number_input("💰 Số tiền đề xuất vay (VNĐ) (*)", min_value=10000000, step=10000000, value=100000000)
-        tenure = st.selectbox("⏱️ Thời hạn vay mong muốn", ["12 tháng", "24 tháng", "36 tháng", "48 tháng", "60 tháng", "120 tháng"])
-        income_type = st.radio("💳 Hình thức nhận lương", ["Chuyển khoản Ngân hàng", "Tiền mặt"], horizontal=True)
-
-    note = st.text_area("📝 Ghi chú thêm (Nếu có)", placeholder="Nhu cầu chi tiết hoặc thời gian tiện nghe điện thoại...", height=80)
+        total_loan = df["Số Tiền Vay (Triệu VNĐ)"].sum() / 1000
+        st.markdown(f"""
+            <div class="metric-card">
+                <div class="metric-title">Tổng Dư Nợ Đăng Ký</div>
+                <div class="metric-value">{total_loan:.2f} Tỷ VNĐ</div>
+            </div>
+        """, unsafe_allow_html=True)
+    with col3:
+        avg_rate = df["Lãi Suất (%/năm)"].mean()
+        st.markdown(f"""
+            <div class="metric-card">
+                <div class="metric-title">Lãi Suất Bình Quân</div>
+                <div class="metric-value">{avg_rate:.2f}% / năm</div>
+            </div>
+        """, unsafe_allow_html=True)
+    with col4:
+        vip_count = len(df[df["Nhóm Chiến Lược"].str.contains("VIP")])
+        st.markdown(f"""
+            <div class="metric-card">
+                <div class="metric-title">Khách Hàng VIP</div>
+                <div class="metric-value">{vip_count} KH</div>
+            </div>
+        """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("🚀 GỬI THÔNG TIN VỀ NHÓM CHIẾN LƯỢC", type="primary", use_container_width=True):
-        if not name.strip():
-            st.error("❌ Vui lòng nhập Họ và tên khách hàng.")
-        elif not phone.strip():
-            st.error("❌ Vui lòng nhập Số điện thoại.")
-        else:
-            new_request = {
-                "Họ và tên": name.strip(),
-                "Số điện thoại": phone.strip(),
-                "Khu vực": address.strip(),
-                "Thu nhập": income,
-                "Gói vay": loan_type,
-                "Số tiền vay": loan_amount,
-                "Thời hạn": tenure,
-                "Hình thức lương": income_type,
-                "Ghi chú": note.strip(),
-                "Trạng thái": "Chờ Nhóm Chiến Lược xử lý"
-            }
-            st.session_state.loan_requests.append(new_request)
-            st.success("✅ Đã gửi thông tin thành công! Nhóm Chiến Lược sẽ ghi nhận và xử lý hồ sơ ngay.")
-            st.balloons()
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# ==========================================
-# TRANG 2: CÔNG CỤ TÍNH TRẢ GÓP
-# ==========================================
-elif page == "🧮 Bảng tính trả góp":
-    st.markdown("### 🧮 Bảng Tính Lãi & Gốc Trả Góp")
-    st.caption("Công cụ tính toán khoản vay theo dư nợ giảm dần do Nhóm Chiến Lược phát triển.")
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    st.markdown('<div class="vcb-card">', unsafe_allow_html=True)
-
-    c1, c2, c3 = st.columns(3, gap="medium")
+    c1, c2 = st.columns(2)
+    
     with c1:
-        calc_amount = st.number_input("💰 Số tiền vay (VNĐ)", min_value=10000000, value=200000000, step=10000000)
+        st.markdown("##### 📌 Phân Bố Theo Gói Vay Cá Nhân")
+        package_counts = df["Gói Vay"].value_counts().reset_index()
+        package_counts.columns = ["Gói Vay", "Số Lượng"]
+        st.bar_chart(package_counts, x="Gói Vay", y="Số Lượng", color="#005A36")
+
     with c2:
-        calc_interest = st.number_input("📈 Lãi suất (%/năm)", min_value=1.0, max_value=25.0, value=8.5, step=0.1)
-    with c3:
-        calc_months = st.slider("⏱️ Thời gian vay (Tháng)", min_value=6, max_value=120, value=36, step=6)
+        st.markdown("##### 🎯 Cơ Cấu Nhóm Chiến Lược")
+        strat_counts = df["Nhóm Chiến Lược"].value_counts().reset_index()
+        strat_counts.columns = ["Nhóm Chiến Lược", "Số Lượng"]
+        st.dataframe(strat_counts, use_container_width=True, hide_index=True)
 
-    # Tính toán
-    monthly_rate = (calc_interest / 100) / 12
-    principal_monthly = calc_amount / calc_months
-    first_month_interest = calc_amount * monthly_rate
-    total_first_month = principal_monthly + first_month_interest
+# ----------------------------------------------------
+# MENU 2: TÍNH VAY & ĐĂNG KÝ HỒ SƠ
+# ----------------------------------------------------
+elif menu == "🧮 Tính Vay & Đăng Ký Hồ Sơ":
+    st.subheader("🧮 Công Cụ Tính Gói Vay & Tạo Hồ Sơ Khách Hàng")
+    
+    col_input, col_result = st.columns([1, 1])
+    
+    with col_input:
+        st.markdown("##### 📝 Thông tin khoản vay")
+        fullname = st.text_input("Họ và tên khách hàng", "Nguyễn Văn Trọng")
+        phone = st.text_input("Số điện thoại", "0912345678")
+        loan_type = st.selectbox("Chọn gói vay Vietcombank", [
+            "Vay mua nhà (An Cư Vietcombank)",
+            "Vay mua ô tô",
+            "Vay tiêu dùng tín chấp",
+            "Vay SXKD cá thể"
+        ])
+        
+        amount_mb = st.number_input("Số tiền vay (Triệu VNĐ)", min_value=10, max_value=20000, value=1500, step=50)
+        tenure_months = st.number_input("Thời hạn vay (Tháng)", min_value=6, max_value=360, value=120, step=6)
+        interest_rate = st.number_input("Lãi suất ưu đãi (%/năm)", min_value=1.0, max_value=20.0, value=7.2, step=0.1)
+        income = st.number_input("Thu nhập hàng tháng (Triệu VNĐ)", min_value=5, max_value=500, value=45, step=5)
 
-    st.markdown("<br>", unsafe_allow_html=True)
-    res1, res2, res3 = st.columns(3)
-    res1.metric("📌 Gốc cố định hàng tháng", format_money(principal_monthly))
-    res2.metric("💸 Lãi tháng đầu tiên", format_money(first_month_interest))
-    res3.metric("🔥 Tổng trả tháng đầu", format_money(total_first_month))
+    monthly_rate = (interest_rate / 100) / 12
+    principal_per_month = amount_mb / tenure_months
+    first_month_interest = amount_mb * monthly_rate
+    first_month_total = principal_per_month + first_month_interest
+    dti_ratio = (first_month_total / income) * 100 if income > 0 else 0
+    
+    strat_group = classify_strategic_group(income, amount_mb, dti_ratio)
 
-    st.caption("⚡ *Bảng tính mang tính tham khảo. Chi tiết sẽ được Nhóm Chiến Lược phê duyệt chính xác theo hồ sơ.*")
-    st.markdown('</div>', unsafe_allow_html=True)
+    with col_result:
+        st.markdown("##### 📊 Kết quả tính toán & Đánh giá chiến lược")
+        st.info(f"**Số tiền trả tháng đầu tiên:** `{first_month_total:,.2f} Triệu VNĐ`")
+        st.write(f"- **Tiền gốc hàng tháng:** {principal_per_month:,.2f} Triệu VNĐ")
+        st.write(f"- **Tiền lãi tháng đầu:** {first_month_interest:,.2f} Triệu VNĐ")
+        st.write(f"- **Tỷ lệ DTI (Nợ / Thu nhập):** `{dti_ratio:.1f}%`")
+        
+        st.markdown("---")
+        st.markdown("**🎯 Phân loại Nhóm Chiến Lược Tự Động:**")
+        st.success(f"**{strat_group}**")
+        
+        if dti_ratio > 50:
+            st.warning("⚠️ Cảnh báo: Tỷ lệ DTI vượt quá 50%. Cần xem xét thêm tài sản bảo đảm!")
+            
+        if st.button("➕ Thêm Hồ Sơ Vào Danh Sách Khách Hàng", use_container_width=True):
+            new_row = {
+                "Họ và Tên": fullname,
+                "Số Điện Thoại": phone,
+                "Gói Vay": loan_type,
+                "Số Tiền Vay (Triệu VNĐ)": amount_mb,
+                "Thời Hạn (Tháng)": tenure_months,
+                "Lãi Suất (%/năm)": interest_rate,
+                "Thu Nhập Hàng Tháng (Triệu)": income,
+                "Tỷ Lệ DTI (%)": round(dti_ratio, 1),
+                "Nhóm Chiến Lược": strat_group,
+                "Trạng Thái": "Đang thẩm định",
+                "Ngày Đăng Ký": date.today().strftime("%Y-%m-%d")
+            }
+            st.session_state.customer_df = pd.concat([st.session_state.customer_df, pd.DataFrame([new_row])], ignore_index=True)
+            st.success(f"✅ Đã thêm hồ sơ thành công cho khách hàng **{fullname}**!")
 
-# ==========================================
-# TRANG 3: ADMIN QUẢN LÝ
-# ==========================================
-elif page == "🔐 Quản trị Admin":
-    st.markdown("### 🔐 Cổng Điều Hành Admin")
-    st.caption("Xem danh sách khách hàng và trích xuất dữ liệu đăng ký.")
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    if not st.session_state.admin_logged_in:
+# ----------------------------------------------------
+# MENU 3: NHÓM CHIẾN LƯỢC KHÁCH HÀNG
+# ----------------------------------------------------
+elif menu == "🎯 Nhóm Chiến Lược Khách Hàng":
+    st.subheader("🎯 Phân Loại & Định Hướng Nhóm Chiến Lược")
+    
+    col1, col2 = st.columns(2)
+    with col1:
         st.markdown("""
-        <div style="max-width: 400px; margin: 30px auto; padding: 32px; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 18px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
-            <div style="font-size: 36px; margin-bottom: 8px;">🔐</div>
-            <h3 style="color: #1A202C; margin: 0 0 6px 0;">Đăng Nhập Admin</h3>
-            <p style="color: #718096; font-size: 13px; margin-bottom: 20px;">Nhập mật khẩu để truy cập hệ thống</p>
+        <div class="strategy-card">
+            <h4><span class="badge-vip">💎 NHÓM 1: KHÁCH HÀNG VIP / ƯU TIÊN</span></h4>
+            <p><b>Tiêu chí:</b> Thu nhập ≥ 60 triệu hoặc khoản vay ≥ 2 Tỷ VNĐ.</p>
+            <ul>
+                <li><b>Chính sách Vietcombank:</b> Giảm thêm 0.5% - 0.8%/năm lãi suất.</li>
+                <li><b>Chiến lược:</b> Phê duyệt luồng xanh trong 24h, cấp hạn mức Thẻ Tín Dụng Platinum, phát triển dịch vụ ngân hàng ưu tiên (VCB Priority).</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div class="strategy-card">
+            <h4><span class="badge-potential">🌟 NHÓM 2: TIỀM NĂNG TĂNG TRƯỞNG</span></h4>
+            <p><b>Tiêu chí:</b> Thu nhập 30-60 triệu, gói vay mua nhà/xe chuẩn.</p>
+            <ul>
+                <li><b>Chính sách Vietcombank:</b> Lãi suất cạnh tranh, thời hạn vay dài lên đến 35 năm.</li>
+                <li><b>Chiến lược:</b> Bán chéo bảo hiểm khoản vay (FWD), tài khoản số đẹp, gói gửi tiết kiệm tích lũy.</li>
+            </ul>
         </div>
         """, unsafe_allow_html=True)
 
-        pwd = st.text_input("🔑 Mật khẩu admin", type="password", placeholder="••••••••", label_visibility="collapsed")
-        st.markdown("<br>", unsafe_allow_html=True)
+    with col2:
+        st.markdown("""
+        <div class="strategy-card">
+            <h4><span class="badge-standard">🌱 NHÓM 3: PHỔ THÔNG KHAI THÁC</span></h4>
+            <p><b>Tiêu chí:</b> Khoản vay tiêu dùng, tín chấp nhỏ, thu nhập trung bình.</p>
+            <ul>
+                <li><b>Chính sách Vietcombank:</b> Quy trình xử lý tự động hóa qua ứng dụng VCB Digibank.</li>
+                <li><b>Chiến lược:</b> Mở rộng quy mô, hướng dẫn thanh toán tự động, thu hút dòng tiền trả lương.</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div class="strategy-card">
+            <h4><span class="badge-risk">⚠️ NHÓM 4: CẦN TĂNG CƯỜNG THẨM ĐỊNH</span></h4>
+            <p><b>Tiêu chí:</b> DTI > 50% hoặc nguồn thu nhập từ hoạt động rủi ro.</p>
+            <ul>
+                <li><b>Chính sách Vietcombank:</b> Thẩm định thực tế nghiêm ngặt, định giá TSĐB sát thị trường.</li>
+                <li><b>Chiến lược:</b> Quản lý rủi ro sát sao, yêu cầu thêm người đồng vay hoặc TSĐB bổ sung.</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
 
-        if st.button("🔓 XÁC NHẬN ĐĂNG NHẬP", type="primary", use_container_width=True):
-            if pwd == "123456":
-                st.session_state.admin_logged_in = True
-                st.rerun()
-            else:
-                st.error("❌ Mật khẩu không đúng.")
-
+# ----------------------------------------------------
+# MENU 4: CỔNG QUẢN TRỊ VIÊN (ADMIN - MẬT KHẨU: 123456)
+# ----------------------------------------------------
+elif menu == "🔒 Cổng Quản Trị Viên (Admin)":
+    
+    # 🔒 CHƯA ĐĂNG NHẬP ADMIN -> BẮT NHẬP MẬT KHẨU
+    if not st.session_state.is_admin:
+        st.markdown("<h3 style='text-align: center;'>🔒 ĐĂNG NHẬP CỔNG QUẢN TRỊ VIÊN VIETCOMBANK</h3>", unsafe_allow_html=True)
+        
+        col_m1, col_m2, col_m3 = st.columns([1, 2, 1])
+        with col_m2:
+            st.info("💡 Vui lòng nhập mật khẩu quản trị để truy cập dữ liệu khách hàng và xuất file.")
+            input_pass = st.text_input("🔑 Mật khẩu Admin:", type="password", placeholder="Nhập mật khẩu...")
+            
+            if st.button("🔓 Đăng Nhập Quản Trị Viên", use_container_width=True):
+                if input_pass == "123456":
+                    st.session_state.is_admin = True
+                    st.success("✅ Đăng nhập Admin thành công!")
+                    st.rerun()
+                else:
+                    st.error("❌ Mật khẩu không chính xác! (Gợi ý: 123456)")
+                    
+    # 🔓 ĐÃ ĐĂNG NHẬP ADMIN -> HIỂN THỊ QUẢN LÝ & XUẤT FILE
     else:
-        top_col1, top_col2 = st.columns([5, 1])
+        top_col1, top_col2 = st.columns([4, 1])
         with top_col1:
-            st.subheader("📊 Danh Sách Hồ Sơ Khách Hàng")
+            st.subheader("📑 Danh Sách Khách Hàng & Cổng Xuất Dữ Liệu Admin")
         with top_col2:
-            if st.button("🚪 Đăng xuất", use_container_width=True):
-                st.session_state.admin_logged_in = False
+            if st.button("🚪 Đăng Xuất Admin", use_container_width=True):
+                st.session_state.is_admin = False
                 st.rerun()
 
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        if not st.session_state.loan_requests:
-            st.info("📭 Chưa có thông tin đăng ký mới nào.")
-        else:
-            df = pd.DataFrame(st.session_state.loan_requests)
-
-            # Thống kê KPI
-            m1, m2, m3 = st.columns(3)
-            m1.metric("👥 Tổng hồ sơ tiếp nhận", f"{len(df)} hồ sơ")
-            m2.metric("💰 Tổng nhu cầu vay", format_money(df["Số tiền vay"].sum()))
-            m3.metric("📊 Nhu cầu trung bình", format_money(df["Số tiền vay"].mean()))
-
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.dataframe(df, use_container_width=True, hide_index=True, height=380)
-
-            st.markdown("<br>", unsafe_allow_html=True)
-            excel_data = export_excel()
+        st.success("🟢 Bạn đang trong phiên làm việc với quyền: **Quản Trị Viên VIETCOMBANK**")
+        df = st.session_state.customer_df.copy()
+        
+        # Bộ lọc dữ liệu
+        st.markdown("##### 🔍 Bộ lọc tìm kiếm")
+        f_col1, f_col2, f_col3 = st.columns(3)
+        
+        with f_col1:
+            search_kw = st.text_input("Tìm theo Họ tên / Số điện thoại")
+        with f_col2:
+            filter_strat = st.selectbox("Lọc theo Nhóm Chiến Lược", ["Tất cả"] + list(df["Nhóm Chiến Lược"].unique()))
+        with f_col3:
+            filter_status = st.selectbox("Lọc theo Trạng Thái", ["Tất cả"] + list(df["Trạng Thái"].unique()))
+            
+        # Áp dụng bộ lọc
+        if search_kw:
+            df = df[df["Họ và Tên"].str.contains(search_kw, case=False) | df["Số Điện Thoại"].str.contains(search_kw)]
+        if filter_strat != "Tất cả":
+            df = df[df["Nhóm Chiến Lược"] == filter_strat]
+        if filter_status != "Tất cả":
+            df = df[df["Trạng Thái"] == filter_status]
+            
+        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.caption(f"Hiển thị {len(df)} trên tổng số {len(st.session_state.customer_df)} khách hàng.")
+        
+        st.markdown("---")
+        st.markdown("##### 🛠️ Thao tác Quản trị viên & Xuất Dữ Liệu")
+        
+        tab_action1, tab_action2 = st.columns(2)
+        
+        # Cột 1: Xuất file
+        with tab_action1:
+            st.write("📥 **Tải danh sách khách hàng:**")
+            
+            # Xuất Excel
+            output_excel = io.BytesIO()
+            with pd.ExcelWriter(output_excel, engine='openpyxl') as writer:
+                df.to_excel(writer, index=False, sheet_name='DS_KhachHang_VCB')
+            excel_data = output_excel.getvalue()
+            
             st.download_button(
-                label="📥 XUẤT FILE EXCEL CHO NHÓM CHIẾN LƯỢC (.XLSX)",
+                label="📊 Tải file Danh sách Khách hàng (Excel .xlsx)",
                 data=excel_data,
-                file_name="danh_sach_khach_hang_nhom_chien_luoc.xlsx",
+                file_name=f"DS_KhachHang_Vay_VCB_{datetime.now().strftime('%Y%m%d')}.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 use_container_width=True
             )
 
-# ==========================================
-# FOOTER
-# ==========================================
-st.markdown("""
-<div class="footer-vcb">
-    HỆ THỐNG ĐĂNG KÝ VAY VỐN & QUẢN LÝ KHÁCH HÀNG • PHÁT TRIỂN BỞI NHÓM CHIẾN LƯỢC © 2026
-</div>
-""", unsafe_allow_html=True)
+            # Xuất CSV
+            csv_data = df.to_csv(index=False, encoding='utf-8-sig')
+            st.download_button(
+                label="📄 Tải file Danh sách Khách hàng (CSV .csv)",
+                data=csv_data,
+                file_name=f"DS_KhachHang_Vay_VCB_{datetime.now().strftime('%Y%m%d')}.csv",
+                mime="text/csv",
+                use_container_width=True
+            )
+
+        # Cột 2: Quyền Xóa hồ sơ Admin
+        with tab_action2:
+            st.write("🗑️ **Xóa hồ sơ khách hàng:**")
+            if not st.session_state.customer_df.empty:
+                customer_list = st.session_state.customer_df["Họ và Tên"].tolist()
+                selected_cust = st.selectbox("Chọn khách hàng muốn xóa khỏi hệ thống:", customer_list)
+                
+                if st.button("❌ Xóa Hồ Sơ Này", use_container_width=True):
+                    st.session_state.customer_df = st.session_state.customer_df[
+                        st.session_state.customer_df["Họ và Tên"] != selected_cust
+                    ].reset_index(drop=True)
+                    st.success(f"✅ Đã xóa thành công hồ sơ của **{selected_cust}**!")
+                    st.rerun()
