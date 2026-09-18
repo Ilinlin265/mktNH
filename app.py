@@ -249,13 +249,13 @@ with st.sidebar:
 # ==========================================
 # BANNER ĐẦU TRANG (TÍCH HỢP LOGO.JPG)
 # ==========================================
-logo_col, text_col = st.columns([1, 5], gap="medium")
+LOGO_col, text_col = st.columns([1, 5], gap="medium")
 
-with logo_col:
-    if os.path.exists("logo.jpg"):
-        st.image("logo.jpg", width=130)
+with LOGO_col:
+    if os.path.exists("LOGO.jpg"):
+        st.image("LOGO.jpg", width=130)
     else:
-        st.warning("⚠️ Thiếu file logo.jpg")
+        st.warning("⚠️ Thiếu file LOGO.jpg")
 
 with text_col:
     st.markdown("""
